@@ -6,10 +6,10 @@ import SearchBar from '../general-components/SearchBar/SearchBar'
 const HomeComponent = () => {
     return (
         <>
-            {/* <Appbar></Appbar>
+            <Appbar></Appbar>
             <SearchBar />
-            <ImageSlider />
-            <Outlet></Outlet> */}
+            {/* <ImageSlider /> */}
+            <Outlet></Outlet>
         </>
     )
 }

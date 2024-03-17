@@ -1,5 +1,4 @@
 import { Axios } from "axios";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { useCookies } from "react-cookie"
 
@@ -14,8 +13,6 @@ import FormLayout from "../../containers/FormLayout";
 const LoginForm = ({ isOpen, onClose }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const router = useRouter()
 
     const [cookies, setCookies] = useCookies("name", "id")
 
@@ -35,7 +32,6 @@ const LoginForm = ({ isOpen, onClose }) => {
         Axios(options).then((res) => {
             const rspData = res.data
 
-            router.push(`/home`);
         })
     }
     return (
