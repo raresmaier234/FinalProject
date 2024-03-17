@@ -1,12 +1,11 @@
-import { React, useState } from "react";
+import { React } from "react";
 import TextField from "@mui/material/TextField";
-import ButtonWithHover from "../Button";
 import { Box } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import Map from "./Map";
+import StyledButton from "../StyledButton/index"
 
-
-function SearchBar() {
+const SearchBar = (props) => {
     return (
         <Box
             sx={{
@@ -25,12 +24,10 @@ function SearchBar() {
                     endAdornment: (
                         <>
                             <InputAdornment position="end">
-                                <ButtonWithHover label="Search" st="btnNoMargin" />
+                                <StyledButton>Search</StyledButton>
                             </InputAdornment>
                             <InputAdornment position="end">
-                                <Map>
-
-                                </Map>
+                                <Map />
                             </InputAdornment>
                         </>
 

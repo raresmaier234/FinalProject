@@ -2,7 +2,7 @@ import React from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { useState } from 'react'
 import Popup from 'reactjs-popup';
-import ButtonWithHover from '../Button';
+import StyledButton from '../StyledButton';
 
 const containerStyle = {
     width: '400px',
@@ -14,7 +14,7 @@ const center = {
     lng: -38.523
 };
 
-function Map() {
+const Map = (props) => {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
@@ -28,7 +28,7 @@ function Map() {
 
     return isLoaded ? (
         <>
-            <ButtonWithHover label="Map" handleClick={toggleMap}></ButtonWithHover>
+            <StyledButton onClick={() => toggleMap()}>Map</StyledButton>
             <Popup
                 position="right center"
                 open={showMap}
@@ -39,7 +39,7 @@ function Map() {
                     zoom={16}
                 >
                 </GoogleMap>
-                <ButtonWithHover label="Exit" handleClick={toggleMap}></ButtonWithHover>
+                <StyledButton onClick={() => toggleMap()}>Exit</StyledButton>
             </Popup>
         </>
 
