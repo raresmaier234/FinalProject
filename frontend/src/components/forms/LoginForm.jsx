@@ -1,4 +1,4 @@
-import { Axios } from "axios";
+import axios from "axios";
 import { useState } from "react";
 import { useCookies } from "react-cookie"
 
@@ -14,26 +14,22 @@ const LoginForm = ({ isOpen, onClose }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const [cookies, setCookies] = useCookies("name", "id")
-
-
-    const onCloseModal = () => {
-
-    }
+    const [cookies, setCookies] = useCookies(['name'])
 
 
     const handleLogin = () => {
-        let data;
-        const options = {
-            url: "/auth/login",
-            method: "POST",
-            data: data
-        };
-        Axios(options).then((res) => {
-            const rspData = res.data
-
-        })
+        let payload = {
+            email: email,
+            password: password
+        }
+        axios.post(process.env.REACT_APP_API_URL + "/login", payload)
+            .then((res) => {
+                const rspData = res.data;
+                setCookies('name', rspData.name, { path: '/' });
+                onClose()
+            })
     }
+
     return (
         <StyledModal isOpen={isOpen} onClose={onClose} title="Sign In">
             <FormLayout onSubmit={(event) => {

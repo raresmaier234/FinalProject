@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c4fb985-237a-47f2-92cb-1cc91f3def06" name="Changes" comment="changes">
-      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Navbar/Appbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Navbar/Appbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Navbar/SignIn.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Navbar/SignIn.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.env.local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/forms/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/forms/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/general-components/Navbar/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/general-components/Navbar/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -66,9 +65,17 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;3241ca6184e7e06d7e2313367e60913a&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -105,6 +112,9 @@
       <workItem from="1698875648342" duration="302000" />
       <workItem from="1698875976955" duration="211000" />
       <workItem from="1709578246047" duration="1636000" />
+      <workItem from="1710592958722" duration="4485000" />
+      <workItem from="1711479898240" duration="549000" />
+      <workItem from="1711483760398" duration="401000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <created>1698876164558</created>

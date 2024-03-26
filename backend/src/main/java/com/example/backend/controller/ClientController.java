@@ -19,20 +19,20 @@ public class ClientController {
     @Autowired
     private ClientRepository clientRepository;
 
-    @GetMapping("/getAssociation")
+    @GetMapping("/getClient")
     List<Client> getAssociations() {
         return clientRepository.findAll();
     }
 
 
-    public Client getClientByCredentials(String username, String password) {
+    public Client getClientByCredentials(String email, String password) {
         List<Client> listAssociation = clientRepository.findAll();
         for (Client v : listAssociation)
-            if (v.getUserName().equals(username) && v.getPassword().equals(password)) return v;
+            if (v.getEmail().equals(email) && v.getPassword().equals(password)) return v;
         return null;
     }
 
-    @PostMapping("/registerAssociation")
+    @PostMapping("/register")
     public Optional<Client> registerAssociation(@RequestBody Map<String, String> credentials) {
         String username = credentials.get("username");
         String password = credentials.get("password");
@@ -45,10 +45,10 @@ public class ClientController {
 
     @PostMapping("/login")
     public ResponseEntity<Client> logIn(@RequestBody Map<String, String> credentials) {
-        String username = credentials.get("username");
+        String email = credentials.get("email");
         String password = credentials.get("password");
 
-        Client client = getClientByCredentials(username, password);
+        Client client = getClientByCredentials(email, password);
 
         if (client != null) {
             return ResponseEntity.ok(clientRepository.findById(client.getId()).orElse(null));
