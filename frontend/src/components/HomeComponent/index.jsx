@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Appbar from "../general-components/Navbar/index";
-import SearchBar from '../general-components/SearchBar/SearchBar'
+import ImageSlider from "../general-components/ImageSlider/index"
+
+import useClasses from "../utils/useClasses";
+
+import homeComponentStyles from "./HomeComponentStyles";
 
 const HomeComponent = () => {
+    const classes = useClasses(homeComponentStyles, { name: "homeComponentStyles" })
+
     return (
         <>
-            <Appbar></Appbar>
-            <SearchBar />
-            {/* <ImageSlider /> */}
-            <Outlet></Outlet>
+            <div className={classes.wrapper}>
+                <Appbar></Appbar>
+                <ImageSlider />
+                <Outlet></Outlet>
+            </div>
+
         </>
     )
 }

@@ -8,28 +8,43 @@ public class Client {
     @Column(name = "id")
     private long id;
     private String email;
-    private String phone;
-    private String userName;
-    private String password;
-    private String name;
 
-    public String getName() {
-        return name;
+    public Client(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    private String phone;
+    private String firstName;
+    private String password;
+    private String lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Client() {
     }
 
-    public Client(String email, String phone, String userName, String password, String name) {
+    public Client(long id, String email, String phone, String firstName, String password, String lastName) {
+        this.id = id;
         this.email = email;
         this.phone = phone;
-        this.userName = userName;
+        this.firstName = firstName;
         this.password = password;
-        this.name = name;
+        this.lastName = lastName;
     }
 
     public long getId() {
@@ -56,12 +71,11 @@ public class Client {
         this.phone = phone;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public Client(String firstName, String lastName, String email, String password) {
+        this.email = email;
+        this.firstName = firstName;
+        this.password = password;
+        this.lastName = lastName;
     }
 
     public String getPassword() {

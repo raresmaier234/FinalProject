@@ -33,15 +33,24 @@ public class ClientController {
     }
 
     @PostMapping("/register")
-    public Optional<Client> registerAssociation(@RequestBody Map<String, String> credentials) {
-        String username = credentials.get("username");
-        String password = credentials.get("password");
+    public ResponseEntity<?> registerAssociation(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
-        String phone = credentials.get("phone");
-        String name = credentials.get("name");
-        Client client = new Client(email, phone, username, password, name);
-        return Optional.of(clientRepository.save(client));
+        String password = credentials.get("password");
+        String firstName = credentials.get("firstName");
+        String lastName = credentials.get("lastName");
+
+        // Check if email already exists
+        Optional<Client> existingClient = clientRepository.findByEmail(email);
+        if (existingClient.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
+        }
+
+        // If email does not exist, proceed with registration
+        Client client = new Client(firstName, lastName, email, password);
+        clientRepository.save(client);
+        return ResponseEntity.ok(client);
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<Client> logIn(@RequestBody Map<String, String> credentials) {
