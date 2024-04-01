@@ -33,7 +33,8 @@ const LoginForm = ({ isOpen, onClose }) => {
             password: password
         }
         dispatch(getUser({ payload: payload })).then((res) => {
-            console.log(res)
+            if (res)
+                onClose()
         })
     }
 
