@@ -1,6 +1,6 @@
-package com.example.backend.components.user;
+package com.example.backend.components.auth;
 
-import com.example.model.User;
+import com.example.backend.components.user.model.User;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.AuthenticationException;

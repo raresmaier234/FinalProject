@@ -1,4 +1,4 @@
-package com.example.backend.components.user.model.response;
+package com.example.backend.components.auth.model.response;
 
 public class LoginRes {
     private String email;

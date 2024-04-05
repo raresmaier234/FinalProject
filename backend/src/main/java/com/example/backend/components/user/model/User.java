@@ -1,26 +1,24 @@
 package com.example.backend.components.user.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 @Entity
+@Table(name="USER", schema = "public")
 public class User {
     @Id
     @GeneratedValue
     @Column(name = "id")
     private long id;
     private String email;
+    private long phone;
+    private String firstName;
+    private String password;
+    private String lastName;
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
-
-    private String phone;
-    private String firstName;
-    private String password;
-    private String lastName;
 
     public String getFirstName() {
         return firstName;
@@ -41,7 +39,7 @@ public class User {
     public User() {
     }
 
-    public User(long id, String email, String phone, String firstName, String password, String lastName) {
+    public User(long id, String email, long phone, String firstName, String password, String lastName) {
         this.id = id;
         this.email = email;
         this.phone = phone;
@@ -66,11 +64,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 

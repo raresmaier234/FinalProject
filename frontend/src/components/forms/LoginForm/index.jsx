@@ -33,9 +33,16 @@ const LoginForm = ({ isOpen, onClose }) => {
             password: password
         }
         dispatch(getUser({ payload: payload })).then((res) => {
-            if (res)
-                onClose()
-        })
+            if (!res?.payload?.error) {
+                onClose();
+            }
+        }).catch((error) => {
+
+            console.error('Login error:', error);
+            if (error && error.code === 404) {
+
+            }
+        });
     }
 
     return (

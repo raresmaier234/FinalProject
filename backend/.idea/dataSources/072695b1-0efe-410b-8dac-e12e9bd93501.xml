@@ -3,9 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.48">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>8258</IntrospectionStateNumber>
+      <IntrospectionStateNumber>8273</IntrospectionStateNumber>
       <ServerVersion>15.0</ServerVersion>
-      <StartupTime>1711976594</StartupTime>
+      <StartupTime>1712067358</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -800,53 +800,50 @@ false Zulu
 13449||10|C|G
 13449||-9223372036854775808|U|G
 13449||10|U|G</Grants>
-      <IntrospectionStateNumber>8258</IntrospectionStateNumber>
+      <IntrospectionStateNumber>8273</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
-    <role id="3" parent="1" name="SevenHarmonies">
-      <ObjectId>16506</ObjectId>
-    </role>
-    <role id="4" parent="1" name="pg_checkpoint">
-      <ObjectId>4544</ObjectId>
-    </role>
-    <role id="5" parent="1" name="pg_database_owner">
+    <role id="3" parent="1" name="pg_database_owner">
       <ObjectId>6171</ObjectId>
     </role>
-    <role id="6" parent="1" name="pg_execute_server_program">
-      <ObjectId>4571</ObjectId>
+    <role id="4" parent="1" name="pg_read_all_data">
+      <ObjectId>6181</ObjectId>
     </role>
-    <role id="7" parent="1" name="pg_monitor">
+    <role id="5" parent="1" name="pg_write_all_data">
+      <ObjectId>6182</ObjectId>
+    </role>
+    <role id="6" parent="1" name="pg_monitor">
       <ObjectId>3373</ObjectId>
       <RoleGrants>3374
 3375
 3377</RoleGrants>
     </role>
-    <role id="8" parent="1" name="pg_read_all_data">
-      <ObjectId>6181</ObjectId>
-    </role>
-    <role id="9" parent="1" name="pg_read_all_settings">
+    <role id="7" parent="1" name="pg_read_all_settings">
       <ObjectId>3374</ObjectId>
     </role>
-    <role id="10" parent="1" name="pg_read_all_stats">
+    <role id="8" parent="1" name="pg_read_all_stats">
       <ObjectId>3375</ObjectId>
     </role>
-    <role id="11" parent="1" name="pg_read_server_files">
-      <ObjectId>4569</ObjectId>
-    </role>
-    <role id="12" parent="1" name="pg_signal_backend">
-      <ObjectId>4200</ObjectId>
-    </role>
-    <role id="13" parent="1" name="pg_stat_scan_tables">
+    <role id="9" parent="1" name="pg_stat_scan_tables">
       <ObjectId>3377</ObjectId>
     </role>
-    <role id="14" parent="1" name="pg_write_all_data">
-      <ObjectId>6182</ObjectId>
+    <role id="10" parent="1" name="pg_read_server_files">
+      <ObjectId>4569</ObjectId>
     </role>
-    <role id="15" parent="1" name="pg_write_server_files">
+    <role id="11" parent="1" name="pg_write_server_files">
       <ObjectId>4570</ObjectId>
     </role>
-    <role id="16" parent="1" name="postgres">
+    <role id="12" parent="1" name="pg_execute_server_program">
+      <ObjectId>4571</ObjectId>
+    </role>
+    <role id="13" parent="1" name="pg_signal_backend">
+      <ObjectId>4200</ObjectId>
+    </role>
+    <role id="14" parent="1" name="pg_checkpoint">
+      <ObjectId>4544</ObjectId>
+    </role>
+    <role id="15" parent="1" name="postgres">
       <BypassRls>1</BypassRls>
       <CanLogin>1</CanLogin>
       <CreateDb>1</CreateDb>
@@ -854,6 +851,9 @@ false Zulu
       <ObjectId>10</ObjectId>
       <Replication>1</Replication>
       <SuperRole>1</SuperRole>
+    </role>
+    <role id="16" parent="1" name="SevenHarmonies">
+      <ObjectId>16506</ObjectId>
     </role>
     <tablespace id="17" parent="1" name="pg_default">
       <ObjectId>1663</ObjectId>
@@ -4230,7 +4230,7 @@ false Zulu
     <schema id="263" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>8258</IntrospectionStateNumber>
+      <IntrospectionStateNumber>8273</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>518</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4238,69 +4238,87 @@ false Zulu
     <sequence id="264" parent="263" name="client_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>24717</ObjectId>
-      <SequenceIdentity>1(301)+50</SequenceIdentity>
+      <SequenceIdentity>1(451)+50</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>8235</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="265" parent="263" name="client">
-      <ObjectId>24718</ObjectId>
-      <StateNumber>8250</StateNumber>
+    <sequence id="265" parent="263" name="user_id_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>24726</ObjectId>
+      <SequenceIdentity>1(1)</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>8272</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="266" parent="263" name="user_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>24725</ObjectId>
+      <SequenceIdentity>1(1)+50</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>8263</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <table id="267" parent="263" name="user">
+      <ObjectId>24727</ObjectId>
+      <StateNumber>8272</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="266" parent="265" name="id">
+    <column id="268" parent="267" name="id">
       <DasType>bigint|0s</DasType>
+      <DefaultExpression>nextval(&apos;user_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>8250</StateNumber>
+      <StateNumber>8272</StateNumber>
+      <SequenceId>24726</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="267" parent="265" name="email">
+    <column id="269" parent="267" name="email">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
-      <StateNumber>8250</StateNumber>
+      <StateNumber>8272</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="268" parent="265" name="first_name">
-      <DasType>varchar(255)|0s</DasType>
+    <column id="270" parent="267" name="phone">
+      <DasType>bigint|0s</DasType>
       <Position>3</Position>
-      <StateNumber>8250</StateNumber>
-      <TypeId>1043</TypeId>
+      <StateNumber>8272</StateNumber>
+      <TypeId>20</TypeId>
     </column>
-    <column id="269" parent="265" name="last_name">
+    <column id="271" parent="267" name="first_name">
       <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
-      <StateNumber>8250</StateNumber>
+      <StateNumber>8272</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="270" parent="265" name="password">
+    <column id="272" parent="267" name="password">
       <DasType>varchar(255)|0s</DasType>
       <Position>5</Position>
-      <StateNumber>8250</StateNumber>
+      <StateNumber>8272</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="271" parent="265" name="phone">
+    <column id="273" parent="267" name="last_name">
       <DasType>varchar(255)|0s</DasType>
       <Position>6</Position>
-      <StateNumber>8250</StateNumber>
+      <StateNumber>8272</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="272" parent="265" name="client_pkey">
+    <index id="274" parent="267" name="user_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24723</ObjectId>
+      <ObjectId>24733</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>8250</StateNumber>
+      <StateNumber>8272</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="273" parent="265" name="client_pkey">
+    <key id="275" parent="267" name="user_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24724</ObjectId>
+      <ObjectId>24734</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>8250</StateNumber>
-      <UnderlyingIndexId>24723</UnderlyingIndexId>
+      <StateNumber>8272</StateNumber>
+      <UnderlyingIndexId>24733</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

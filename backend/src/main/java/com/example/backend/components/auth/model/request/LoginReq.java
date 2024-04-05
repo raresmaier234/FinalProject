@@ -1,4 +1,4 @@
-package com.example.backend.components.user.model.request;
+package com.example.backend.components.auth.model.request;
 
 public class LoginReq {
     private String email;

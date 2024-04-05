@@ -1,4 +1,4 @@
-package com.example.backend.components.user.model.response;
+package com.example.backend.components.auth.model.response;
 
 import org.springframework.http.HttpStatus;
 

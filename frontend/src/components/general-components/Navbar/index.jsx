@@ -21,6 +21,8 @@ import Map from '../Map/Map';
 import LoginForm from '../../forms/LoginForm';
 import SigninForm from '../../forms/SignupForm';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../../store/slices/login/thunk';
 
 const Search = styled('div')(({ theme }) => ({
     gap: "20px",
@@ -65,13 +67,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Appbar() {
+    const user = useSelector((state) => state.login.user)
+    const isLoggedIn = useSelector((state) => state.login.isLoggedIn)
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [openLoginModal, setOpenLoginModal] = useState(false)
     const [openRegisterModal, setOpenRegisterModal] = useState(false)
     const [openMap, setOpenMap] = useState(false)
+
+    const dispatch = useDispatch()
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -79,6 +85,10 @@ export default function Appbar() {
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
+    const handleLogout = () => {
+        dispatch(logoutUser({}));
+    }
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
@@ -110,21 +120,17 @@ export default function Appbar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            {isLoggedIn && (<>
-                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            </>)}
-            {!isLoggedIn && (
-                <>
-                    <MenuItem onClick={() => { setOpenLoginModal(true) }}>
-                        Log In
-                    </MenuItem>
-                    <MenuItem onClick={() => { setOpenRegisterModal(true) }}>
-                        Register
-                    </MenuItem>
-                </>
+            {isLoggedIn ? (
+                [
+                    <MenuItem key="profile" onClick={handleMenuClose}>Profile</MenuItem>,
+                    <MenuItem key="logout" onClick={handleLogout}>Log out</MenuItem>
+                ]
+            ) : (
+                [
+                    <MenuItem key="login" onClick={() => { setOpenLoginModal(true) }}>Log In</MenuItem>,
+                    <MenuItem key="register" onClick={() => { setOpenRegisterModal(true) }}>Register</MenuItem>
+                ]
             )}
-
-
         </Menu>
     );
 
