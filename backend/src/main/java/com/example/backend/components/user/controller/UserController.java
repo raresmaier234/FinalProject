@@ -1,7 +1,7 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.Client;
-import com.example.backend.repository.ClientRepository;
+import com.example.backend.model.User;
+import com.example.backend.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,19 +15,19 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class ClientController {
+public class UserController {
     @Autowired
-    private ClientRepository clientRepository;
+    private UserRepository userRepository;
 
     @GetMapping("/getClient")
-    List<Client> getAssociations() {
-        return clientRepository.findAll();
+    List<User> getAssociations() {
+        return userRepository.findAll();
     }
 
 
-    public Client getClientByCredentials(String email, String password) {
-        List<Client> listAssociation = clientRepository.findAll();
-        for (Client v : listAssociation)
+    public User getClientByCredentials(String email, String password) {
+        List<User> listAssociation = userRepository.findAll();
+        for (User v : listAssociation)
             if (v.getEmail().equals(email) && v.getPassword().equals(password)) return v;
         return null;
     }
@@ -40,27 +40,27 @@ public class ClientController {
         String lastName = credentials.get("lastName");
 
         // Check if email already exists
-        Optional<Client> existingClient = clientRepository.findByEmail(email);
+        Optional<User> existingClient = userRepository.findByEmail(email);
         if (existingClient.isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
         }
 
         // If email does not exist, proceed with registration
-        Client client = new Client(firstName, lastName, email, password);
-        clientRepository.save(client);
-        return ResponseEntity.ok(client);
+        User user = new User(firstName, lastName, email, password);
+        userRepository.save(user);
+        return ResponseEntity.ok(user);
     }
 
 
     @PostMapping("/login")
-    public ResponseEntity<Client> logIn(@RequestBody Map<String, String> credentials) {
+    public ResponseEntity<User> logIn(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
         String password = credentials.get("password");
 
-        Client client = getClientByCredentials(email, password);
+        User user = getClientByCredentials(email, password);
 
-        if (client != null) {
-            return ResponseEntity.ok(clientRepository.findById(client.getId()).orElse(null));
+        if (user != null) {
+            return ResponseEntity.ok(userRepository.findById(user.getId()).orElse(null));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
