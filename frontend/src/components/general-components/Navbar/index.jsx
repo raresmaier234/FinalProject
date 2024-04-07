@@ -24,18 +24,17 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../../store/slices/login/thunk';
 
-const Search = styled('div')(({ theme }) => ({
+export const Search = styled('div')(({ theme }) => ({
     gap: "20px",
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
+    border: "1px solid black",
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
 
-
     marginRight: theme.spacing(2),
-    marginLeft: 20,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(3),
@@ -43,7 +42,8 @@ const Search = styled('div')(({ theme }) => ({
     },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+
+export const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -53,16 +53,14 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     justifyContent: 'center',
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
+export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
+
     },
 }));
 
@@ -75,7 +73,6 @@ export default function Appbar() {
 
     const [openLoginModal, setOpenLoginModal] = useState(false)
     const [openRegisterModal, setOpenRegisterModal] = useState(false)
-    const [openMap, setOpenMap] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -208,19 +205,13 @@ export default function Appbar() {
                         >
                             Traveler
                         </Typography>
-                        <Search>
-                            <SearchIconWrapper>
-                                <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                placeholder="Search…"
-                                inputProps={{ 'aria-label': 'search' }}
-                            />
-                            <StyledButton>Search</StyledButton>
-                            <StyledButton>Map</StyledButton>
-                            <Map isOpen={openMap} onClose={() => { setOpenMap(false) }} />
-                        </Search>
-                        <Box sx={{ flexGrow: 1 }} />
+                        <Box sx={{ flexGrow: 1, display: 'flex', margin: '20px' }}>
+                            <Link to="/">
+                                <StyledButton>
+                                    Sejururi
+                                </StyledButton>
+                            </Link>
+                        </Box>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                 <Link to="/myprofile">

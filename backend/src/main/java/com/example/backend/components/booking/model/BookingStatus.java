@@ -1,2 +1,7 @@
-package com.example.backend.components.booking.model;public enum BookingStatus {
+package com.example.backend.components.booking.model;
+
+public enum BookingStatus {
+    PENDING,
+    CONFIRMED,
+    CANCELED;
 }
