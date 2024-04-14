@@ -2,15 +2,15 @@ package com.example.backend.components.booking.controller;
 
 import com.example.backend.components.booking.model.Booking;
 import com.example.backend.components.booking.repository.BookingRepository;
+import com.example.backend.components.booking.service.BookingService;
 import com.example.backend.components.user.model.User;
 import com.example.backend.components.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -18,11 +18,12 @@ import java.util.List;
 @CrossOrigin
 public class BookingController {
     @Autowired
-    private BookingRepository bookingRepository;
+    private BookingService bookingService;
 
-    @GetMapping("/getBookings")
-    List<Booking> getAssociations() {
-        return bookingRepository.findAll();
+    @GetMapping("/availableDates")
+    List<Date> getAvailableDates(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                    @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+        return bookingService.findAvailableDates(startDate, endDate);
     }
 
 }

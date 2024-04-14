@@ -211,6 +211,11 @@ export default function Appbar() {
                                     Sejururi
                                 </StyledButton>
                             </Link>
+                            <Link to="/createRent">
+                                <StyledButton>
+                                    Creare chirie
+                                </StyledButton>
+                            </Link>
                         </Box>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">

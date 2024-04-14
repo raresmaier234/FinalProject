@@ -1,2 +1,6 @@
-package com.example.backend.components.rent.model;public interface RentStatus {
+package com.example.backend.components.rent.model;
+
+public enum RentStatus {
+    Available,
+    Busy
 }

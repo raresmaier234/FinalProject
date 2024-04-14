@@ -1,6 +1,7 @@
 package com.example.backend.components.booking.model;
 
 import com.example.backend.components.comment.model.Comment;
+import com.example.backend.components.rent.model.Rent;
 import com.example.backend.components.user.model.User;
 import jakarta.persistence.*;
 
@@ -20,7 +21,9 @@ public class Booking {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String photos;
+    @ManyToOne
+    @JoinColumn(name = "rent_id")
+    private Rent rent;
 
     @Column(name = "start_date", nullable = false)
     private Date startDate;
@@ -28,41 +31,27 @@ public class Booking {
     @Column(name = "end_date", nullable = false)
     private Date endDate;
 
-    private String name;
-    private String location;
-
     @Column(name = "booking_status", nullable = false)
     private BookingStatus bookingStatus;
 
-    private int price;
-    private String rating;
-
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public Booking(User user, String photos, Date startDate, Date endDate, String name, String location, BookingStatus bookingStatus, int price, String rating, List<Comment> comments) {
+    public Booking(User user, Rent rent, Date startDate, Date endDate,  BookingStatus bookingStatus) {
         this.user = user;
-        this.photos = photos;
+        this.rent = rent;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.name = name;
-        this.location = location;
         this.bookingStatus = bookingStatus;
-        this.price = price;
-        this.rating = rating;
-        this.comments = comments;
     }
 
     public Booking() {
 
+    }
+
+    public Rent getRent() {
+        return rent;
+    }
+
+    public void setRent(Rent rent) {
+        this.rent = rent;
     }
 
     public long getId() {
@@ -81,13 +70,6 @@ public class Booking {
         this.user = user;
     }
 
-    public String getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(String photos) {
-        this.photos = photos;
-    }
 
     public Date getStartDate() {
         return startDate;
@@ -105,21 +87,6 @@ public class Booking {
         this.endDate = endDate;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     public BookingStatus getBookingStatus() {
         return bookingStatus;
@@ -127,22 +94,6 @@ public class Booking {
 
     public void setBookingStatus(BookingStatus bookingStatus) {
         this.bookingStatus = bookingStatus;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
     }
 }
 
