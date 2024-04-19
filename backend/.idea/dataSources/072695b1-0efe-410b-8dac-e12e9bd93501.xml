@@ -3,9 +3,17 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.48">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>8290</IntrospectionStateNumber>
+      <Grants>1||-9223372036854775808|c|G
+1||10|c|G
+1||10|C|G
+1||10|T|G
+4||-9223372036854775808|c|G
+4||10|c|G
+4||10|C|G
+4||10|T|G</Grants>
+      <IntrospectionStateNumber>8306</IntrospectionStateNumber>
       <ServerVersion>15.0</ServerVersion>
-      <StartupTime>1712067358</StartupTime>
+      <StartupTime>1713445341</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -47,14 +55,14 @@ false Africa/Blantyre
 false Africa/Brazzaville
 false Africa/Bujumbura
 false Africa/Cairo
-true Africa/Casablanca
+false Africa/Casablanca
 true Africa/Ceuta
 false Africa/Conakry
 false Africa/Dakar
 false Africa/Dar_es_Salaam
 false Africa/Djibouti
 false Africa/Douala
-true Africa/El_Aaiun
+false Africa/El_Aaiun
 false Africa/Freetown
 false Africa/Gaborone
 false Africa/Harare
@@ -800,50 +808,53 @@ false Zulu
 13449||10|C|G
 13449||-9223372036854775808|U|G
 13449||10|U|G</Grants>
-      <IntrospectionStateNumber>8290</IntrospectionStateNumber>
+      <IntrospectionStateNumber>8306</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
-    <role id="3" parent="1" name="pg_database_owner">
+    <role id="3" parent="1" name="SevenHarmonies">
+      <ObjectId>16506</ObjectId>
+    </role>
+    <role id="4" parent="1" name="pg_checkpoint">
+      <ObjectId>4544</ObjectId>
+    </role>
+    <role id="5" parent="1" name="pg_database_owner">
       <ObjectId>6171</ObjectId>
     </role>
-    <role id="4" parent="1" name="pg_read_all_data">
-      <ObjectId>6181</ObjectId>
+    <role id="6" parent="1" name="pg_execute_server_program">
+      <ObjectId>4571</ObjectId>
     </role>
-    <role id="5" parent="1" name="pg_write_all_data">
-      <ObjectId>6182</ObjectId>
-    </role>
-    <role id="6" parent="1" name="pg_monitor">
+    <role id="7" parent="1" name="pg_monitor">
       <ObjectId>3373</ObjectId>
       <RoleGrants>3374
 3375
 3377</RoleGrants>
     </role>
-    <role id="7" parent="1" name="pg_read_all_settings">
+    <role id="8" parent="1" name="pg_read_all_data">
+      <ObjectId>6181</ObjectId>
+    </role>
+    <role id="9" parent="1" name="pg_read_all_settings">
       <ObjectId>3374</ObjectId>
     </role>
-    <role id="8" parent="1" name="pg_read_all_stats">
+    <role id="10" parent="1" name="pg_read_all_stats">
       <ObjectId>3375</ObjectId>
     </role>
-    <role id="9" parent="1" name="pg_stat_scan_tables">
-      <ObjectId>3377</ObjectId>
-    </role>
-    <role id="10" parent="1" name="pg_read_server_files">
+    <role id="11" parent="1" name="pg_read_server_files">
       <ObjectId>4569</ObjectId>
     </role>
-    <role id="11" parent="1" name="pg_write_server_files">
-      <ObjectId>4570</ObjectId>
-    </role>
-    <role id="12" parent="1" name="pg_execute_server_program">
-      <ObjectId>4571</ObjectId>
-    </role>
-    <role id="13" parent="1" name="pg_signal_backend">
+    <role id="12" parent="1" name="pg_signal_backend">
       <ObjectId>4200</ObjectId>
     </role>
-    <role id="14" parent="1" name="pg_checkpoint">
-      <ObjectId>4544</ObjectId>
+    <role id="13" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
     </role>
-    <role id="15" parent="1" name="postgres">
+    <role id="14" parent="1" name="pg_write_all_data">
+      <ObjectId>6182</ObjectId>
+    </role>
+    <role id="15" parent="1" name="pg_write_server_files">
+      <ObjectId>4570</ObjectId>
+    </role>
+    <role id="16" parent="1" name="postgres">
       <BypassRls>1</BypassRls>
       <CanLogin>1</CanLogin>
       <CreateDb>1</CreateDb>
@@ -851,9 +862,6 @@ false Zulu
       <ObjectId>10</ObjectId>
       <Replication>1</Replication>
       <SuperRole>1</SuperRole>
-    </role>
-    <role id="16" parent="1" name="SevenHarmonies">
-      <ObjectId>16506</ObjectId>
     </role>
     <tablespace id="17" parent="1" name="pg_default">
       <ObjectId>1663</ObjectId>
@@ -4230,7 +4238,7 @@ false Zulu
     <schema id="263" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>8290</IntrospectionStateNumber>
+      <IntrospectionStateNumber>8306</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>518</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4259,7 +4267,15 @@ false Zulu
       <StateNumber>8283</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="267" parent="263" name="user_id_seq">
+    <sequence id="267" parent="263" name="rent_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>24780</ObjectId>
+      <SequenceIdentity>1(101)+50</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>8294</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="268" parent="263" name="user_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>24726</ObjectId>
       <SequenceIdentity>1(1)</SequenceIdentity>
@@ -4267,7 +4283,7 @@ false Zulu
       <StateNumber>8272</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="268" parent="263" name="user_seq">
+    <sequence id="269" parent="263" name="user_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>24725</ObjectId>
       <SequenceIdentity>1(201)+50</SequenceIdentity>
@@ -4275,96 +4291,114 @@ false Zulu
       <StateNumber>8263</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="269" parent="263" name="booking">
+    <table id="270" parent="263" name="booking">
       <ObjectId>24742</ObjectId>
-      <StateNumber>8285</StateNumber>
+      <StateNumber>8291</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="270" parent="263" name="comment">
+    <table id="271" parent="263" name="comment">
       <ObjectId>24751</ObjectId>
       <StateNumber>8286</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="271" parent="263" name="user">
+    <table id="272" parent="263" name="rent">
+      <ObjectId>24768</ObjectId>
+      <StateNumber>8308</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="273" parent="263" name="rent_photos">
+      <ObjectId>24777</ObjectId>
+      <StateNumber>8296</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="274" parent="263" name="user">
       <ObjectId>24727</ObjectId>
       <StateNumber>8285</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <check id="272" parent="269" name="booking_booking_status_check">
+    <check id="275" parent="270" name="booking_booking_status_check">
       <ColNames>booking_status</ColNames>
       <ObjectId>24745</ObjectId>
       <Predicate>(booking_status &gt;= 0) AND (booking_status &lt;= 2)</Predicate>
       <StateNumber>8282</StateNumber>
     </check>
-    <column id="273" parent="269" name="id">
+    <column id="276" parent="270" name="id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>8282</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="274" parent="269" name="booking_status">
+    <column id="277" parent="270" name="booking_status">
       <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>8282</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="275" parent="269" name="end_date">
+    <column id="278" parent="270" name="end_date">
       <DasType>timestamp(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>8282</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="276" parent="269" name="location">
+    <column id="279" parent="270" name="location">
       <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
       <StateNumber>8282</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="277" parent="269" name="name">
+    <column id="280" parent="270" name="name">
       <DasType>varchar(255)|0s</DasType>
       <Position>5</Position>
       <StateNumber>8282</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="278" parent="269" name="photos">
+    <column id="281" parent="270" name="photos">
       <DasType>varchar(255)|0s</DasType>
       <Position>6</Position>
       <StateNumber>8282</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="279" parent="269" name="price">
+    <column id="282" parent="270" name="price">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StateNumber>8282</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="280" parent="269" name="rating">
+    <column id="283" parent="270" name="rating">
       <DasType>varchar(255)|0s</DasType>
       <Position>8</Position>
       <StateNumber>8282</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="281" parent="269" name="start_date">
+    <column id="284" parent="270" name="start_date">
       <DasType>timestamp(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
       <StateNumber>8282</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="282" parent="269" name="user_id">
+    <column id="285" parent="270" name="user_id">
       <DasType>bigint|0s</DasType>
       <Position>10</Position>
       <StateNumber>8282</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="283" parent="269" name="fkkgseyy7t56x7lkjgu3wah5s3t">
+    <column id="286" parent="270" name="rent_id">
+      <DasType>bigint|0s</DasType>
+      <Position>11</Position>
+      <StateNumber>8291</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="287" parent="270" name="fkkgseyy7t56x7lkjgu3wah5s3t">
       <ColNames>user_id</ColNames>
       <ObjectId>24758</ObjectId>
       <RefColNames>id</RefColNames>
@@ -4374,7 +4408,17 @@ false Zulu
       <RefTableName>user</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <index id="284" parent="269" name="booking_pkey">
+    <foreign-key id="288" parent="270" name="fkmg1wv6o0vijhoy6v64jfv6odi">
+      <ColNames>rent_id</ColNames>
+      <ObjectId>24781</ObjectId>
+      <RefColNames>id</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>8295</StateNumber>
+      <RefTableId>24768</RefTableId>
+      <RefTableName>rent</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <index id="289" parent="270" name="booking_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24748</ObjectId>
@@ -4383,14 +4427,14 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="285" parent="269" name="booking_pkey">
+    <key id="290" parent="270" name="booking_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24749</ObjectId>
       <Primary>1</Primary>
       <StateNumber>8282</StateNumber>
       <UnderlyingIndexId>24748</UnderlyingIndexId>
     </key>
-    <column id="286" parent="270" name="id">
+    <column id="291" parent="271" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;comment_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4399,21 +4443,21 @@ false Zulu
       <SequenceId>24750</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="287" parent="270" name="text">
+    <column id="292" parent="271" name="text">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>8283</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="288" parent="270" name="booking_id">
+    <column id="293" parent="271" name="booking_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>8283</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="289" parent="270" name="fklk7lrb0glesrjwtg0olcibbvr">
+    <foreign-key id="294" parent="271" name="fklk7lrb0glesrjwtg0olcibbvr">
       <ColNames>booking_id</ColNames>
       <ObjectId>24763</ObjectId>
       <RefColNames>id</RefColNames>
@@ -4423,7 +4467,7 @@ false Zulu
       <RefTableName>booking</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <index id="290" parent="270" name="comment_pkey">
+    <index id="295" parent="271" name="comment_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24755</ObjectId>
@@ -4432,14 +4476,121 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="291" parent="270" name="comment_pkey">
+    <key id="296" parent="271" name="comment_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24756</ObjectId>
       <Primary>1</Primary>
       <StateNumber>8283</StateNumber>
       <UnderlyingIndexId>24755</UnderlyingIndexId>
     </key>
-    <column id="292" parent="271" name="id">
+    <check id="297" parent="272" name="rent_rating_check">
+      <ColNames>rating</ColNames>
+      <ObjectId>24771</ObjectId>
+      <Predicate>(rating &gt;= 0) AND (rating &lt;= 4)</Predicate>
+      <StateNumber>8292</StateNumber>
+    </check>
+    <check id="298" parent="272" name="rent_rent_status_check">
+      <ColNames>rent_status</ColNames>
+      <ObjectId>24772</ObjectId>
+      <Predicate>(rent_status &gt;= 0) AND (rent_status &lt;= 1)</Predicate>
+      <StateNumber>8292</StateNumber>
+    </check>
+    <column id="299" parent="272" name="id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>8292</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="300" parent="272" name="location">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>8292</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="301" parent="272" name="name">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>8292</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="302" parent="272" name="price">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>8292</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="303" parent="272" name="rating">
+      <DasType>smallint|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>8292</StateNumber>
+      <TypeId>21</TypeId>
+    </column>
+    <column id="304" parent="272" name="rent_status">
+      <DasType>smallint|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>8292</StateNumber>
+      <TypeId>21</TypeId>
+    </column>
+    <column id="305" parent="272" name="description">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>7</Position>
+      <StateNumber>8297</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="306" parent="272" name="end_date">
+      <DasType>timestamp(6)|0s</DasType>
+      <Position>8</Position>
+      <StateNumber>8307</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="307" parent="272" name="start_date">
+      <DasType>timestamp(6)|0s</DasType>
+      <Position>9</Position>
+      <StateNumber>8308</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="308" parent="272" name="rent_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>24775</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>8292</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="309" parent="272" name="rent_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>24776</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>8292</StateNumber>
+      <UnderlyingIndexId>24775</UnderlyingIndexId>
+    </key>
+    <column id="310" parent="273" name="rent_id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>8293</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="311" parent="273" name="photo_url">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>8293</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <foreign-key id="312" parent="273" name="fkq1lysm5u4mosxrc27m36vkufo">
+      <ColNames>rent_id</ColNames>
+      <ObjectId>24786</ObjectId>
+      <RefColNames>id</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>8296</StateNumber>
+      <RefTableId>24768</RefTableId>
+      <RefTableName>rent</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <column id="313" parent="274" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;user_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4448,37 +4599,37 @@ false Zulu
       <SequenceId>24726</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="293" parent="271" name="email">
+    <column id="314" parent="274" name="email">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
       <StateNumber>8272</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="294" parent="271" name="phone">
+    <column id="315" parent="274" name="phone">
       <DasType>bigint|0s</DasType>
       <Position>3</Position>
       <StateNumber>8272</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="295" parent="271" name="first_name">
+    <column id="316" parent="274" name="first_name">
       <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
       <StateNumber>8272</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="296" parent="271" name="password">
+    <column id="317" parent="274" name="password">
       <DasType>varchar(255)|0s</DasType>
       <Position>5</Position>
       <StateNumber>8272</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="297" parent="271" name="last_name">
+    <column id="318" parent="274" name="last_name">
       <DasType>varchar(255)|0s</DasType>
       <Position>6</Position>
       <StateNumber>8272</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="298" parent="271" name="user_pkey">
+    <index id="319" parent="274" name="user_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24733</ObjectId>
@@ -4487,7 +4638,7 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="299" parent="271" name="user_pkey">
+    <key id="320" parent="274" name="user_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24734</ObjectId>
       <Primary>1</Primary>

@@ -205,8 +205,13 @@ export default function Appbar() {
                         >
                             Traveler
                         </Typography>
-                        <Box sx={{ flexGrow: 1, display: 'flex', margin: '20px' }}>
+                        <Box sx={{ flexGrow: 1, display: 'flex', margin: '20px', gap: '20px' }}>
                             <Link to="/">
+                                <StyledButton>
+                                    Home
+                                </StyledButton>
+                            </Link>
+                            <Link to="/trips">
                                 <StyledButton>
                                     Sejururi
                                 </StyledButton>
@@ -219,9 +224,9 @@ export default function Appbar() {
                         </Box>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                <Link to="/myprofile">
+                                <Link to="/notifications">
                                     <Badge badgeContent={4} color="error">
-                                        <MailIcon />
+                                        <MailIcon color="disabled" />
                                     </Badge>
                                 </Link>
 

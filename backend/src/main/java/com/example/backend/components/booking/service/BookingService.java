@@ -5,6 +5,7 @@ import com.example.backend.components.booking.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,9 +16,9 @@ public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
-    public List<Date> findAvailableDates(Date startDate, Date endDate) {
+    public List<LocalDate> findAvailableDates(LocalDate startDate, LocalDate endDate) {
         List<Booking> existingBookings = bookingRepository.findByStartDateBetween(startDate, endDate);
-        List<Date> allDates = generateDateRange(startDate, endDate);
+        List<LocalDate> allDates = generateDateRange(startDate, endDate);
 
         for (Booking booking : existingBookings) {
             removeDates(allDates, booking.getStartDate(), booking.getEndDate());
@@ -26,26 +27,24 @@ public class BookingService {
         return allDates;
     }
 
-    private List<Date> generateDateRange(Date startDate, Date endDate) {
-        List<Date> datesInRange = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(startDate);
+    private List<LocalDate> generateDateRange(LocalDate startDate, LocalDate endDate) {
+        List<LocalDate> datesInRange = new ArrayList<>();
 
-        while (calendar.getTime().before(endDate) || calendar.getTime().equals(endDate)) {
-            datesInRange.add(calendar.getTime());
-            calendar.add(Calendar.DATE, 1);
+        LocalDate currentDate = startDate;
+        while (!currentDate.isAfter(endDate)) {
+            datesInRange.add(currentDate);
+            currentDate = currentDate.plusDays(1);
         }
 
         return datesInRange;
     }
 
-    private void removeDates(List<Date> dates, Date startDate, Date endDate) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(startDate);
+    private void removeDates(List<LocalDate> dates, LocalDate startDate, LocalDate endDate) {
+        LocalDate currentDate = startDate;
 
-        while (calendar.getTime().before(endDate) || calendar.getTime().equals(endDate)) {
-            dates.remove(calendar.getTime());
-            calendar.add(Calendar.DATE, 1);
+        while (!currentDate.isAfter(endDate)) {
+            dates.remove(currentDate);
+            currentDate = currentDate.plusDays(1);
         }
     }
 }

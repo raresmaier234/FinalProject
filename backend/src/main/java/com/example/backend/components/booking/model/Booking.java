@@ -5,6 +5,7 @@ import com.example.backend.components.rent.model.Rent;
 import com.example.backend.components.user.model.User;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +27,15 @@ public class Booking {
     private Rent rent;
 
     @Column(name = "start_date", nullable = false)
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date", nullable = false)
-    private Date endDate;
+    private LocalDate endDate;
 
     @Column(name = "booking_status", nullable = false)
     private BookingStatus bookingStatus;
 
-    public Booking(User user, Rent rent, Date startDate, Date endDate,  BookingStatus bookingStatus) {
+    public Booking(User user, Rent rent, LocalDate startDate, LocalDate endDate,  BookingStatus bookingStatus) {
         this.user = user;
         this.rent = rent;
         this.startDate = startDate;
@@ -71,19 +72,19 @@ public class Booking {
     }
 
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

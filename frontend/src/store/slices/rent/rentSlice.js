@@ -9,16 +9,16 @@ const rentSlice = createSlice({
     name: "rent",
     initialState,
     reducers: {
-        setToEmpty(state, action) {
+        setToEmpty(state) {
             state.items = {}
             state.quantity = 0
         },
         setItem(state, action) {
-            state.items = action.payload.items
-            state.quantity = this.length(state.items)
+            state.items = action.payload.item;
+            state.quantity = Object.keys(state.items).length;
         }
     },
 });
 
-export const loginActions = rentSlice.actions;
+export const rentActions = rentSlice.actions;
 export default rentSlice.reducer;

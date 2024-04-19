@@ -9,20 +9,25 @@ import SearchIcon from '@mui/icons-material/Search';
 import StyledButton from "../general-components/StyledButton";
 import Map from "../general-components/Map/Map";
 import { StyledInputBase } from "../general-components/Navbar/index";
-
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import useClasses from "../utils/useClasses";
+import { getAvailableRents } from "../../store/slices/rent/thunk";
+import GoogleMaps from "../general-components/GoogleMaps";
 
 import homeComponentStyles from "./HomeComponentStyles";
 
 const HomeComponent = () => {
     const classes = useClasses(homeComponentStyles, { name: "homeComponentStyles" })
 
+    const dispatch = useDispatch()
     const [openMap, setOpenMap] = useState(false)
 
     const [filters, setFilters] = useState({
         startDate: null,
         endDate: null,
         searchText: null,
+        location: null
     })
 
     const setMultipleFilters = (newFilter) => {
@@ -32,11 +37,20 @@ const HomeComponent = () => {
         }))
     }
 
+    const handleSubmit = () => {
+        const payload = {
+            startDate: filters.startDate,
+            endDate: filters.endDate,
+            searchText: filters.searchText
+        }
+
+    }
+
     return (
         <>
             <div className={classes.wrapper}>
                 <Appbar></Appbar>
-                <div className={classes.datePicker}>
+                <div className={classes.filterBox} onSubmit={handleSubmit}>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
@@ -52,7 +66,7 @@ const HomeComponent = () => {
                         />
 
                     </Search>
-                    <StyledDatePicker
+                    <StyledDatePicker className={classes.datePicker}
                         label="start date"
                         onChange={(e) => {
                             setMultipleFilters({
@@ -60,14 +74,18 @@ const HomeComponent = () => {
                             })
                         }}>
                     </StyledDatePicker>
-                    <StyledDatePicker label="end date"
+                    <StyledDatePicker label="end date" className={classes.datePicker}
                         onChange={(e) => {
                             setMultipleFilters({
                                 endDate: e.format("YYYY/MM/DD")
                             })
                         }}>
                     </StyledDatePicker>
-                    <StyledButton>Search</StyledButton>
+                    <GoogleMaps onChange={(e) => e !== null ?
+                        setMultipleFilters({ location: e.description }) : setMultipleFilters({ location: null })} />
+                    <Link to="/trips">
+                        <StyledButton type="submit">Search</StyledButton>
+                    </Link>
                     <StyledButton onClick={() => { setOpenMap(true) }}>Map</StyledButton>
                     <Map isOpen={openMap} onClose={() => { setOpenMap(false) }} />
                 </div>

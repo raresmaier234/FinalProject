@@ -2,34 +2,35 @@ package com.example.backend.components.rent.model;
 
 import com.example.backend.components.booking.model.BookingStatus;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class RentFilter {
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private BookingStatus bookingStatus;
     private String location;
 
-    public RentFilter(Date startDate, Date endDate, BookingStatus bookingStatus, String location) {
+    public RentFilter(LocalDate startDate, LocalDate endDate, BookingStatus bookingStatus, String location) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.bookingStatus = bookingStatus;
         this.location = location;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

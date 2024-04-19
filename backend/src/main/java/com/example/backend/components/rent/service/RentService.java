@@ -1,7 +1,9 @@
 package com.example.backend.components.rent.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.example.backend.components.rent.model.RentFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,33 +23,70 @@ public class RentService {
     @Autowired
     private BookingRepository bookingRepository;
 
-    public List<Rent> getAvailableRents(RentFilter filter) {
-        List<Rent> allRents = rentRepository.findAll();
+    public List<Rent> getAll() {
+        return rentRepository.findAll();
+    }
 
-        // Filter rents based on booking status
-        List<Long> rentIdsWithApprovedBookings = bookingRepository.findByBookingStatus(filter.getBookingStatus())
+    public List<Rent> getAvailableRents(RentFilter rentFilter) {
+        List<Rent> allRents = getAll();
+
+        if (rentFilter == null) {
+            return allRents;
+        }
+
+        List<Long> rentIdsWithApprovedBookings = bookingRepository.findByBookingStatus(BookingStatus.CONFIRMED)
                 .stream()
                 .map(Booking::getRent)
                 .map(Rent::getId)
                 .toList();
 
-        // Filter rents based on location
-        List<Long> rentIdsWithMatchingLocation = allRents.stream()
-                .filter(rent -> rent.getLocation().equals(filter.getLocation()))
-                .map(Rent::getId)
-                .toList();
-
-        // Filter rents based on bookings' start and end dates
-        List<Long> rentIdsWithNoBookings = bookingRepository.findAll()
-                .stream()
-                .filter(booking -> booking.getStartDate().compareTo(filter.getEndDate()) <= 0 && booking.getEndDate().compareTo(filter.getStartDate()) >= 0)
-                .map(Booking::getRent)
-                .map(Rent::getId)
-                .toList();
-
-        // Filter the available rents based on booking status, location, and date range
-        return allRents.stream()
-                .filter(rent -> !rentIdsWithApprovedBookings.contains(rent.getId()) || !rentIdsWithNoBookings.contains(rent.getId()) || rentIdsWithMatchingLocation.contains(rent.getId()))
+        List<Rent> availableRents = allRents.stream()
+                .filter(rent -> !rentIdsWithApprovedBookings.contains(rent.getId()))
                 .collect(Collectors.toList());
+
+        if (rentFilter.getLocation() != null) {
+            availableRents = availableRents.stream()
+                    .filter(rent -> rent.getLocation().equals(rentFilter.getLocation()))
+                    .collect(Collectors.toList());
+        }
+
+        if (rentFilter.getStartDate() != null && rentFilter.getEndDate() != null) {
+            List<Long> rentIdsWithNoBookings = bookingRepository.findAll()
+                    .stream()
+                    .filter(booking -> booking.getStartDate().compareTo(rentFilter.getEndDate()) <= 0 &&
+                            booking.getEndDate().compareTo(rentFilter.getStartDate()) >= 0)
+                    .map(Booking::getRent)
+                    .map(Rent::getId)
+                    .toList();
+
+            availableRents = availableRents.stream()
+                    .filter(rent -> !rentIdsWithNoBookings.contains(rent.getId()))
+                    .collect(Collectors.toList());
+        }
+
+        return availableRents;
+    }
+
+
+    public Rent addRent(Rent rent) {
+        return rentRepository.save(rent);
+    }
+
+    public Rent updateRent(Rent rent) {
+        Optional<Rent> existingRentOptional = rentRepository.findById(rent.getId());
+
+        if (existingRentOptional.isPresent()) {
+            Rent existingRent = existingRentOptional.get();
+            existingRent.setLocation(rent.getLocation());
+            existingRent.setPrice(rent.getPrice());
+
+            return rentRepository.save(existingRent);
+        } else {
+            throw new RuntimeException("Rent not found with ID: " + rent.getId());
+        }
+    }
+
+    public void deleteRent(long rent) {
+        rentRepository.deleteById(rent);
     }
 }

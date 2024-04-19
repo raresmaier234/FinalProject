@@ -1,63 +1,37 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
+// GoogleMaps.js
+import React, { useState, useEffect, useMemo } from 'react';
+import { debounce } from '@mui/material/utils';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import parse from 'autosuggest-highlight/parse';
-import { debounce } from '@mui/material/utils';
 
-function loadScript(src, position, id) {
-  if (!position) {
-    return;
-  }
+let autocompleteService;
 
-  const script = document.createElement('script');
-  script.setAttribute('async', '');
-  script.setAttribute('id', id);
-  script.src = src;
-  position.appendChild(script);
-}
+const GoogleMaps = ({ onChange }) => {
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState('');
+  const [options, setOptions] = useState([]);
 
-const autocompleteService = { current: null };
-
-export default function GoogleMaps({ onChange }) {
-  const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState('');
-  const [options, setOptions] = React.useState([]);
-  const loaded = React.useRef(false);
-
-  if (typeof window !== 'undefined' && !loaded.current) {
-    if (!document.querySelector('#google-maps')) {
-      loadScript(
-        `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`,
-        document.querySelector('head'),
-        'google-maps',
-      );
-    }
-
-    loaded.current = true;
-  }
-
-  const fetch = React.useMemo(
+  const fetch = useMemo(
     () =>
       debounce((request, callback) => {
-        autocompleteService.current.getPlacePredictions(request, callback);
+        autocompleteService.getPlacePredictions(request, callback);
       }, 400),
     [],
   );
 
-  React.useEffect(() => {
-    let active = true;
+  useEffect(() => {
+    if (!autocompleteService && window.google && window.google.maps && window.google.maps.places) {
+      autocompleteService = new window.google.maps.places.AutocompleteService();
+    }
+  }, []);
 
-    if (!autocompleteService.current && window.google) {
-      autocompleteService.current =
-        new window.google.maps.places.AutocompleteService();
-    }
-    if (!autocompleteService.current) {
-      return undefined;
-    }
+  useEffect(() => {
+    let active = true;
 
     if (inputValue === '') {
       setOptions(value ? [value] : []);
@@ -84,7 +58,6 @@ export default function GoogleMaps({ onChange }) {
       active = false;
     };
   }, [value, inputValue, fetch]);
-
   return (
     <Autocomplete
       id="google-map-demo"
@@ -146,3 +119,6 @@ export default function GoogleMaps({ onChange }) {
     />
   );
 }
+
+
+export default GoogleMaps;
