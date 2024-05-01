@@ -1,10 +1,12 @@
 package com.example.backend.components.rent.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.example.backend.S3Bucket.S3Service;
 import com.example.backend.components.rent.model.RentFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import com.example.backend.components.booking.model.Booking;
 import com.example.backend.components.booking.repository.BookingRepository;
 import com.example.backend.components.rent.model.Rent;
 import com.example.backend.components.rent.repository.RentRepository;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class RentService {
@@ -23,9 +26,14 @@ public class RentService {
     @Autowired
     private BookingRepository bookingRepository;
 
+    @Autowired
+    private S3Service s3Service;
+
     public List<Rent> getAll() {
         return rentRepository.findAll();
     }
+
+    public Optional<Rent> getRent(Long id) { return rentRepository.findById(id); }
 
     public List<Rent> getAvailableRents(RentFilter rentFilter) {
         List<Rent> allRents = getAll();
@@ -63,15 +71,19 @@ public class RentService {
                     .filter(rent -> !rentIdsWithNoBookings.contains(rent.getId()))
                     .collect(Collectors.toList());
         }
+        for (Rent rent : availableRents) {
+            List<String> photoUrls = s3Service.getPhotoUrlsForRent(rent.getId());
+            rent.setPhotoUrls(photoUrls);
+        }
+
 
         return availableRents;
     }
 
 
-    public Rent addRent(Rent rent) {
+    public Rent addRent(Rent rent){
         return rentRepository.save(rent);
     }
-
     public Rent updateRent(Rent rent) {
         Optional<Rent> existingRentOptional = rentRepository.findById(rent.getId());
 

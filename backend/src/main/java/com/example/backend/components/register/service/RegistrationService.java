@@ -17,16 +17,19 @@ public class RegistrationService {
     private PasswordEncoder passwordEncoder;
 
     public void registerUser(User user) {
-        // Hash the password using PasswordEncoder
+        User newUser = new User();
+        newUser.setEmail(user.getEmail());
         String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-        userRepository.save(user);
+        newUser.setPassword(hashedPassword);
+        newUser.setFirstName(user.getFirstName());
+        newUser.setLastName(user.getLastName());
+        newUser.setRole(user.getRole());
+        userRepository.save(newUser);
     }
 
     public boolean verifyLogin(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user != null) {
-            // Compare the provided password with the hashed password from the database
             return passwordEncoder.matches(password, user.getPassword());
         }
         return false;

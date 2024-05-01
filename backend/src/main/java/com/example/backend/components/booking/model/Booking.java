@@ -35,16 +35,47 @@ public class Booking {
     @Column(name = "booking_status", nullable = false)
     private BookingStatus bookingStatus;
 
-    public Booking(User user, Rent rent, LocalDate startDate, LocalDate endDate,  BookingStatus bookingStatus) {
+    private int totalPrice;
+    private int nrOfRooms;
+    private int nrOfPersons;
+
+    public Booking(User user, Rent rent, LocalDate startDate, LocalDate endDate, BookingStatus bookingStatus, int totalPrice, int nrOfRooms, int nrOfPersons) {
         this.user = user;
         this.rent = rent;
         this.startDate = startDate;
         this.endDate = endDate;
         this.bookingStatus = bookingStatus;
+        this.totalPrice = totalPrice;
+        this.nrOfRooms = nrOfRooms;
+        this.nrOfPersons = nrOfPersons;
     }
 
     public Booking() {
 
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public int getNrOfRooms() {
+        return nrOfRooms;
+    }
+
+    public void setNrOfRooms(int nrOfRooms) {
+        this.nrOfRooms = nrOfRooms;
+    }
+
+    public int getNrOfPersons() {
+        return nrOfPersons;
+    }
+
+    public void setNrOfPersons(int nrOfPersons) {
+        this.nrOfPersons = nrOfPersons;
     }
 
     public Rent getRent() {

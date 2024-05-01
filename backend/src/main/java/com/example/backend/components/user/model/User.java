@@ -14,6 +14,7 @@ public class User {
     private String firstName;
     private String password;
     private String lastName;
+    private UserRole role;
 
     public User(String email, String password) {
         this.email = email;
@@ -39,13 +40,14 @@ public class User {
     public User() {
     }
 
-    public User(long id, String email, long phone, String firstName, String password, String lastName) {
+    public User(long id, String email, long phone, String firstName, String password, String lastName, UserRole role) {
         this.id = id;
         this.email = email;
         this.phone = phone;
         this.firstName = firstName;
         this.password = password;
         this.lastName = lastName;
+        this.role = role;
     }
 
     public long getId() {
@@ -72,11 +74,20 @@ public class User {
         this.phone = phone;
     }
 
-    public User(String firstName, String lastName, String email, String password) {
+    public User(String firstName, String lastName, String email, String password, UserRole role) {
         this.email = email;
         this.firstName = firstName;
         this.password = password;
         this.lastName = lastName;
+        this.role = role;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     public String getPassword() {

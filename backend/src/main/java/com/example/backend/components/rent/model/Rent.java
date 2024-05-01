@@ -1,12 +1,9 @@
 package com.example.backend.components.rent.model;
 
-import com.example.backend.components.booking.model.Booking;
-import com.example.backend.components.booking.model.BookingStatus;
-import com.example.backend.components.user.model.User;
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,72 +18,53 @@ public class Rent {
     private int price;
     private Rating rating;
     private String description;
+
+    @Transient // Not persisted in the database
+    private List<MultipartFile> photos;
+
     @ElementCollection
     @CollectionTable(name = "RentPhotos", joinColumns = @JoinColumn(name = "rent_id"))
     @Column(name = "photo_url")
-    private List<String> photos;
+    private List<String> photoUrls;
+
     private String location;
     private RentStatus rentStatus;
     private LocalDate startDate;
     private LocalDate endDate;
 
+    @Column(nullable = true)
+    private int nrOfRooms;
+
+    @Column(nullable = true)
+    private int nrOfPersons;
+
+    @Column(nullable = true)
+    private int nrOfBathrooms;
+
+    @Column(nullable = true)
+    private boolean hasParking;
+
     public Rent() {
 
     }
 
-    public Rent(String name, int price, String location, String description, List<String> photos, LocalDate startDate, LocalDate endDate) {
-        this.name = name;
-        this.price = price;
-        this.photos = photos;
-        this.location = location;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-    public Rent(long id, String name, int price, Rating rating, List<String> photos, String location, RentStatus rentStatus,
-    LocalDate startDate, LocalDate endDate) {
+    public Rent(long id, String name, int price, Rating rating, String description, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.rating = rating;
-        this.photos = photos;
+        this.description = description;
+        this.photoUrls = photoUrls;
         this.location = location;
         this.rentStatus = rentStatus;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-    public List<String> getPhotos() {
-        return photos;
-    }
-
-    public String getDescription() {
-        return description;
+        this.nrOfRooms = nrOfRooms;
+        this.nrOfPersons = nrOfPersons;
+        this.nrOfBathrooms = nrOfBathrooms;
+        this.hasParking = hasParking;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPhotos(List<String> photos) {
-        this.photos = photos;
-    }
     public long getId() {
         return id;
     }
@@ -119,6 +97,29 @@ public class Rent {
         this.rating = rating;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<MultipartFile> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<MultipartFile> photos) {
+        this.photos = photos;
+    }
+
+    public List<String> getPhotoUrls() {
+        return photoUrls;
+    }
+
+    public void setPhotoUrls(List<String> photoUrls) {
+        this.photoUrls = photoUrls;
+    }
 
     public String getLocation() {
         return location;
@@ -134,5 +135,53 @@ public class Rent {
 
     public void setRentStatus(RentStatus rentStatus) {
         this.rentStatus = rentStatus;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public int getNrOfRooms() {
+        return nrOfRooms;
+    }
+
+    public void setNrOfRooms(int nrOfRooms) {
+        this.nrOfRooms = nrOfRooms;
+    }
+
+    public int getNrOfPersons() {
+        return nrOfPersons;
+    }
+
+    public void setNrOfPersons(int nrOfPersons) {
+        this.nrOfPersons = nrOfPersons;
+    }
+
+    public int getNrOfBathrooms() {
+        return nrOfBathrooms;
+    }
+
+    public void setNrOfBathrooms(int nrOfBathrooms) {
+        this.nrOfBathrooms = nrOfBathrooms;
+    }
+
+    public boolean isHasParking() {
+        return hasParking;
+    }
+
+    public void setHasParking(boolean hasParking) {
+        this.hasParking = hasParking;
     }
 }

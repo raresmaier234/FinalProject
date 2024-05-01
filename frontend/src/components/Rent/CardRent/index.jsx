@@ -6,9 +6,10 @@ import CardContent from '@mui/joy/CardContent';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
+import { Link } from 'react-router-dom';
 
 
-export default function CardRent({ name, description, price, location, photos }) {
+export default function CardRent({ id, name, description, price, location, photos }) {
     return (
         <Card sx={{ width: "100%" }}>
             <div>
@@ -37,18 +38,21 @@ export default function CardRent({ name, description, price, location, photos })
                 <div>
                     <Typography level="body-xs">Price:</Typography>
                     <Typography fontSize="lg" fontWeight="lg">
-                        {price}
+                        {price} €
                     </Typography>
                 </div>
-                <Button
-                    variant="solid"
-                    size="md"
-                    color="primary"
-                    aria-label="Explore Bahamas Islands"
-                    sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
-                >
-                    Explore
-                </Button>
+                <Link to={`/${id}/${name}`}>
+                    <Button
+                        variant="solid"
+                        size="md"
+                        color="primary"
+                        aria-label="Explore Bahamas Islands"
+                        sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
+                    >
+                        Explore
+                    </Button>
+                </Link>
+
             </CardContent>
         </Card>
     );

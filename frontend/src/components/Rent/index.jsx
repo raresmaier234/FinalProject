@@ -25,11 +25,12 @@ const RentComponent = ({ filter }) => {
                 {Array.isArray(rents) && rents.map((rent) => (
                     <CardRent
                         key={rent.id}
+                        id={rent.id}
                         name={rent.name}
                         description={rent.description}
                         price={rent.price}
                         location={rent.location}
-                        photos={rent.photos}
+                        photos={rent.photoUrls}
                     />
                 ))}
             </div>
