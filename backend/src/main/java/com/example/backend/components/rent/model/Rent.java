@@ -44,16 +44,19 @@ public class Rent {
     @Column(nullable = true)
     private boolean hasParking;
 
+    private RentType type;
+
     public Rent() {
 
     }
 
-    public Rent(long id, String name, int price, Rating rating, String description, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking) {
+    public Rent(long id, String name, int price, Rating rating, String description, List<MultipartFile> photos, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking, RentType type) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.rating = rating;
         this.description = description;
+        this.photos = photos;
         this.photoUrls = photoUrls;
         this.location = location;
         this.rentStatus = rentStatus;
@@ -63,6 +66,33 @@ public class Rent {
         this.nrOfPersons = nrOfPersons;
         this.nrOfBathrooms = nrOfBathrooms;
         this.hasParking = hasParking;
+        this.type = type;
+    }
+
+    public Rent(String name, int price, Rating rating, String description, List<MultipartFile> photos, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking, RentType type) {
+        this.name = name;
+        this.price = price;
+        this.rating = rating;
+        this.description = description;
+        this.photos = photos;
+        this.photoUrls = photoUrls;
+        this.location = location;
+        this.rentStatus = rentStatus;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.nrOfRooms = nrOfRooms;
+        this.nrOfPersons = nrOfPersons;
+        this.nrOfBathrooms = nrOfBathrooms;
+        this.hasParking = hasParking;
+        this.type = type;
+    }
+
+    public RentType getType() {
+        return type;
+    }
+
+    public void setType(RentType type) {
+        this.type = type;
     }
 
     public long getId() {

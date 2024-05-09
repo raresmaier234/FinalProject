@@ -6,14 +6,16 @@ import CardContent from '@mui/joy/CardContent';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
+import ImageSlider from '../../general-components/ImageSlider';
 import { Link } from 'react-router-dom';
 
+export default function CardRent({ id, name, description, price, location, photos, type }) {
 
-export default function CardRent({ id, name, description, price, location, photos }) {
     return (
-        <Card sx={{ width: "100%" }}>
+        <Card sx={{ width: "100%", height: "500px" }}>
             <div>
                 <Typography level="title-lg">{name}</Typography>
+                <Typography level="body-sm">{type}</Typography>
                 <Typography level="body-sm">{description}</Typography>
                 <Typography level="body-sm">{location}</Typography>
                 <IconButton
@@ -26,13 +28,8 @@ export default function CardRent({ id, name, description, price, location, photo
                     <BookmarkAdd />
                 </IconButton>
             </div>
-            <AspectRatio minHeight="120px" maxHeight="200px">
-                <img
-                    src={photos}
-                    srcSet={photos}
-                    loading="lazy"
-                    alt=""
-                />
+            <AspectRatio height="400px" maxHeight="200px">
+                <ImageSlider images={photos}></ImageSlider>
             </AspectRatio>
             <CardContent orientation="horizontal">
                 <div>

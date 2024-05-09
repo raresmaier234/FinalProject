@@ -15,7 +15,7 @@ export const getUser = createAsyncThunk("getUser", async ({ payload }, thunkAPI)
 
         thunkAPI.dispatch(loginActions.setItem({ item: data }));
 
-        return true
+        return data
     } catch (e) {
         return thunkAPI.rejectWithValue({
             error: true,

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { useAuth } from "../../providers/AuthProvider";
 import { Outlet } from "react-router-dom";
 import Appbar from "../general-components/Navbar/index";
-import ImageSlider from "../general-components/ImageSlider/index"
 import StyledDatePicker from "../general-components/StyledDatePicker";
 import { Search, SearchIconWrapper } from "../general-components/Navbar/index";
 import SearchIcon from '@mui/icons-material/Search';
@@ -49,7 +49,6 @@ const HomeComponent = () => {
     return (
         <>
             <div className={classes.wrapper}>
-                <Appbar></Appbar>
                 <div className={classes.filterBox} onSubmit={handleSubmit}>
                     <Search>
                         <SearchIconWrapper>
@@ -89,7 +88,6 @@ const HomeComponent = () => {
                     <StyledButton onClick={() => { setOpenMap(true) }}>Map</StyledButton>
                     <Map isOpen={openMap} onClose={() => { setOpenMap(false) }} />
                 </div>
-                <ImageSlider />
                 <Outlet></Outlet>
             </div>
 

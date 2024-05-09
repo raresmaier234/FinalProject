@@ -1,14 +1,12 @@
 package com.example.backend.components.rent.controller;
 
 import com.example.backend.S3Bucket.FileService;
-import com.example.backend.S3Bucket.S3Service;
-import com.example.backend.components.booking.model.BookingStatus;
 import com.example.backend.components.rent.model.Rent;
 import com.example.backend.components.rent.model.RentFilter;
+import com.example.backend.components.rent.model.RentStatus;
+import com.example.backend.components.rent.model.RentType;
 import com.example.backend.components.rent.service.RentService;
-import jakarta.servlet.annotation.MultipartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +49,7 @@ public class RentController {
                                         @RequestParam("hasParking") Boolean hasParking,
                                         @RequestParam("startDate") LocalDate startDate,
                                         @RequestParam("endDate") LocalDate endDate,
+                                        @RequestParam("type") String type,
                                         @RequestPart("photos") List<MultipartFile> photos) {
 
         List<String> publicURL = fileService.uploadFiles(photos);
@@ -64,8 +63,10 @@ public class RentController {
         rent.setNrOfBathrooms(nrOfBathrooms);
         rent.setDescription(description);
         rent.setName(name);
+        rent.setRentStatus(RentStatus.Available);
         rent.setPrice(price);
         rent.setLocation(location);
+        rent.setType(RentType.valueOf(type));
         return new ResponseEntity<>(rentService.addRent(rent), HttpStatus.CREATED);
     }
     @GetMapping("/getRent/{id}")

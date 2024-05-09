@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -11,18 +12,18 @@ import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import StyledButton from '../StyledButton';
-import Map from '../Map/Map';
 import LoginForm from '../../forms/LoginForm';
 import SigninForm from '../../forms/SignupForm';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../../store/slices/login/thunk';
+import { useAuth } from '../../../providers/AuthProvider';
+
 
 export const Search = styled('div')(({ theme }) => ({
     gap: "20px",
@@ -64,10 +65,9 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function Appbar() {
-    const user = useSelector((state) => state.login.user)
-    const isLoggedIn = useSelector((state) => state.login.isLoggedIn)
+export default function Appbar({ user }) {
 
+    const { logout } = useAuth()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -76,6 +76,8 @@ export default function Appbar() {
 
     const dispatch = useDispatch()
 
+    const navigate = useNavigate()
+
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -83,8 +85,13 @@ export default function Appbar() {
         setAnchorEl(event.currentTarget);
     };
 
+    const handleProfile = () => {
+        navigate("/profile")
+    }
+
     const handleLogout = () => {
         dispatch(logoutUser({}));
+        logout()
     }
 
     const handleMobileMenuClose = () => {
@@ -117,9 +124,9 @@ export default function Appbar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            {isLoggedIn ? (
+            {user ? (
                 [
-                    <MenuItem key="profile" onClick={handleMenuClose}>Profile</MenuItem>,
+                    <MenuItem key="profile" onClick={handleProfile}>Profile</MenuItem>,
                     <MenuItem key="logout" onClick={handleLogout}>Log out</MenuItem>
                 ]
             ) : (
@@ -176,7 +183,8 @@ export default function Appbar() {
                     aria-haspopup="true"
                     color="inherit"
                 >
-                    <AccountCircle />
+                    {user ? <Avatar>H</Avatar>
+                        : <AccountCircle />}
                 </IconButton>
                 <p>Profile</p>
             </MenuItem>
@@ -216,11 +224,11 @@ export default function Appbar() {
                                     Sejururi
                                 </StyledButton>
                             </Link>
-                            <Link to="/createRent">
+                            {user && <Link to="/createRent">
                                 <StyledButton>
                                     Creare chirie
                                 </StyledButton>
-                            </Link>
+                            </Link>}
                         </Box>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -249,7 +257,7 @@ export default function Appbar() {
                                 onClick={handleProfileMenuOpen}
                                 color="inherit"
                             >
-                                <AccountCircle />
+                                {user ? <Avatar></Avatar> : <AccountCircle />}
                             </IconButton>
                         </Box>
                         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

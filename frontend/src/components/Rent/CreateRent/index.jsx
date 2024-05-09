@@ -1,23 +1,21 @@
+// CreateRentForm.js
 import React, { useState } from 'react';
-import useClasses from '../../utils/useClasses';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import Appbar from '../../general-components/Navbar';
 import { Outlet } from 'react-router-dom';
-import FormLayout from '../../../containers/FormLayout';
-import GoogleMaps from '../../general-components/GoogleMaps';
-import { TextField, Box, Checkbox } from '@mui/material';
-import createRentStyles from './CreateRentStyles';
-import { Link } from 'react-router-dom';
+import { TextField, Box, Checkbox, Typography } from '@mui/material';
+import { InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import StyledButton from '../../general-components/StyledButton';
 import StyledDatePicker from '../../general-components/StyledDatePicker';
-
+import GoogleMaps from '../../general-components/GoogleMaps';
+import FormLayout from '../../../containers/FormLayout';
 import { addRent } from '../../../store/slices/rent/thunk';
+import './CreateRentStyles.css';
 
 const CreateRentForm = () => {
-    const classes = useClasses(createRentStyles, { name: "createRentStyles" })
-
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [location, setLocation] = useState("");
     const [price, setPrice] = useState("");
@@ -30,15 +28,20 @@ const CreateRentForm = () => {
     const [nrOfPersons, setNrOfPersons] = useState(null);
     const [nrOfBathrooms, setNrOfBathrooms] = useState(null);
     const [hasParking, setHasParking] = useState(false);
+    const [type, setType] = useState("");
 
     const handleUploadPhotos = (e) => {
-        setPhotos(e.target.files);
-    }
+        const files = e.target.files;
+        setPhotos([...photos, ...files]);
+    };
 
     const handleParkingChange = () => {
         setHasParking(!hasParking);
     };
 
+    const handleChangeType = (e) => {
+        setType(e.target.value);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -57,18 +60,39 @@ const CreateRentForm = () => {
         formData.append("hasParking", hasParking);
         formData.append("startDate", startDateFormatted);
         formData.append("endDate", endDateFormatted);
+        formData.append("type", type);
         for (let i = 0; i < photos.length; i++) {
             formData.append("photos", photos[i]);
         }
-        console.log(formData)
-        dispatch(addRent({ rent: formData }))
+        dispatch(addRent({ rent: formData }));
+
+        navigate('/');
     };
 
     return (
-        <div>
-            <Appbar></Appbar>
-            <h2>Create Rent</h2>
-            <FormLayout onSubmit={handleSubmit}>
+        <div className="create-rent-form-container">
+            <Typography variant="h4" className="form-heading">
+                Create Rent
+            </Typography>
+            <FormLayout onSubmit={handleSubmit} className="form-layout">
+                <FormControl fullWidth className="form-field">
+                    <InputLabel id="type-label">Tip cazare</InputLabel>
+                    <Select
+                        labelId="type-label"
+                        id="type-select"
+                        value={type}
+                        label="Tip cazare"
+                        onChange={handleChangeType}
+                    >
+                        <MenuItem value="HOTEL">Hotel</MenuItem>
+                        <MenuItem value="CABANA">Cabana</MenuItem>
+                        <MenuItem value="PENSIUNE">Pensiune</MenuItem>
+                        <MenuItem value="APARTAMENT">Apartament</MenuItem>
+                        <MenuItem value="CASA">Casa</MenuItem>
+                        <MenuItem value="CAMPING">Camping</MenuItem>
+                    </Select>
+                </FormControl>
+
                 <TextField
                     margin="normal"
                     required
@@ -76,10 +100,9 @@ const CreateRentForm = () => {
                     id="name"
                     label="Nume"
                     name="name"
-                    type="string"
-                    autoFocus
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    className="form-field"
                 />
                 <TextField
                     margin="normal"
@@ -91,6 +114,7 @@ const CreateRentForm = () => {
                     type="number"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
+                    className="form-field"
                 />
                 <TextField
                     margin="normal"
@@ -98,21 +122,22 @@ const CreateRentForm = () => {
                     fullWidth
                     id="description"
                     label="Descriere"
-                    name="price"
-                    type="string"
+                    name="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    className="form-field"
                 />
                 <TextField
                     margin="normal"
                     required
                     fullWidth
-                    id="description"
+                    id="nrOfPersons"
                     label="Numar maxim de persoane"
                     name="nrOfPersons"
                     type="number"
                     value={nrOfPersons}
                     onChange={(e) => setNrOfPersons(e.target.value)}
+                    className="form-field"
                 />
                 <TextField
                     margin="normal"
@@ -124,6 +149,7 @@ const CreateRentForm = () => {
                     type="number"
                     value={nrOfRooms}
                     onChange={(e) => setNrOfRooms(e.target.value)}
+                    className="form-field"
                 />
                 <TextField
                     margin="normal"
@@ -135,21 +161,28 @@ const CreateRentForm = () => {
                     type="number"
                     value={nrOfBathrooms}
                     onChange={(e) => setNrOfBathrooms(e.target.value)}
+                    className="form-field"
                 />
+                <div>
+                    <StyledDatePicker
+                        label="Start Date"
+                        onChange={(e) => setStartDate(e.format("YYYY-MM-DD"))}
+                        className="form-field"
+                    />
+                    <StyledDatePicker
+                        label="End Date"
+                        onChange={(e) => setEndDate(e.format("YYYY-MM-DD"))}
+                        className="form-field"
+                    />
+                </div>
 
-                <StyledDatePicker
-                    label="start date"
-                    onChange={(e) => {
-                        setStartDate(e.format("YYYY/MM/DD"))
-                    }}>
-                </StyledDatePicker>
-                <StyledDatePicker label="end date"
-                    onChange={(e) => {
-                        setEndDate(e.format("YYYY/MM/DD"))
-                    }}>
-                </StyledDatePicker>
-                <GoogleMaps onChange={(selectedLocation) => selectedLocation !== null ? setLocation(selectedLocation.description) : setLocation("")} />
-                <Box sx={{ display: 'flex', gap: 3 }}>
+                <GoogleMaps
+                    onChange={(selectedLocation) =>
+                        selectedLocation !== null ? setLocation(selectedLocation.description) : setLocation("")
+                    }
+                    className="form-field"
+                />
+                <Box className="form-parking">
                     <label>
                         <Checkbox checked={hasParking} onChange={handleParkingChange} />
                         Parcare
@@ -159,8 +192,13 @@ const CreateRentForm = () => {
                         Fara parcare
                     </label>
                 </Box>
-                <input type="file" onChange={handleUploadPhotos} multiple />
-                <StyledButton type="submit">
+                <input type="file" onChange={handleUploadPhotos} multiple className="file-input" />
+                <div className="uploaded-photos">
+                    {photos.map((file, index) => (
+                        <Typography key={index} variant="body2">{file.name}</Typography>
+                    ))}
+                </div>
+                <StyledButton type="submit" className="form-submit">
                     Submit
                 </StyledButton>
             </FormLayout>

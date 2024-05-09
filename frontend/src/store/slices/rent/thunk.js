@@ -13,6 +13,7 @@ export const getAvailableRents = createAsyncThunk("getAvailableRents", async ({ 
         const response = await Axios(options);
         const data = response?.data;
 
+        console.log(data)
         thunkAPI.dispatch(rentActions.setItem({ item: data }));
         return true
     } catch (e) {

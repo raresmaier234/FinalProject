@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useCookies } from "react-cookie"
+import { useAuth } from "../../../providers/AuthProvider";
 import { useDispatch } from 'react-redux';
 
 import { getUser } from "../../../store/slices/login/thunk";
@@ -21,6 +22,8 @@ const LoginForm = ({ isOpen, onClose }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const { login } = useAuth();
+
     const [cookies, setCookies] = useCookies(['name'])
 
     const dispatch = useDispatch()
@@ -34,6 +37,10 @@ const LoginForm = ({ isOpen, onClose }) => {
         }
         dispatch(getUser({ payload: payload })).then((res) => {
             if (!res?.payload?.error) {
+
+                const serializedUser = JSON.stringify(res);
+                localStorage.setItem("loggedInUser", serializedUser)
+                login(res?.payload?.token);
                 onClose();
             }
         }).catch((error) => {

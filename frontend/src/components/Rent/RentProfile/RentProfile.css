@@ -1,0 +1,39 @@
+/* RentProfile.css */
+.rent-profile {
+    margin: 20px auto;
+    max-width: 900px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.profile-content {
+    padding: 16px;
+}
+
+.profile-description {
+    margin: 12px 0;
+}
+
+.profile-location,
+.profile-price,
+.profile-amenities {
+    margin: 8px 0;
+}
+
+.profile-reviews {
+    margin: 20px 0;
+    border-top: 1px solid #ddd;
+    padding-top: 16px;
+}
+
+.profile-review {
+    margin-bottom: 8px;
+}

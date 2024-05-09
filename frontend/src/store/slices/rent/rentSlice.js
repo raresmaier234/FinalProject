@@ -22,3 +22,4 @@ const rentSlice = createSlice({
 
 export const rentActions = rentSlice.actions;
 export default rentSlice.reducer;
+

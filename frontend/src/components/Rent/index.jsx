@@ -8,6 +8,7 @@ import useClasses from "../utils/useClasses";
 import CardRent from "./CardRent";
 import Appbar from "../general-components/Navbar";
 import rentComponentStyles from "./RentComponentStyles";
+import { useAuth } from "../../providers/AuthProvider";
 
 const RentComponent = ({ filter }) => {
     const classes = useClasses(rentComponentStyles, { name: "rentComponentStyles" });
@@ -20,18 +21,21 @@ const RentComponent = ({ filter }) => {
 
     return (
         <>
-            <Appbar></Appbar>
             <div className={classes.wrapper}>
                 {Array.isArray(rents) && rents.map((rent) => (
-                    <CardRent
-                        key={rent.id}
-                        id={rent.id}
-                        name={rent.name}
-                        description={rent.description}
-                        price={rent.price}
-                        location={rent.location}
-                        photos={rent.photoUrls}
-                    />
+                    <>
+                        <CardRent
+                            key={rent.id}
+                            id={rent.id}
+                            name={rent.name}
+                            description={rent.description}
+                            price={rent.price}
+                            location={rent.location}
+                            photos={rent.photoUrls}
+                            type={rent.type}
+                        />
+                    </>
+
                 ))}
             </div>
         </>

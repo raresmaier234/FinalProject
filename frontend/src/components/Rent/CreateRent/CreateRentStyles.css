@@ -1,0 +1,63 @@
+/* CreateRentForm.css */
+.create-rent-form-container {
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 3rem;
+}
+
+.form-heading {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+
+.form-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-field {
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    display: grid;
+    background-color: #ffffff;
+}
+
+.file-input {
+    margin-top: 1rem;
+}
+
+.form-parking {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.uploaded-photos {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border: 1px solid #e0e0e0;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+.form-submit {
+    margin-top: 2rem;
+    background-color: #3f51b5;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+}

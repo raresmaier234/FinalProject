@@ -20,8 +20,8 @@ public class S3Service implements FileService {
 
     @Override
     public List<String> getPhotoUrlsForRent(Long rentId) {
-        String bucketName = "traveler-store"; // Your S3 bucket name
-        String prefix = "rents/" + rentId + "/"; // Assuming photos are stored under a 'rents' directory with rent ID subdirectories
+        String bucketName = "traveler-store";
+        String prefix = "rents/" + rentId + "/";
 
         ListObjectsV2Request request = new ListObjectsV2Request()
                 .withBucketName(bucketName)
@@ -37,7 +37,6 @@ public class S3Service implements FileService {
                 String photoUrl = amazonS3Client.getUrl(bucketName, objectSummary.getKey()).toString();
                 photoUrls.add(photoUrl);
             }
-
             request.setContinuationToken(result.getNextContinuationToken());
         } while (result.isTruncated());
 

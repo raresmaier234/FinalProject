@@ -18,6 +18,7 @@ const SigninForm = ({ isOpen, onClose }) => {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [password, setPassword] = useState("")
+    const [phone, setPhone] = useState("")
     const [error, setError] = useState(null);
 
 
@@ -29,6 +30,7 @@ const SigninForm = ({ isOpen, onClose }) => {
             firstName: firstName,
             lastName: lastName,
             email: email,
+            phone: phone,
             password: password
         }
         axios.post(process.env.REACT_APP_API_URL + "/register", payload)

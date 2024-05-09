@@ -7,9 +7,7 @@ const ImageSliderstyles = (theme) => ({
         objectFit: "cover"
     },
     wrapper: {
-        margin: "10px",
-        width: "500px",
-        height: "500px"
+        height: "auto"
     },
     container: {
         display: "flex",

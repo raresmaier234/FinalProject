@@ -2,6 +2,7 @@ package com.example.backend.components.booking.service;
 
 import com.example.backend.components.booking.model.Booking;
 import com.example.backend.components.booking.repository.BookingRepository;
+import com.example.backend.components.rent.model.Rent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,4 +48,9 @@ public class BookingService {
             currentDate = currentDate.plusDays(1);
         }
     }
+
+    public Booking addBooking(Booking booking){
+        return bookingRepository.save(booking);
+    }
+
 }

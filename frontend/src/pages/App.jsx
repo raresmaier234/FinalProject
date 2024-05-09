@@ -4,18 +4,25 @@ import ProfileComponent from '../components/ProfileComponent';
 import CreateRentForm from '../components/Rent/CreateRent';
 import RentComponent from '../components/Rent';
 import RentProfile from '../components/Rent/RentProfile';
+import BookingForm from '../components/Booking';
+import Layout from '../components/Layout';
+import UserProfile from '../components/UserProfile';
 
 function App() {
   return (
 
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomeComponent />}></Route>
-        <Route path="/myprofile" element={<ProfileComponent />}></Route>
-        <Route path="/createRent" element={<CreateRentForm />}></Route>
-        <Route path="/trips" element={<RentComponent />}></Route>
-        <Route path="/:id/:name" element={<RentProfile />}></Route>
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path='/profile' element={<UserProfile />}></Route>
+          <Route path="/" element={<HomeComponent />}></Route>
+          <Route path="/myprofile" element={<ProfileComponent />}></Route>
+          <Route path="/createRent" element={<CreateRentForm />}></Route>
+          <Route path="/trips" element={<RentComponent />}></Route>
+          <Route path="/:id/:name" element={<RentProfile />}></Route>
+          <Route path="/booking/:rentId" element={<BookingForm />} />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   )
 }

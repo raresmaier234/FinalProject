@@ -1,154 +1,175 @@
-import axios from "axios";
-import { useState } from "react";
-import { useCookies } from "react-cookie"
-import { useDispatch, useSelector } from 'react-redux';
+// BookingForm.js
+import React, { useState, useEffect } from "react";
+import { getRentById } from "../../store/slices/rent/thunk";
+import { useParams } from "react-router-dom";
+import {
+    TextField,
+    Button,
+    Grid,
+    MenuItem,
+    Container,
+    Typography,
+    Paper
+} from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import FormLayout from "../../containers/FormLayout";
 
-import { getUser } from "../../../store/slices/login/thunk";
 
-import { TextField } from '@mui/material'
-import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link';
 
-import StyledButton from "../../general-components/StyledButton";
-import StyledModal from "../../general-components/StyledModal";
-import StyledDropdown from "../general-components/StyledDropdown";
-import FormLayout from "../../../containers/FormLayout";
+const BookingForm = () => {
+    const { rentId } = useParams();
+    const rent = useSelector((state) => state.rent.items);
 
-import useClasses from "../../utils/useClasses";
+    const dispatch = useDispatch();
 
-import LoginFormStyles from "./LoginFormStyles";
-import GoogleMaps from "../general-components/GoogleMaps";
+    const [form, setForm] = useState({
+        user: "",
+        firstName: "",
+        lastName: "",
+        phone: "",
+        rent: rentId || "",
+        nrOfRooms: 1,
+        nrOfPersons: 1,
+        startDate: "",
+        endDate: "",
+        totalPrice: 0
+    });
 
-const Booking = ({ isOpen, onClose }) => {
-    const resources = useSelector()
-    const sectionData = useSelector()
+    console.log(rent.price)
+    useEffect(() => {
+        dispatch(getRentById({ id: rentId }));
+    }, [dispatch]);
 
-    const [email, setEmail] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [phone, setPhone] = useState(null);
-    const [location, setLocation] = useState(null)
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm({ ...form, [name]: value });
+    };
 
-    const [cookies, setCookies] = useCookies(['name'])
+    const calculateTotalPrice = () => {
+        const start = new Date(form.startDate);
+        const end = new Date(form.endDate);
+        const nights = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+        const roomCost = form.nrOfRooms * rent.price * nights;
+        const personCost = form.nrOfPersons * rent.price * nights;
+        return roomCost + personCost;
+    };
 
-    const dispatch = useDispatch()
-
-    const classes = useClasses(LoginFormStyles, { name: "LoginFormStyles" })
-
-    const handleBooking = () => {
-        let payload = {
-            email: email,
-            fitstName: firstName,
-            lastName: lastName,
-            phone: phone,
-            location: location
+    useEffect(() => {
+        if (form.startDate && form.endDate) {
+            const totalPrice = calculateTotalPrice();
+            setForm({ ...form, totalPrice });
         }
-        dispatch(getUser({ payload: payload })).then((res) => {
-            if (!res?.payload?.error) {
-                onClose();
-            }
-        }).catch((error) => {
+    }, [form.startDate, form.endDate, form.nrOfRooms, form.nrOfPersons]);
 
-            console.error('Login error:', error);
-            if (error && error.code === 404) {
-
-            }
-        });
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
 
     return (
-        <StyledModal isOpen={isOpen} onClose={onClose} title="Booking">
-            <FormLayout onSubmit={(event) => {
-                event.preventDefault();
-                handleBooking();
-            }}>
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="first_name"
-                    label="First Name"
-                    name="firstName"
-                    type="string"
-                    autoFocus
-                    onChange={(e) => setFirstName(e.target.value)}
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    type="string"
-                    autoFocus
-                    onChange={(e) => setLastName(e.target.value)}
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    type="string"
-                    autoFocus
-                    onChange={(e) => setEmail(e.target.value)}
-                />
+        <Container maxWidth="sm">
+            <Paper style={{ padding: 16 }}>
+                <Typography variant="h4" align="center" gutterBottom>
+                    Create a Booking
+                </Typography>
+                <FormLayout onSubmit={handleSubmit}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="First Name"
+                                name="firstName"
+                                value={form.firstName}
+                                onChange={handleChange}
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Last Name"
+                                name="lastName"
+                                value={form.lastName}
+                                onChange={handleChange}
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Phone Number"
+                                name="phone"
+                                value={form.phone}
+                                onChange={handleChange}
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Start Date"
+                                type="date"
+                                name="startDate"
+                                value={form.startDate}
+                                onChange={handleChange}
+                                InputLabelProps={{ shrink: true }}
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="End Date"
+                                type="date"
+                                name="endDate"
+                                value={form.endDate}
+                                onChange={handleChange}
+                                InputLabelProps={{ shrink: true }}
+                                required
+                            />
+                        </Grid>
 
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="phone"
-                    label="Phone"
-                    name="phone"
-                    type="string"
-                    autoFocus
-                    onChange={(e) => setPhone(e.target.value)}
-                />
-                <GoogleMaps onChange={(e) => e !== null ? setLocation(e.description) : setLocation(null)} />
-
-                <StyledDropdown
-                    id="nrOfRooms"
-                    activeLabel
-                    options={resources?.nrOfRooms || []}
-                    label={"Numar de camere"}
-                    required
-                    value={sectionData?.nrOfRooms || null}
-                    width="100%"
-                    onChange={(e, value) => {
-
-                    }}
-                />
-
-                <StyledDropdown
-                    id="nrOfRooms"
-                    activeLabel
-                    options={resources?.nrOfPersons || []}
-                    label={"Numar de persoane"}
-                    required
-                    value={sectionData?.nrOfPersons || null}
-                    width="100%"
-                    onChange={(e, value) => {
-
-                    }}
-                />
-
-                <div className={classes.button}>
-                    <StyledButton type="submit">Submit</StyledButton>
-                    <StyledButton onClick={onClose}>Exit</StyledButton>
-                </div>
-
-            </FormLayout>
-        </StyledModal>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Number of Rooms"
+                                type="number"
+                                name="nrOfRooms"
+                                value={form.nrOfRooms}
+                                onChange={handleChange}
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Number of Persons"
+                                type="number"
+                                name="nrOfPersons"
+                                value={form.nrOfPersons}
+                                onChange={handleChange}
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Total Price"
+                                type="number"
+                                name="totalPrice"
+                                value={form.totalPrice}
+                                InputProps={{ readOnly: true }}
+                            />
+                        </Grid>
+                        <Grid item xs={12} align="center">
+                            <Button variant="contained" color="primary" type="submit">
+                                Create Booking
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </FormLayout>
+            </Paper>
+        </Container>
     );
-}
+};
 
-export default Booking
-
-
-
-
-
-
+export default BookingForm;

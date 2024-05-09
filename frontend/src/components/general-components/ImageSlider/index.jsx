@@ -5,11 +5,8 @@ import useClasses from "../../utils/useClasses";
 
 import ImageSliderStyles from './ImageSliderStyles';
 
-const ImageSlider = () => {
-    const images = [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Cluj_Biserica_Sf%C3%A2ntul_Mihail.jpg/1200px-Cluj_Biserica_Sf%C3%A2ntul_Mihail.jpg',
-        'https://www.sapantamaramures.ro/wp-content/uploads/2017/02/baia-mare.jpg'
-    ];
+const ImageSlider = ({ images }) => {
+
 
     const classes = useClasses(ImageSliderStyles, { name: "ImageSliderStyles" })
 

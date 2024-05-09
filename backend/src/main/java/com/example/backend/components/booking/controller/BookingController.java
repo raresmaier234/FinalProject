@@ -1,5 +1,6 @@
 package com.example.backend.components.booking.controller;
 
+import com.example.backend.components.booking.model.Booking;
 import com.example.backend.components.booking.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +21,12 @@ public class BookingController {
     List<LocalDate> getAvailableDates(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
                                     @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
         return bookingService.findAvailableDates(startDate, endDate);
+    }
+
+
+    @PostMapping("/create")
+    public Booking createBooking(@RequestBody Booking booking) {
+        return bookingService.addBooking(booking);
     }
 
 }
