@@ -17,9 +17,14 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/getClient")
-    List<User> getAssociations() {
-        return userRepository.findAll();
+    @GetMapping("/getUser")
+    public ResponseEntity<User> getUserByEmail(@RequestParam("email") String email) {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

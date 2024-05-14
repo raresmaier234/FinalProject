@@ -10,6 +10,35 @@ public class RentFilter {
     private LocalDate endDate;
     private BookingStatus bookingStatus;
     private String location;
+    private int nrOfPersons;
+    private int nrOfRooms;
+
+    public RentFilter() {
+    }
+
+    public RentFilter(LocalDate startDate, LocalDate endDate, String location, int nrOfPersons, int nrOfRooms) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+        this.nrOfPersons = nrOfPersons;
+        this.nrOfRooms = nrOfRooms;
+    }
+
+    public int getNrOfPersons() {
+        return nrOfPersons;
+    }
+
+    public void setNrOfPersons(int nrOfPersons) {
+        this.nrOfPersons = nrOfPersons;
+    }
+
+    public int getNrOfRooms() {
+        return nrOfRooms;
+    }
+
+    public void setNrOfRooms(int nrOfRooms) {
+        this.nrOfRooms = nrOfRooms;
+    }
 
     public RentFilter(LocalDate startDate, LocalDate endDate, BookingStatus bookingStatus, String location) {
         this.startDate = startDate;

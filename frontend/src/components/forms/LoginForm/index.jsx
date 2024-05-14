@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie"
 import { useAuth } from "../../../providers/AuthProvider";
 import { useDispatch } from 'react-redux';
 
-import { getUser } from "../../../store/slices/login/thunk";
+import { getUser } from "../../../store/slices/user/thunk";
 
 import { TextField } from '@mui/material'
 import Grid from '@mui/material/Grid'

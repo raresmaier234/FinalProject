@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Axios from "axios";
 
-import { loginActions } from "./loginSlice";
+import { userActions } from "./userSlice";
 
 export const getUser = createAsyncThunk("getUser", async ({ payload }, thunkAPI) => {
     const options = {
@@ -13,7 +13,29 @@ export const getUser = createAsyncThunk("getUser", async ({ payload }, thunkAPI)
         const response = await Axios(options);
         const data = response?.data;
 
-        thunkAPI.dispatch(loginActions.setItem({ item: data }));
+        thunkAPI.dispatch(userActions.setItem({ item: data }));
+
+        return data
+    } catch (e) {
+        return thunkAPI.rejectWithValue({
+            error: true,
+            code: e.response?.data?.error?.code,
+            message: "SomethingWentWrong",
+        });
+    }
+});
+
+export const getUserByEmail = createAsyncThunk("getUserByEmail", async ({ email }, thunkAPI) => {
+    const options = {
+        url: `${process.env.REACT_APP_API_URL}/getUser`,
+        method: "GET",
+        params: { email },
+    };
+    try {
+        const response = await Axios(options);
+        const data = response?.data;
+
+        thunkAPI.dispatch(userActions.setItem({ item: data }));
 
         return data
     } catch (e) {
@@ -27,7 +49,7 @@ export const getUser = createAsyncThunk("getUser", async ({ payload }, thunkAPI)
 
 export const logoutUser = createAsyncThunk("logoutUser", async ({ }, thunkAPI) => {
     try {
-        thunkAPI.dispatch(loginActions.setToEmpty());
+        thunkAPI.dispatch(userActions.setToEmpty());
         return true
     } catch (e) {
         return thunkAPI.rejectWithValue({

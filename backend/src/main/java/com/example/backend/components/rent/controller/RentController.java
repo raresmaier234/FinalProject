@@ -33,7 +33,7 @@ public class RentController {
         return rentService.getAll();
     }
 
-    @GetMapping("/getAvailableRents")
+    @PostMapping("/getAvailableRents")
     public List<Rent> getAllAvailableRents(@RequestBody(required = false) RentFilter filter) {
         return rentService.getAvailableRents(filter);
     }

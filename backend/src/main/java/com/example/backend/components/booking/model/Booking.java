@@ -39,7 +39,7 @@ public class Booking {
     private int nrOfRooms;
     private int nrOfPersons;
 
-    public Booking(User user, Rent rent, LocalDate startDate, LocalDate endDate, BookingStatus bookingStatus, int totalPrice, int nrOfRooms, int nrOfPersons) {
+    public Booking(User user, Rent rent, int nrOfRooms, int nrOfPersons, LocalDate startDate, LocalDate endDate, BookingStatus bookingStatus, int totalPrice) {
         this.user = user;
         this.rent = rent;
         this.startDate = startDate;

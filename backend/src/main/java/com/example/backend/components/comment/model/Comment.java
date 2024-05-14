@@ -16,6 +16,10 @@ public class Comment {
     @JoinColumn(name = "booking_id", nullable = false)
     private Booking booking;
 
+    public Comment() {
+
+    }
+
     public String getText() {
         return text;
     }

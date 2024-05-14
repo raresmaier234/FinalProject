@@ -11,7 +11,7 @@ import parse from 'autosuggest-highlight/parse';
 
 let autocompleteService;
 
-const GoogleMaps = ({ onChange }) => {
+const GoogleMaps = ({ onChange, className }) => {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
@@ -61,7 +61,6 @@ const GoogleMaps = ({ onChange }) => {
   return (
     <Autocomplete
       id="google-map-demo"
-      sx={{ width: 300 }}
       getOptionLabel={(option) =>
         typeof option === 'string' ? option : option.description
       }
@@ -81,7 +80,7 @@ const GoogleMaps = ({ onChange }) => {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-        <TextField {...params} label="Location" fullWidth />
+        <TextField {...params} label="Location" className={className} id="fullWidth" fullWidth />
       )}
       renderOption={(props, option) => {
         const matches =

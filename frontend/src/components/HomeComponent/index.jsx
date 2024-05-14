@@ -1,98 +1,142 @@
+// HomeComponent.js
 import React, { useState } from "react";
-import { useEffect } from "react";
-import { useAuth } from "../../providers/AuthProvider";
-import { Outlet } from "react-router-dom";
-import Appbar from "../general-components/Navbar/index";
-import StyledDatePicker from "../general-components/StyledDatePicker";
-import { Search, SearchIconWrapper } from "../general-components/Navbar/index";
-import SearchIcon from '@mui/icons-material/Search';
-import StyledButton from "../general-components/StyledButton";
-import Map from "../general-components/Map/Map";
-import { StyledInputBase } from "../general-components/Navbar/index";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import useClasses from "../utils/useClasses";
-import { getAvailableRents } from "../../store/slices/rent/thunk";
+import "./HomeComponent.css";
 import GoogleMaps from "../general-components/GoogleMaps";
-
-import homeComponentStyles from "./HomeComponentStyles";
+import { Link } from "react-router-dom";
+import { getAvailableRents } from "../../store/slices/rent/thunk";
+import { useNavigate } from "react-router-dom";
+import Map from "../general-components/Map/Map";
 
 const HomeComponent = () => {
-    const classes = useClasses(homeComponentStyles, { name: "homeComponentStyles" })
+    const navigate = useNavigate();
+    const [location, setLocation] = useState("");
+    const [checkIn, setCheckIn] = useState("");
+    const [checkOut, setCheckOut] = useState("");
+    const [rooms, setRooms] = useState(1);
+    const [adults, setAdults] = useState(1);
+    const [children, setChildren] = useState(0);
 
-    const dispatch = useDispatch()
-    const [openMap, setOpenMap] = useState(false)
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    const [filters, setFilters] = useState({
-        startDate: null,
-        endDate: null,
-        searchText: null,
-        location: null
-    })
+        const searchParams = new URLSearchParams({
+            location: location,
+            startDate: checkIn,
+            endDate: checkOut,
+            rooms: rooms,
+            adults: adults,
+            children: children
+        });
 
-    const setMultipleFilters = (newFilter) => {
-        setFilters(prevFilters => ({
-            ...prevFilters,
-            ...newFilter
-        }))
-    }
-
-    const handleSubmit = () => {
-        const payload = {
-            startDate: filters.startDate,
-            endDate: filters.endDate,
-            searchText: filters.searchText
-        }
-
-    }
+        navigate(`/trips?${searchParams.toString()}`);
+    };
 
     return (
-        <>
-            <div className={classes.wrapper}>
-                <div className={classes.filterBox} onSubmit={handleSubmit}>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                            onChange={(e) => {
-                                setMultipleFilters({
-                                    searchText: e.target.value
-                                })
-                            }}
-                        />
+        <div id="booking" className="section">
+            <div className="section-center">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-7 col-md-push-5">
+                            <div className="booking-cta">
+                                <h1>Make your reservation</h1>
+                                <p>
 
-                    </Search>
-                    <StyledDatePicker className={classes.datePicker}
-                        label="start date"
-                        onChange={(e) => {
-                            setMultipleFilters({
-                                startDate: e.format("YYYY/MM/DD")
-                            })
-                        }}>
-                    </StyledDatePicker>
-                    <StyledDatePicker label="end date" className={classes.datePicker}
-                        onChange={(e) => {
-                            setMultipleFilters({
-                                endDate: e.format("YYYY/MM/DD")
-                            })
-                        }}>
-                    </StyledDatePicker>
-                    <GoogleMaps onChange={(e) => e !== null ?
-                        setMultipleFilters({ location: e.description }) : setMultipleFilters({ location: null })} />
-                    <Link to="/trips">
-                        <StyledButton type="submit">Search</StyledButton>
-                    </Link>
-                    <StyledButton onClick={() => { setOpenMap(true) }}>Map</StyledButton>
-                    <Map isOpen={openMap} onClose={() => { setOpenMap(false) }} />
+                                </p>
+                            </div>
+                        </div>
+                        <div className="col-md-4 col-md-pull-7">
+                            <div className="booking-form">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="form-group">
+                                        <span className="form-label">Your Destination</span>
+                                        <GoogleMaps
+                                            onChange={(selectedLocation) =>
+                                                selectedLocation !== null ? setLocation(selectedLocation.description) : setLocation("")
+                                            }
+                                            className="form-control"
+                                        />
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-sm-6">
+                                            <div className="form-group">
+                                                <span className="form-label">Check In</span>
+                                                <input
+                                                    className="form-control"
+                                                    type="date"
+                                                    required
+                                                    value={checkIn}
+                                                    onChange={(e) => setCheckIn(e.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <div className="form-group">
+                                                <span className="form-label">Check Out</span>
+                                                <input
+                                                    className="form-control"
+                                                    type="date"
+                                                    required
+                                                    value={checkOut}
+                                                    onChange={(e) => setCheckOut(e.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-sm-4">
+                                            <div className="form-group">
+                                                <span className="form-label">Rooms</span>
+                                                <select
+                                                    className="form-control"
+                                                    value={rooms}
+                                                    onChange={(e) => setRooms(e.target.value)}
+                                                >
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-4">
+                                            <div className="form-group">
+                                                <span className="form-label">Adults</span>
+                                                <select
+                                                    className="form-control"
+                                                    value={adults}
+                                                    onChange={(e) => setAdults(e.target.value)}
+                                                >
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-4">
+                                            <div className="form-group">
+                                                <span className="form-label">Children</span>
+                                                <select
+                                                    className="form-control"
+                                                    value={children}
+                                                    onChange={(e) => setChildren(e.target.value)}
+                                                >
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="form-btn">
+                                        <button type="submit" className="submit-btn">Check availability</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <Outlet></Outlet>
             </div>
-
-        </>
-    )
-}
+        </div>
+    );
+};
 
 export default HomeComponent;

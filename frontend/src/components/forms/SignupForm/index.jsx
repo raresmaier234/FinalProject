@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import axios from "axios";
 
-
-import { createTheme } from '@mui/material/styles';
 import { TextField } from '@mui/material'
 
 import StyledButton from '../../general-components/StyledButton';
@@ -35,7 +33,6 @@ const SigninForm = ({ isOpen, onClose }) => {
         }
         axios.post(process.env.REACT_APP_API_URL + "/register", payload)
             .then((res) => {
-                const rspData = res.data;
                 onClose()
             })
             .catch((error) => {
@@ -56,7 +53,6 @@ const SigninForm = ({ isOpen, onClose }) => {
                     name="First Name"
                     label="First Name"
                     type="string"
-                    id="password"
                     autoFocus
                     onChange={(e) => setFirstName(e.target.value)}
                 />
@@ -80,6 +76,16 @@ const SigninForm = ({ isOpen, onClose }) => {
                     type="string"
                     autoFocus
                     onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="phone"
+                    label="Numar telefon"
+                    type="number"
+                    autoFocus
+                    onChange={(e) => setPhone(e.target.value)}
                 />
                 <TextField
                     margin="normal"

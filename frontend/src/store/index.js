@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit"
 
-import loginReducer from "./slices/login/loginSlice"
+import userReducer from "./slices/user/userSlice"
 import rentReducer from "./slices/rent/rentSlice"
+import bookingReducer from "./slices/booking/bookingSlice"
 
 const store = configureStore({
     reducer: {
-        login: loginReducer,
-        rent: rentReducer
+        user: userReducer,
+        rent: rentReducer,
+        booking: bookingReducer
     }
 })
 

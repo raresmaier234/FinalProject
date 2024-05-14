@@ -21,7 +21,7 @@ import LoginForm from '../../forms/LoginForm';
 import SigninForm from '../../forms/SignupForm';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../../../store/slices/login/thunk';
+import { logoutUser } from '../../../store/slices/user/thunk';
 import { useAuth } from '../../../providers/AuthProvider';
 
 
@@ -92,6 +92,7 @@ export default function Appbar({ user }) {
     const handleLogout = () => {
         dispatch(logoutUser({}));
         logout()
+        navigate("/")
     }
 
     const handleMobileMenuClose = () => {
@@ -194,7 +195,7 @@ export default function Appbar({ user }) {
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static">
+                <AppBar position="fixed">
                     <Toolbar>
                         <IconButton
                             size="large"

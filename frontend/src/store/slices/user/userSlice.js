@@ -5,8 +5,8 @@ const initialState = {
     isLoggedIn: false,
 };
 
-const loginSlice = createSlice({
-    name: "login",
+const userSlice = createSlice({
+    name: "user",
     initialState,
     reducers: {
         setToEmpty(state, action) {
@@ -20,5 +20,5 @@ const loginSlice = createSlice({
     },
 });
 
-export const loginActions = loginSlice.actions;
-export default loginSlice.reducer;
+export const userActions = userSlice.actions;
+export default userSlice.reducer;

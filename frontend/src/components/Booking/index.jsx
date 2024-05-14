@@ -13,32 +13,43 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import FormLayout from "../../containers/FormLayout";
-
+import { addBooking } from "../../store/slices/booking/thunk";
+import { useAuth } from "../../providers/AuthProvider";
+import { getUserByEmail } from "../../store/slices/user/thunk";
 
 
 const BookingForm = () => {
     const { rentId } = useParams();
     const rent = useSelector((state) => state.rent.items);
+    const userInfo = useSelector((state) => state.user.user);
+
+    const { user, logout } = useAuth();
+
 
     const dispatch = useDispatch();
+    console.log(userInfo)
+
 
     const [form, setForm] = useState({
-        user: "",
-        firstName: "",
-        lastName: "",
-        phone: "",
-        rent: rentId || "",
+        rentId: parseInt(rentId, 10),
+        userId: userInfo.id,
         nrOfRooms: 1,
         nrOfPersons: 1,
         startDate: "",
         endDate: "",
+        bookingStatus: "PENDING",
         totalPrice: 0
     });
 
-    console.log(rent.price)
     useEffect(() => {
         dispatch(getRentById({ id: rentId }));
     }, [dispatch]);
+
+    useEffect(() => {
+        if (user) {
+            dispatch(getUserByEmail({ email: user }));
+        }
+    }, [user, dispatch]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -57,52 +68,24 @@ const BookingForm = () => {
     useEffect(() => {
         if (form.startDate && form.endDate) {
             const totalPrice = calculateTotalPrice();
-            setForm({ ...form, totalPrice });
+            setForm(prevForm => ({ ...prevForm, totalPrice }));
         }
     }, [form.startDate, form.endDate, form.nrOfRooms, form.nrOfPersons]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(form)
+        dispatch(addBooking({ booking: form }))
     };
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" style={{ paddingTop: "100px" }}>
             <Paper style={{ padding: 16 }}>
                 <Typography variant="h4" align="center" gutterBottom>
                     Create a Booking
                 </Typography>
                 <FormLayout onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <TextField
-                                fullWidth
-                                label="First Name"
-                                name="firstName"
-                                value={form.firstName}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                fullWidth
-                                label="Last Name"
-                                name="lastName"
-                                value={form.lastName}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label="Phone Number"
-                                name="phone"
-                                value={form.phone}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Grid>
                         <Grid item xs={6}>
                             <TextField
                                 fullWidth

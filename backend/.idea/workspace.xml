@@ -4,7 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c4fb985-237a-47f2-92cb-1cc91f3def06" name="Changes" comment="changes" />
+    <list default="true" id="6c4fb985-237a-47f2-92cb-1cc91f3def06" name="Changes" comment="changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/model/BookingRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/072695b1-0efe-410b-8dac-e12e9bd93501.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/072695b1-0efe-410b-8dac-e12e9bd93501.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/072695b1-0efe-410b-8dac-e12e9bd93501/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/072695b1-0efe-410b-8dac-e12e9bd93501/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/booking/controller/BookingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/booking/controller/BookingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/booking/service/BookingService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/booking/service/BookingService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/comment/model/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/comment/model/Comment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/rent/controller/RentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/rent/controller/RentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/rent/model/RentFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/rent/model/RentFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/rent/service/RentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/rent/service/RentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/user/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/backend/components/user/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/controller/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/model/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/service/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/service/BookingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/comment/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/comment/model/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/rent/controller/RentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/rent/controller/RentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/rent/model/RentFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/rent/model/RentFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/rent/service/RentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/rent/service/RentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Booking/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Booking/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/HomeComponent/HomeComponent.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/HomeComponent/HomeComponent.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/HomeComponent/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/HomeComponent/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Rent/CardRent/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Rent/CardRent/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Rent/RentComponentStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Rent/RentComponentStyles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Rent/RentProfile/RentProfile.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Rent/RentProfile/RentProfile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Rent/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Rent/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/UserProfile/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/UserProfile/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/forms/LoginForm/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/forms/LoginForm/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/forms/SignupForm/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/forms/SignupForm/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/general-components/GoogleMaps/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/general-components/GoogleMaps/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/general-components/Map/Map.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/general-components/Map/Map.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/general-components/Navbar/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/general-components/Navbar/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/slices/login/loginSlice.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/slices/login/thunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/slices/rent/thunk.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/slices/rent/thunk.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -135,7 +184,9 @@
       <workItem from="1715095780273" duration="778000" />
       <workItem from="1715096613860" duration="1396000" />
       <workItem from="1715098281133" duration="537000" />
-      <workItem from="1715100910797" duration="4848000" />
+      <workItem from="1715100910797" duration="9431000" />
+      <workItem from="1715593545304" duration="9411000" />
+      <workItem from="1715690202815" duration="3796000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <created>1698876164558</created>

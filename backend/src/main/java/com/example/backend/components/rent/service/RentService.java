@@ -71,11 +71,6 @@ public class RentService {
                     .filter(rent -> !rentIdsWithNoBookings.contains(rent.getId()))
                     .collect(Collectors.toList());
         }
-        for (Rent rent : availableRents) {
-            List<String> photoUrls = s3Service.getPhotoUrlsForRent(rent.getId());
-            rent.setPhotoUrls(photoUrls);
-        }
-
 
         return availableRents;
     }

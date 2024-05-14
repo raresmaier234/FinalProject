@@ -1,4 +1,3 @@
-// UserProfile.js
 import React, { useState, useEffect } from 'react';
 import {
     TextField,
@@ -6,12 +5,13 @@ import {
     Grid,
     Container,
     Typography,
-    Paper
+    Paper,
+    Avatar
 } from '@mui/material';
 import { useAuth } from '../../providers/AuthProvider';
-import { getUser } from '../../store/slices/login/thunk';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { getUserByEmail } from '../../store/slices/user/thunk';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
     const [form, setForm] = useState({
@@ -24,40 +24,41 @@ const UserProfile = () => {
         role: ''
     });
 
-    // const userInfo = useSelector((state) => state.user)
-
+    const userInfo = useSelector((state) => state.user.user);
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { user, logout } = useAuth();
 
-    const { user } = useAuth();
+    useEffect(() => {
+        if (user) {
+            dispatch(getUserByEmail({ email: user }));
+        }
+    }, [user, dispatch]);
 
-    console.log(user)
-    // setForm({
-    //     id: userInfo.id,
-    //     email: userInfo.email,
-    //     phone: userInfo.phone,
-    //     firstName: userInfo.firstName,
-    //     lastName: userInfo.lastName,
-    //     password: '',
-    //     role: userInfo.role
-    // });
-
-    // useEffect(() => {
-    //     dispatch(getUser({ payload: user }))
-    // }, []);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setForm({ ...form, [name]: value });
-    };
+    useEffect(() => {
+        if (userInfo) {
+            setForm({
+                id: userInfo.id,
+                email: userInfo.email,
+                phone: userInfo.phone,
+                firstName: userInfo.firstName,
+                lastName: userInfo.lastName,
+                password: '',
+                role: userInfo.role
+            });
+            setIsLoading(false);
+        }
+    }, [userInfo]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
     };
 
     return (
-        <Container maxWidth="sm">
-            <Paper style={{ padding: 16 }}>
+        <Container maxWidth="sm" style={{ paddingTop: 100 }}>
+            <Paper style={{ padding: 16, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Avatar style={{ height: '100px', width: '100px', marginBottom: 16 }} src="/static/images/avatar/1.jpg" />
                 <Typography variant="h4" align="center" gutterBottom>
                     User Profile
                 </Typography>
@@ -65,67 +66,21 @@ const UserProfile = () => {
                     <Typography align="center">Loading...</Typography>
                 ) : (
                     <form onSubmit={handleSubmit}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={6}>
-                                <TextField
-                                    fullWidth
-                                    label="First Name"
-                                    name="firstName"
-                                    value={form.firstName}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Last Name"
-                                    name="lastName"
-                                    value={form.lastName}
-                                    onChange={handleChange}
-                                    required
-                                />
+                        <Grid container spacing={2} justifyContent="center">
+                            <Grid item xs={12}>
+                                <Typography variant="subtitle1">First Name: {form.firstName}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    label="Email"
-                                    name="email"
-                                    value={form.email}
-                                    onChange={handleChange}
-                                    required
-                                />
+                                <Typography variant="subtitle1">Last Name: {form.lastName}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    label="Phone"
-                                    name="phone"
-                                    value={form.phone}
-                                    onChange={handleChange}
-                                    required
-                                />
+                                <Typography variant="subtitle1">Email: {form.email}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    label="Password"
-                                    name="password"
-                                    type="password"
-                                    value={form.password}
-                                    onChange={handleChange}
-                                    required
-                                />
+                                <Typography variant="subtitle1">Phone: {form.phone}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    label="Role"
-                                    name="role"
-                                    value={form.role}
-                                    onChange={handleChange}
-                                    InputProps={{ readOnly: true }}
-                                />
+                                <Typography variant="subtitle1">Role: {form.role}</Typography>
                             </Grid>
                             <Grid item xs={12} align="center">
                                 <Button variant="contained" color="primary" type="submit">

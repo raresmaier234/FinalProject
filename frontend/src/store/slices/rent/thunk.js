@@ -6,14 +6,13 @@ import { rentActions } from "./rentSlice"
 export const getAvailableRents = createAsyncThunk("getAvailableRents", async ({ payload }, thunkAPI) => {
     const options = {
         url: `${process.env.REACT_APP_API_URL}/getAvailableRents`,
-        method: "GET",
+        method: "POST",
         data: payload
     };
     try {
         const response = await Axios(options);
         const data = response?.data;
 
-        console.log(data)
         thunkAPI.dispatch(rentActions.setItem({ item: data }));
         return true
     } catch (e) {

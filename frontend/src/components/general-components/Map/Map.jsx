@@ -1,5 +1,5 @@
 import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { useState } from 'react'
 import StyledButton from '../StyledButton';
 import StyledModal from '../StyledModal';
@@ -9,12 +9,12 @@ const containerStyle = {
     height: '400px'
 };
 
-const center = {
+const defaultCenter = {
     lat: -3.745,
     lng: -38.523
 };
 
-const Map = ({ isOpen, onClose }) => {
+const Map = ({ isOpen, onClose, location = defaultCenter }) => {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY
@@ -24,6 +24,7 @@ const Map = ({ isOpen, onClose }) => {
 
     const toggleMap = () => {
         setShowMap(!showMap)
+        onClose()
     }
 
     return isLoaded ? (
@@ -31,9 +32,12 @@ const Map = ({ isOpen, onClose }) => {
             <StyledModal isOpen={isOpen} onClose={onClose}>
                 <GoogleMap
                     mapContainerStyle={containerStyle}
-                    center={center}
+                    center={location}
                     zoom={16}
                 >
+                    <Marker
+                        position={location}
+                    />
                 </GoogleMap>
                 <StyledButton onClick={() => toggleMap()}>Exit</StyledButton>
             </StyledModal>

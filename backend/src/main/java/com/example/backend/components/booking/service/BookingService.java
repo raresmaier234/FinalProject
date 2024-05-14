@@ -50,6 +50,7 @@ public class BookingService {
     }
 
     public Booking addBooking(Booking booking){
+
         return bookingRepository.save(booking);
     }
 
