@@ -1,11 +1,14 @@
 package com.example.backend.components.rent.controller;
 
+import com.amazonaws.services.kms.model.NotFoundException;
 import com.example.backend.S3Bucket.FileService;
 import com.example.backend.components.rent.model.Rent;
 import com.example.backend.components.rent.model.RentFilter;
 import com.example.backend.components.rent.model.RentStatus;
 import com.example.backend.components.rent.model.RentType;
 import com.example.backend.components.rent.service.RentService;
+import com.example.backend.components.user.model.User;
+import com.example.backend.components.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +31,9 @@ public class RentController {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/getAllRents")
     public List<Rent> getAllRents() {
         return rentService.getAll();
@@ -39,7 +45,8 @@ public class RentController {
     }
 
     @PostMapping("/addRent")
-    public ResponseEntity<Rent> addRent(@RequestParam("location") String location,
+    public ResponseEntity<Rent> addRent(@RequestParam("user_id") Long userId,
+                                        @RequestParam("location") String location,
                                         @RequestParam("price") int price,
                                         @RequestParam("name") String name,
                                         @RequestParam("description") String description,
@@ -54,6 +61,9 @@ public class RentController {
 
         List<String> publicURL = fileService.uploadFiles(photos);
         Rent rent = new Rent();
+        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
+
+        rent.setUser(user);
         rent.setPhotoUrls(publicURL);
         rent.setEndDate(endDate);
         rent.setStartDate(startDate);

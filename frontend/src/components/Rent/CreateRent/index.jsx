@@ -1,11 +1,11 @@
 // CreateRentForm.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { Outlet } from 'react-router-dom';
 import { TextField, Box, Checkbox, Typography } from '@mui/material';
 import { InputLabel, MenuItem, FormControl, Select } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import StyledButton from '../../general-components/StyledButton';
 import StyledDatePicker from '../../general-components/StyledDatePicker';
 import GoogleMaps from '../../general-components/GoogleMaps';
@@ -16,6 +16,8 @@ import './CreateRentStyles.css';
 const CreateRentForm = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const userInfo = useSelector((state) => state.user.user)
 
     const [location, setLocation] = useState("");
     const [price, setPrice] = useState("");
@@ -50,6 +52,7 @@ const CreateRentForm = () => {
         const endDateFormatted = moment(endDate).format("YYYY-MM-DD");
 
         const formData = new FormData();
+        formData.append("user_id", userInfo.id);
         formData.append("location", location);
         formData.append("price", price);
         formData.append("name", name);

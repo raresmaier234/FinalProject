@@ -1,5 +1,6 @@
 package com.example.backend.components.rent.model;
 
+import com.example.backend.components.user.model.User;
 import jakarta.persistence.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,9 @@ public class Rent {
     @Column(name = "id")
     private long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private String name;
     private int price;
     private Rating rating;
@@ -50,8 +54,9 @@ public class Rent {
 
     }
 
-    public Rent(long id, String name, int price, Rating rating, String description, List<MultipartFile> photos, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking, RentType type) {
+    public Rent(long id, User user, String name, int price, Rating rating, String description, List<MultipartFile> photos, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking, RentType type) {
         this.id = id;
+        this.user = user;
         this.name = name;
         this.price = price;
         this.rating = rating;
@@ -69,7 +74,8 @@ public class Rent {
         this.type = type;
     }
 
-    public Rent(String name, int price, Rating rating, String description, List<MultipartFile> photos, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking, RentType type) {
+    public Rent(User user, String name, int price, Rating rating, String description, List<MultipartFile> photos, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking, RentType type) {
+        this.user = user;
         this.name = name;
         this.price = price;
         this.rating = rating;
@@ -85,6 +91,18 @@ public class Rent {
         this.nrOfBathrooms = nrOfBathrooms;
         this.hasParking = hasParking;
         this.type = type;
+    }
+
+    public Rent(Long rentId) {
+        this.id = rentId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public RentType getType() {

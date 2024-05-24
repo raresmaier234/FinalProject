@@ -11,7 +11,6 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -21,7 +20,7 @@ import LoginForm from '../../forms/LoginForm';
 import SigninForm from '../../forms/SignupForm';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../../../store/slices/user/thunk';
+import { getUserByEmail, logoutUser } from '../../../store/slices/user/thunk';
 import { useAuth } from '../../../providers/AuthProvider';
 
 
@@ -65,11 +64,13 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function Appbar({ user }) {
+export default function Appbar() {
 
-    const { logout } = useAuth()
+    const { user, logout } = useAuth()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+    const userInfo = useSelector((state) => state.user.user)
 
     const [openLoginModal, setOpenLoginModal] = useState(false)
     const [openRegisterModal, setOpenRegisterModal] = useState(false)
@@ -107,6 +108,10 @@ export default function Appbar({ user }) {
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
+
+    useEffect(() => {
+        dispatch(getUserByEmail({ email: user }))
+    }, [])
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -197,15 +202,6 @@ export default function Appbar({ user }) {
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="fixed">
                     <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            sx={{ mr: 2 }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
                         <Typography
                             variant="h6"
                             noWrap
@@ -222,12 +218,12 @@ export default function Appbar({ user }) {
                             </Link>
                             <Link to="/trips">
                                 <StyledButton>
-                                    Sejururi
+                                    Rents
                                 </StyledButton>
                             </Link>
-                            {user && <Link to="/createRent">
+                            {userInfo !== null && userInfo.role === "RENTER" && <Link to="/createRent">
                                 <StyledButton>
-                                    Creare chirie
+                                    Create Rent
                                 </StyledButton>
                             </Link>}
                         </Box>

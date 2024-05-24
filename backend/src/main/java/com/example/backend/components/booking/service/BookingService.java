@@ -1,8 +1,10 @@
 package com.example.backend.components.booking.service;
 
 import com.example.backend.components.booking.model.Booking;
+import com.example.backend.components.booking.model.BookingStatus;
 import com.example.backend.components.booking.repository.BookingRepository;
 import com.example.backend.components.rent.model.Rent;
+import com.example.backend.components.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +54,10 @@ public class BookingService {
     public Booking addBooking(Booking booking){
 
         return bookingRepository.save(booking);
+    }
+
+    public List<Booking> getPendingBookings(User user) {
+        return bookingRepository.findBookingByUser(user);
     }
 
 }

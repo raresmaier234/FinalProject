@@ -1,5 +1,5 @@
 import React from 'react'
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, Circle } from '@react-google-maps/api';
 import { useState } from 'react'
 import StyledButton from '../StyledButton';
 import StyledModal from '../StyledModal';
@@ -7,6 +7,20 @@ import StyledModal from '../StyledModal';
 const containerStyle = {
     width: '400px',
     height: '400px'
+};
+
+const options = {
+    fillColor: "lightblue",
+    fillOpacity: 0.5,
+    strokeColor: "red",
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    clickable: false,
+    draggable: false,
+    editable: false,
+    visible: true,
+    radius: 500,
+    zIndex: 1
 };
 
 const defaultCenter = {
@@ -38,6 +52,9 @@ const Map = ({ isOpen, onClose, location = defaultCenter }) => {
                     <Marker
                         position={location}
                     />
+                    <Circle
+                        center={location}
+                        options={options}></Circle>
                 </GoogleMap>
                 <StyledButton onClick={() => toggleMap()}>Exit</StyledButton>
             </StyledModal>

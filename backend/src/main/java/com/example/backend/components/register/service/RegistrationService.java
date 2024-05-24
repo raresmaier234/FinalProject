@@ -23,6 +23,7 @@ public class RegistrationService {
         newUser.setPassword(hashedPassword);
         newUser.setFirstName(user.getFirstName());
         newUser.setLastName(user.getLastName());
+        newUser.setPhone(user.getPhone());
         newUser.setRole(user.getRole());
         userRepository.save(newUser);
     }

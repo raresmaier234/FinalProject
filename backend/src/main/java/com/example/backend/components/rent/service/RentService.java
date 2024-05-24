@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import com.example.backend.S3Bucket.S3Service;
 import com.example.backend.components.rent.model.RentFilter;
+import com.example.backend.components.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.backend.components.booking.model.BookingStatus;
@@ -37,10 +38,6 @@ public class RentService {
 
     public List<Rent> getAvailableRents(RentFilter rentFilter) {
         List<Rent> allRents = getAll();
-
-        if (rentFilter == null) {
-            return allRents;
-        }
 
         List<Long> rentIdsWithApprovedBookings = bookingRepository.findByBookingStatus(BookingStatus.CONFIRMED)
                 .stream()

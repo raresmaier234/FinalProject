@@ -10,7 +10,7 @@ public class User {
     @Column(name = "id")
     private long id;
     private String email;
-    private long phone;
+    private String phone;
     private String firstName;
     private String password;
     private String lastName;
@@ -40,8 +40,21 @@ public class User {
     public User() {
     }
 
-    public User(long id, String email, long phone, String firstName, String password, String lastName, UserRole role) {
+    public User(long id, String email, String phone, String firstName, String password, String lastName, UserRole role) {
         this.id = id;
+        this.email = email;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.password = password;
+        this.lastName = lastName;
+        this.role = role;
+    }
+
+    public User(long id) {
+        this.id = id;
+    }
+
+    public User(String email, String phone, String firstName, String password, String lastName, UserRole role) {
         this.email = email;
         this.phone = phone;
         this.firstName = firstName;
@@ -66,11 +79,11 @@ public class User {
         this.email = email;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

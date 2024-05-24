@@ -12,13 +12,11 @@ import { Link } from 'react-router-dom';
 import cardRentStyles from './CardRentStyles';
 import useClasses from '../../utils/useClasses';
 import Map from '../../general-components/Map/Map';
+import HoverRating from '../../general-components/Rating';
 import { useJsApiLoader } from '@react-google-maps/api';
 
 export default function CardRent({ id, name, description, price, location, photos, type }) {
     const classes = useClasses(cardRentStyles, { name: "cardRentStyles" });
-
-    const searchParams = new URLSearchParams(location.search);
-
     const [openMap, setOpenMap] = useState(false);
     const [coordinates, setCoordinates] = useState(null);
 
@@ -28,7 +26,7 @@ export default function CardRent({ id, name, description, price, location, photo
     });
 
     const fetchCoordinates = async () => {
-        const apiKey = process.env.REACT_APP_GOOGLE_MAPS_KEY;  // Make sure this key has access to the Geocoding API
+        const apiKey = process.env.REACT_APP_GOOGLE_MAPS_KEY;
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${apiKey}`;
 
         const response = await fetch(url);
@@ -50,9 +48,9 @@ export default function CardRent({ id, name, description, price, location, photo
 
     return (
         <>
-            <Card sx={{ width: "100%", height: "500px" }}>
-
+            <Card sx={{ width: "100%", height: "750px" }}>
                 <div>
+                    <HoverRating></HoverRating>
                     <Typography level="title-lg">{name}</Typography>
                     <Typography level="body-sm">{type}</Typography>
                     <Typography level="body-sm">{description}</Typography>
@@ -67,7 +65,7 @@ export default function CardRent({ id, name, description, price, location, photo
                         <BookmarkAdd />
                     </IconButton>
                 </div>
-                <AspectRatio height="400px" maxHeight="200px">
+                <AspectRatio height="500px" maxHeight="500px">
                     <ImageSlider images={photos}></ImageSlider>
                 </AspectRatio>
                 <CardContent orientation="horizontal">

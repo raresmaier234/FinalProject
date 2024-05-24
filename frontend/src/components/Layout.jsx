@@ -3,11 +3,9 @@ import Appbar from './general-components/Navbar';
 import { useAuth } from '../providers/AuthProvider';
 
 function Layout({ children }) {
-    const { user } = useAuth()
-
     return (
         <>
-            <Appbar user={user} />
+            <Appbar />
             <main>{children}</main>
         </>
     );

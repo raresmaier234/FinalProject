@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import axios from "axios";
 
-import { TextField } from '@mui/material'
 
 import StyledButton from '../../general-components/StyledButton';
 import StyledModal from '../../general-components/StyledModal';
 import FormLayout from '../../../containers/FormLayout';
+import { TextField, Box, Checkbox } from '@mui/material';
 
 import useClasses from '../../utils/useClasses';
 
@@ -18,10 +18,14 @@ const SigninForm = ({ isOpen, onClose }) => {
     const [password, setPassword] = useState("")
     const [phone, setPhone] = useState("")
     const [error, setError] = useState(null);
+    const [renter, setRenter] = useState(false);
 
 
     const classes = useClasses(SignupFormStyles, { name: "SignupFormStyles" })
 
+    const handleRenterChange = () => {
+        setRenter(!renter)
+    }
 
     const handleSave = () => {
         let payload = {
@@ -29,8 +33,10 @@ const SigninForm = ({ isOpen, onClose }) => {
             lastName: lastName,
             email: email,
             phone: phone,
-            password: password
+            password: password,
+            role: renter ? "RENTER" : "CLIENT"
         }
+        console.log(payload)
         axios.post(process.env.REACT_APP_API_URL + "/register", payload)
             .then((res) => {
                 onClose()
@@ -97,6 +103,16 @@ const SigninForm = ({ isOpen, onClose }) => {
                     id="password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <Box className="form-parking">
+                    <label>
+                        <Checkbox checked={renter} onChange={handleRenterChange} />
+                        Chirias
+                    </label>
+                    <label>
+                        <Checkbox checked={!renter} onChange={handleRenterChange} />
+                        Client
+                    </label>
+                </Box>
                 {error && <p>{error}</p>}
                 <div className={classes.button}>
                     <StyledButton type="submit"> Submit </StyledButton>

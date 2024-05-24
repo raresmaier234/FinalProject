@@ -2,12 +2,15 @@
 .rent-profile {
     margin: 20px auto;
     max-width: 900px;
-    padding-top: 100px;
     padding: 16px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper {
+    padding: 90px
 }
 
 .profile-header {

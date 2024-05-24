@@ -7,6 +7,7 @@ import RentProfile from '../components/Rent/RentProfile';
 import BookingForm from '../components/Booking';
 import Layout from '../components/Layout';
 import UserProfile from '../components/UserProfile';
+import RentInPending from '../components/Rent/RentInPending';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path='/profile' element={<UserProfile />}></Route>
           <Route path="/" element={<HomeComponent />}></Route>
+          <Route path="/rents/:rentId/pending" component={<RentInPending />} />
+          <Route path='/profile' element={<UserProfile />}></Route>
           <Route path="/myprofile" element={<ProfileComponent />}></Route>
           <Route path="/createRent" element={<CreateRentForm />}></Route>
           <Route path="/trips" element={<RentComponent />}></Route>

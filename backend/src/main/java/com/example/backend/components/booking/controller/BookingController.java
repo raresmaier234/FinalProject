@@ -12,8 +12,6 @@ import com.example.backend.components.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -38,13 +36,19 @@ public class BookingController {
 
     @PostMapping("/addBooking")
     public Booking createBooking(@RequestBody BookingRequest request) {
-        System.out.println(request.getRentId());
         User user = userRepository.findById(request.getUserId()).orElseThrow(() -> new NotFoundException("User not found"));
         Rent rent = rentRepository.findById(request.getRentId()).orElseThrow(() -> new NotFoundException("Rent not found"));
 
         Booking booking = new Booking(user, rent, request.getNrOfRooms(), request.getNrOfPersons(), request.getStartDate(), request.getEndDate(), BookingStatus.valueOf(request.getBookingStatus()), request.getTotalPrice());
 
         return bookingService.addBooking(booking);
+    }
+
+    @GetMapping("/booking/pending")
+    public List<Booking> getPendingBookings(@RequestParam("userId") Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
+
+        return bookingService.getPendingBookings(user);
     }
 
 }

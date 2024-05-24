@@ -1,12 +1,12 @@
 // BookingForm.js
 import React, { useState, useEffect } from "react";
 import { getRentById } from "../../store/slices/rent/thunk";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Snackbar, Alert } from '@mui/material';
 import {
     TextField,
     Button,
     Grid,
-    MenuItem,
     Container,
     Typography,
     Paper
@@ -23,7 +23,12 @@ const BookingForm = () => {
     const rent = useSelector((state) => state.rent.items);
     const userInfo = useSelector((state) => state.user.user);
 
-    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+
+    const { user } = useAuth();
 
 
     const dispatch = useDispatch();
@@ -75,7 +80,18 @@ const BookingForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(form)
-        dispatch(addBooking({ booking: form }))
+        dispatch(addBooking({ booking: form })).then((res) => {
+            if (res) {
+                setSnackbarMessage("Booking successfully created!");
+                setOpenSnackbar(true);
+                navigate("/")
+                // Reset form or perform other actions as necessary
+            } else {
+                // Handle error case
+                setSnackbarMessage("Failed to create booking.");
+                setOpenSnackbar(true);
+            }
+        })
     };
 
     return (
@@ -150,6 +166,11 @@ const BookingForm = () => {
                         </Grid>
                     </Grid>
                 </FormLayout>
+                <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={() => setOpenSnackbar(false)}>
+                    <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
             </Paper>
         </Container>
     );

@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 import { getAvailableRents } from "../../store/slices/rent/thunk";
 import { useNavigate } from "react-router-dom";
 import Map from "../general-components/Map/Map";
+import { useAuth } from "../../providers/AuthProvider";
 
 const HomeComponent = () => {
+    const { user } = useAuth()
     const navigate = useNavigate();
     const [location, setLocation] = useState("");
     const [checkIn, setCheckIn] = useState("");
