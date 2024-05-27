@@ -30,12 +30,14 @@ const RentComponent = () => {
             location: searchParams.get("location"),
             startDate: searchParams.get("startDate"),
             endDate: searchParams.get("endDate"),
-            rooms: searchParams.get("rooms"),
-            adults: searchParams.get("adults"),
-            children: searchParams.get("children")
+            nrOfRooms: searchParams.get("rooms"),
+            nrOfPersons: searchParams.get("adults"),
         };
-        dispatch(getAllRents({}));
-        console.log(rents)
+        if (filter)
+            dispatch(getAllRents(filter));
+        else {
+            dispatch(getAllRents());
+        }
     }, [dispatch]);
 
     return (

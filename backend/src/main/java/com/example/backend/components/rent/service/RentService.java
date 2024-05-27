@@ -69,6 +69,18 @@ public class RentService {
                     .collect(Collectors.toList());
         }
 
+        if (rentFilter.getNrOfPersons() > 0) {
+            availableRents = availableRents.stream()
+                    .filter(rent -> rent.getNrOfPersons() >= rentFilter.getNrOfPersons())
+                    .collect(Collectors.toList());
+        }
+
+        if (rentFilter.getNrOfRooms() > 0) {
+            availableRents = availableRents.stream()
+                    .filter(rent -> rent.getNrOfRooms() >= rentFilter.getNrOfRooms())
+                    .collect(Collectors.toList());
+        }
+
         return availableRents;
     }
 

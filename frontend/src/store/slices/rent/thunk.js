@@ -3,10 +3,11 @@ import Axios from "axios";
 
 import { rentActions } from "./rentSlice"
 
-export const getAllRents = createAsyncThunk("getAllRents", async ({ }, thunkAPI) => {
+export const getAllRents = createAsyncThunk("getAllRents", async (filter, thunkAPI) => {
     const options = {
         url: `${process.env.REACT_APP_API_URL}/getAllRents`,
-        method: "GET",
+        method: "POST",
+        data: filter
     };
     try {
         const response = await Axios(options);

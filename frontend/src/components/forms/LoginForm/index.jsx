@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { useCookies } from "react-cookie"
 import { useAuth } from "../../../providers/AuthProvider";
@@ -24,8 +23,6 @@ const LoginForm = ({ isOpen, onClose }) => {
     const [emailError, setEmailError] = useState(false);
 
     const { login } = useAuth();
-
-    const [cookies, setCookies] = useCookies(['name'])
 
     const dispatch = useDispatch()
 

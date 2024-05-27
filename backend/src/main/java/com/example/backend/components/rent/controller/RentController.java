@@ -37,9 +37,9 @@ public class RentController {
     private ReviewService reviewService;
 
 
-    @GetMapping("/getAllRents")
-    public List<RentDTO> getAllRents() {
-        List<Rent> rents = rentService.getAll();
+    @PostMapping("/getAllRents")
+    public List<RentDTO> getAllRents(@RequestBody(required = false) RentFilter filter) {
+        List<Rent> rents = rentService.getAvailableRents(filter);
         return rents.stream().map(rent -> {
             Double averageRating = reviewService.getAverageRating(rent.getId());
             return new RentDTO(
