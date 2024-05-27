@@ -10,7 +10,7 @@ import { TextField } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link';
 
-import StyledButton from "../../general-components/StyledButton";
+import Button from "@mui/joy/Button";
 import StyledModal from "../../general-components/StyledModal";
 import FormLayout from "../../../containers/FormLayout";
 
@@ -21,6 +21,7 @@ import LoginFormStyles from "./LoginFormStyles";
 const LoginForm = ({ isOpen, onClose }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [emailError, setEmailError] = useState(false);
 
     const { login } = useAuth();
 
@@ -30,7 +31,23 @@ const LoginForm = ({ isOpen, onClose }) => {
 
     const classes = useClasses(LoginFormStyles, { name: "LoginFormStyles" })
 
+    const validateEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
+    const handleEmailChange = (e) => {
+        const input = e.target.value;
+        setEmail(input);
+        setEmailError(!validateEmail(input));
+    };
+
     const handleLogin = () => {
+        if (emailError) {
+            console.error('Invalid email attempt');
+            return;
+        }
+
         let payload = {
             email: email,
             password: password
@@ -68,7 +85,10 @@ const LoginForm = ({ isOpen, onClose }) => {
                     name="email"
                     type="string"
                     autoFocus
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    onChange={handleEmailChange}
+                    error={emailError}
+                    helperText={emailError ? "Invalid email address" : ""}
                 />
                 <TextField
                     margin="normal"
@@ -94,8 +114,21 @@ const LoginForm = ({ isOpen, onClose }) => {
                     </Grid>
                 </Grid>
                 <div className={classes.button}>
-                    <StyledButton type="submit">Submit</StyledButton>
-                    <StyledButton onClick={onClose}>Exit</StyledButton>
+                    <Button variant="solid"
+                        size="lg"
+                        color="primary"
+                        type="submit"
+                        sx={{ mt: 2 }} >
+                        Submit
+                    </Button>
+                    <Button variant="solid"
+                        size="lg"
+                        color="primary"
+                        type="submit"
+                        onClick={onClose}
+                        sx={{ mt: 2 }} >
+                        Exit
+                    </Button>
                 </div>
 
             </FormLayout>

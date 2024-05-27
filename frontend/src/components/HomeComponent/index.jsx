@@ -7,6 +7,8 @@ import { getAvailableRents } from "../../store/slices/rent/thunk";
 import { useNavigate } from "react-router-dom";
 import Map from "../general-components/Map/Map";
 import { useAuth } from "../../providers/AuthProvider";
+import { TextField } from "@mui/material";
+import StyledDatePicker from "../general-components/StyledDatePicker";
 
 const HomeComponent = () => {
     const { user } = useAuth()
@@ -62,24 +64,20 @@ const HomeComponent = () => {
                                         <div className="col-sm-6">
                                             <div className="form-group">
                                                 <span className="form-label">Check In</span>
-                                                <input
+                                                <StyledDatePicker
                                                     className="form-control"
-                                                    type="date"
-                                                    required
-                                                    value={checkIn}
-                                                    onChange={(e) => setCheckIn(e.target.value)}
+                                                    onChange={(e) => setCheckIn(e.format("YYYY-MM-DD"))}
                                                 />
                                             </div>
                                         </div>
                                         <div className="col-sm-6">
                                             <div className="form-group">
                                                 <span className="form-label">Check Out</span>
-                                                <input
+                                                <StyledDatePicker
                                                     className="form-control"
-                                                    type="date"
-                                                    required
-                                                    value={checkOut}
-                                                    onChange={(e) => setCheckOut(e.target.value)}
+                                                    onChange=
+                                                    {(e) =>
+                                                        setCheckOut(e.format("YYYY-MM-DD"))}
                                                 />
                                             </div>
                                         </div>
@@ -88,43 +86,27 @@ const HomeComponent = () => {
                                         <div className="col-sm-4">
                                             <div className="form-group">
                                                 <span className="form-label">Rooms</span>
-                                                <select
+                                                <TextField
                                                     className="form-control"
                                                     value={rooms}
+                                                    type="number"
                                                     onChange={(e) => setRooms(e.target.value)}
+                                                    inputProps={{ min: 1 }}
                                                 >
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
+                                                </TextField>
                                             </div>
                                         </div>
                                         <div className="col-sm-4">
                                             <div className="form-group">
                                                 <span className="form-label">Adults</span>
-                                                <select
+                                                <TextField
                                                     className="form-control"
                                                     value={adults}
                                                     onChange={(e) => setAdults(e.target.value)}
+                                                    type="number"
+                                                    inputProps={{ min: 1 }}
                                                 >
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div className="col-sm-4">
-                                            <div className="form-group">
-                                                <span className="form-label">Children</span>
-                                                <select
-                                                    className="form-control"
-                                                    value={children}
-                                                    onChange={(e) => setChildren(e.target.value)}
-                                                >
-                                                    <option>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                </select>
+                                                </TextField>
                                             </div>
                                         </div>
                                     </div>

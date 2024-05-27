@@ -33,9 +33,23 @@
 .booking-form {
     background-color: #fff;
     padding: 50px 20px;
+    width: 100%;
     -webkit-box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
+}
+
+@media (max-width: 1199px) {
+    .col-md-4.col-md-pull-7 {
+        width: 100%
+    }
+}
+
+@media (min-width: 768px) {
+    .col-md-4 {
+        flex: 0 0 auto;
+        width: 41.33333333%;
+    }
 }
 
 .booking-form .form-group {
@@ -47,7 +61,9 @@
     background-color: #ebecee;
     border-radius: 4px;
     border: none;
-    height: 55px;
+    overflow: hidden;
+    padding-top: 0px;
+    height: 56px;
     -webkit-box-shadow: none;
     box-shadow: none;
     color: #3e485c;

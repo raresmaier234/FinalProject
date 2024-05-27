@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import axios from "axios";
 
-
-import StyledButton from '../../general-components/StyledButton';
+import Button from '@mui/joy/Button';
 import StyledModal from '../../general-components/StyledModal';
 import FormLayout from '../../../containers/FormLayout';
 import { TextField, Box, Checkbox } from '@mui/material';
@@ -19,6 +18,7 @@ const SigninForm = ({ isOpen, onClose }) => {
     const [phone, setPhone] = useState("")
     const [error, setError] = useState(null);
     const [renter, setRenter] = useState(false);
+    const [emailError, setEmailError] = useState(false);
 
 
     const classes = useClasses(SignupFormStyles, { name: "SignupFormStyles" })
@@ -27,7 +27,23 @@ const SigninForm = ({ isOpen, onClose }) => {
         setRenter(!renter)
     }
 
+    const validateEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
+    const handleEmailChange = (e) => {
+        const input = e.target.value;
+        setEmail(input);
+        setEmailError(!validateEmail(input));
+    };
+
     const handleSave = () => {
+        if (emailError) {
+            console.error('Invalid email attempt');
+            return;
+        }
+
         let payload = {
             firstName: firstName,
             lastName: lastName,
@@ -80,7 +96,10 @@ const SigninForm = ({ isOpen, onClose }) => {
                     name="email"
                     type="string"
                     autoFocus
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    onChange={handleEmailChange}
+                    error={emailError}
+                    helperText={emailError ? "Invalid email address" : ""}
                 />
                 <TextField
                     margin="normal"
@@ -105,7 +124,7 @@ const SigninForm = ({ isOpen, onClose }) => {
                 <Box className="form-parking">
                     <label>
                         <Checkbox checked={renter} onChange={handleRenterChange} />
-                        Chirias
+                        Renter
                     </label>
                     <label>
                         <Checkbox checked={!renter} onChange={handleRenterChange} />
@@ -114,8 +133,21 @@ const SigninForm = ({ isOpen, onClose }) => {
                 </Box>
                 {error && <p>{error}</p>}
                 <div className={classes.button}>
-                    <StyledButton type="submit"> Submit </StyledButton>
-                    <StyledButton onClick={onClose}> Exit </StyledButton>
+                    <Button variant="solid"
+                        size="lg"
+                        color="primary"
+                        type="submit"
+                        sx={{ mt: 2 }} >
+                        Submit
+                    </Button>
+                    <Button variant="solid"
+                        size="lg"
+                        color="primary"
+                        type="submit"
+                        onClick={onClose}
+                        sx={{ mt: 2 }} >
+                        Exit
+                    </Button>
                 </div>
 
             </FormLayout>
