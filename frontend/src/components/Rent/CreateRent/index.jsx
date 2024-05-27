@@ -119,84 +119,90 @@ const CreateRentForm = () => {
                     </Select>
                 </FormControl>
 
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="name"
-                    label="Nume"
-                    name="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="form-field"
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="price"
-                    label="Pret pe zi"
-                    name="price"
-                    type="number"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="form-field"
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="description"
-                    label="Descriere"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="form-field"
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="nrOfPersons"
-                    label="Numar maxim de persoane"
-                    name="nrOfPersons"
-                    type="number"
-                    value={nrOfPersons}
-                    onChange={(e) => setNrOfPersons(e.target.value)}
-                    className="form-field"
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="nrOfRooms"
-                    label="Numar de camere"
-                    name="nrOfRooms"
-                    type="number"
-                    value={nrOfRooms}
-                    onChange={(e) => setNrOfRooms(e.target.value)}
-                    className="form-field"
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="nrOfBathrooms"
-                    label="Numar de bai"
-                    name="nrOfBathrooms"
-                    type="number"
-                    value={nrOfBathrooms}
-                    onChange={(e) => setNrOfBathrooms(e.target.value)}
-                    className="form-field"
-                />
-                <div>
+
+                <div style={{
+                    display: "grid", gridTemplateColumns: "1fr 1fr",
+                    gap: "10px"
+                }}>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="name"
+                        label="Nume"
+                        name="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="form-field"
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="price"
+                        label="Pret pe zi"
+                        name="price"
+                        type="number"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        className="form-field"
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="description"
+                        label="Descriere"
+                        name="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        className="form-field"
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="nrOfPersons"
+                        label="Numar maxim de persoane"
+                        name="nrOfPersons"
+                        type="number"
+                        value={nrOfPersons}
+                        onChange={(e) => setNrOfPersons(e.target.value)}
+                        className="form-field"
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="nrOfRooms"
+                        label="Numar de camere"
+                        name="nrOfRooms"
+                        type="number"
+                        value={nrOfRooms}
+                        onChange={(e) => setNrOfRooms(e.target.value)}
+                        className="form-field"
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="nrOfBathrooms"
+                        label="Numar de bai"
+                        name="nrOfBathrooms"
+                        type="number"
+                        value={nrOfBathrooms}
+                        onChange={(e) => setNrOfBathrooms(e.target.value)}
+                        className="form-field"
+                    />
                     <StyledDatePicker
                         label="Start Date"
+                        width={"100%"}
                         onChange={(e) => setStartDate(e.format("YYYY-MM-DD"))}
                         className="form-field"
                     />
                     <StyledDatePicker
                         label="End Date"
+                        width={"100%"}
                         onChange={(e) => setEndDate(e.format("YYYY-MM-DD"))}
                         className="form-field"
                     />

@@ -64,6 +64,14 @@ public class BookingService {
         return bookingRepository.findBookingByUser(user);
     }
 
+    public Booking getBookingById(Long id) {
+        return bookingRepository.getReferenceById(id);
+    }
+
+    public Booking updateBooking(Booking booking) {
+        return bookingRepository.save(booking);
+    }
+
     public List<Booking> getBookingsForUserRents(Long userId) {
         List<Rent> rents = rentRepository.findByUserId(userId);
         List<Booking> bookings = new ArrayList<>();
@@ -71,6 +79,10 @@ public class BookingService {
             bookings.addAll(bookingRepository.findByRentId(rent.getId()));
         }
         return bookings;
+    }
+
+    public List<Booking> getBookingsByClient(Long clientId) {
+        return bookingRepository.findByUserId(clientId);
     }
 
 }

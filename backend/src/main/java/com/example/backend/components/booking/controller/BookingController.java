@@ -12,6 +12,7 @@ import com.example.backend.components.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -44,11 +45,24 @@ public class BookingController {
         return bookingService.addBooking(booking);
     }
 
+    @PostMapping("/{bookingId}/updateBookingStatus")
+    public Booking editBookingStatus(@PathVariable Long bookingId, @RequestParam("bookingStatus") String bookingStatus) {
+        Booking booking = bookingService.getBookingById(bookingId);
+        booking.setBookingStatus(BookingStatus.valueOf(bookingStatus));
+        return bookingService.updateBooking(booking);
+    }
+
     @GetMapping("/{userId}/bookings")
     public List<Booking> getBookingsForUserRents(
             @PathVariable Long userId)
     {
         return bookingService.getBookingsForUserRents(userId);
+    }
+    @GetMapping("/client/{userId}/bookings")
+    public List<Booking> getBookingsForClients(
+            @PathVariable Long userId)
+    {
+        return bookingService.getBookingsByClient(userId);
     }
 
 }

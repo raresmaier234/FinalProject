@@ -30,9 +30,53 @@ export const addBooking = createAsyncThunk("addBooking", async ({ booking }, thu
     }
 });
 
+export const updateBookingStatus = createAsyncThunk("updateBookingStatus", async ({ bookingId, bookingStatus }, thunkAPI) => {
+    const options = {
+        url: `${process.env.REACT_APP_API_URL}/${bookingId}/updateBookingStatus`,
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        params: { bookingStatus }
+    };
+    try {
+        const response = await Axios(options);
+        const data = response?.data;
+
+        thunkAPI.dispatch(bookingActions.setBooking({ booking: data }));
+
+        return true;
+    } catch (e) {
+        return thunkAPI.rejectWithValue({
+            error: true,
+            code: e.response?.data?.error?.code,
+            message: "Something went wrong",
+        });
+    }
+});
+
 export const getBookings = createAsyncThunk("getBookings", async ({ userId }, thunkAPI) => {
     const options = {
         url: `${process.env.REACT_APP_API_URL}/${userId}/bookings`,
+        method: "GET",
+    };
+    try {
+        const response = await Axios(options);
+        const data = response?.data;
+
+        return data;
+    } catch (e) {
+        return thunkAPI.rejectWithValue({
+            error: true,
+            code: e.response?.data?.error?.code,
+            message: "Something went wrong",
+        });
+    }
+});
+
+export const getClientBookings = createAsyncThunk("getClientBookings", async ({ userId }, thunkAPI) => {
+    const options = {
+        url: `${process.env.REACT_APP_API_URL}/client/${userId}/bookings`,
         method: "GET",
     };
     try {

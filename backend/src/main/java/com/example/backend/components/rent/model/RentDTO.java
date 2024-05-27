@@ -15,26 +15,35 @@ public class RentDTO {
     private Double averageRating;
 
     private List<String> photos;
+    private int nrOfRooms;
+    private int nrOfBathrooms;
+    private int nrOfPersons;
 
     public RentDTO() {
     }
 
-    public RentDTO(Long id, String name, String description, int price, String location, RentType type, Double averageRating, List<String> photos) {
+    public RentDTO(Long id, String name, String description, int price, String location, RentType type, Double averageRating, List<String> photos, int nrOfPersons, int nrOfRooms, int nrOfBathrooms) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.location = location;
+        this.nrOfPersons = nrOfPersons;
+        this.nrOfRooms = nrOfRooms;
+        this.nrOfBathrooms = nrOfBathrooms;
         this.type = type;
         this.averageRating = averageRating;
         this.photos = photos;
     }
 
-    public RentDTO(String name, String description, int price, String location, RentType type, Double averageRating, List<String> photos) {
+    public RentDTO(String name, String description, int price, String location, RentType type, Double averageRating, List<String> photos, int nrOfPersons, int nrOfRooms, int nrOfBathrooms) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.location = location;
+        this.nrOfPersons = nrOfPersons;
+        this.nrOfRooms = nrOfRooms;
+        this.nrOfBathrooms = nrOfBathrooms;
         this.type = type;
         this.averageRating = averageRating;
         this.photos = photos;
@@ -70,6 +79,30 @@ public class RentDTO {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getNrOfRooms() {
+        return nrOfRooms;
+    }
+
+    public void setNrOfRooms(int nrOfRooms) {
+        this.nrOfRooms = nrOfRooms;
+    }
+
+    public int getNrOfBathrooms() {
+        return nrOfBathrooms;
+    }
+
+    public void setNrOfBathrooms(int nrOfBathrooms) {
+        this.nrOfBathrooms = nrOfBathrooms;
+    }
+
+    public int getNrOfPersons() {
+        return nrOfPersons;
+    }
+
+    public void setNrOfPersons(int nrOfPersons) {
+        this.nrOfPersons = nrOfPersons;
     }
 
     public String getLocation() {

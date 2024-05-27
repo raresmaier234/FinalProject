@@ -8,6 +8,7 @@ import BookingForm from '../components/Booking';
 import Layout from '../components/Layout';
 import UserProfile from '../components/UserProfile';
 import PendingBookings from '../components/Rent/PendingBookings';
+import Notifications from '../components/Notifications';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeComponent />}></Route>
           <Route path="/pending-bookings" element={<PendingBookings />} />
+          <Route path="/notifications" element={<Notifications />}></Route>
           <Route path='/profile' element={<UserProfile />}></Route>
           <Route path="/myprofile" element={<ProfileComponent />}></Route>
           <Route path="/createRent" element={<CreateRentForm />}></Route>

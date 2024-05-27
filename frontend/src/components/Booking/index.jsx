@@ -134,6 +134,7 @@ const BookingForm = () => {
                                 value={form.nrOfRooms}
                                 onChange={handleChange}
                                 required
+                                inputProps={{ min: 1, max: rent.nrOfRooms }}
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -145,6 +146,7 @@ const BookingForm = () => {
                                 value={form.nrOfPersons}
                                 onChange={handleChange}
                                 required
+                                inputProps={{ min: 1, max: rent.nrOfPersons }}
                             />
                         </Grid>
                         <Grid item xs={12}>

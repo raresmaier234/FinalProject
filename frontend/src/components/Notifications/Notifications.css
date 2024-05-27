@@ -1,16 +1,14 @@
 .booking-container {
     display: flex;
-    flex-wrap: wrap;
     gap: 20px;
     padding: 100px;
-    justify-content: center;
 }
 
 .booking-card {
     border: 1px solid #ccc;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 300px;
+    width: 500px;
     background-color: #f9f9f9;
     border-radius: 8px;
     position: relative;
@@ -53,6 +51,24 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
+}
+
+.status-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: #e8f5e9;
+    color: green;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.status-icon {
+    color: green;
+    margin-left: 5px;
 }
 
 .approve-button {

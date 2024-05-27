@@ -16,7 +16,7 @@ import HoverRating from '../../general-components/Rating';
 import { useJsApiLoader } from '@react-google-maps/api';
 
 
-export default function CardRent({ id, name, description, price, location, photos, type, averageRating }) {
+export default function CardRent({ id, name, price, nrOfPersons, location, photos, type, averageRating }) {
     const classes = useClasses(cardRentStyles, { name: "cardRentStyles" });
     const [openMap, setOpenMap] = useState(false);
     const [coordinates, setCoordinates] = useState(null);
@@ -54,7 +54,7 @@ export default function CardRent({ id, name, description, price, location, photo
                     <HoverRating rating={averageRating} setRating={() => { }} isEditable={false} />
                     <Typography level="title-lg">{name}</Typography>
                     <Typography level="body-sm">{type}</Typography>
-                    <Typography level="body-sm">{description}</Typography>
+                    <Typography level="body-sm">Persons: {nrOfPersons}</Typography>
                     <Typography level="body-sm">{location}</Typography>
                     <IconButton
                         aria-label="bookmark Bahamas Islands"
@@ -77,7 +77,10 @@ export default function CardRent({ id, name, description, price, location, photo
                     objectFit='cover' >
                     <ImageSlider images={photos} />
                 </AspectRatio>
-                <CardContent orientation="horizontal">
+                <CardContent orientation="horizontal" sx={{
+                    display: "flex",
+                    alignItems: "center"
+                }}>
                     <div>
                         <Typography level="body-xs">Price:</Typography>
                         <Typography fontSize="lg" fontWeight="lg">

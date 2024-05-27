@@ -109,6 +109,10 @@ export default function Appbar() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    const handleNotifications = () => {
+        navigate('/notifications')
+    }
+
     useEffect(() => {
         dispatch(getUserByEmail({ email: user }))
     }, [])
@@ -172,10 +176,9 @@ export default function Appbar() {
             <MenuItem>
                 <IconButton
                     size="large"
-                    aria-label="show 17 new notifications"
                     color="inherit"
                 >
-                    <Badge badgeContent={17} color="error">
+                    <Badge color="error">
                         <NotificationsIcon />
                     </Badge>
                 </IconButton>
@@ -237,7 +240,7 @@ export default function Appbar() {
                         </Box>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                <Link to="/notifications">
+                                <Link to="/messenger">
                                     <Badge badgeContent={4} color="error">
                                         <MailIcon color="disabled" />
                                     </Badge>
@@ -246,10 +249,10 @@ export default function Appbar() {
                             </IconButton>
                             <IconButton
                                 size="large"
-                                aria-label="show 17 new notifications"
                                 color="inherit"
+                                onClick={handleNotifications}
                             >
-                                <Badge badgeContent={17} color="error">
+                                <Badge color="error">
                                     <NotificationsIcon />
                                 </Badge>
                             </IconButton>

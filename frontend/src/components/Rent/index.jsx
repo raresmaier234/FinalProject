@@ -52,6 +52,7 @@ const RentComponent = () => {
                         location={rent.location}
                         photos={rent.photos}
                         type={rent.type}
+                        nrOfPersons={rent.nrOfPersons}
                         averageRating={rent.averageRating}
                     />
                 ))}

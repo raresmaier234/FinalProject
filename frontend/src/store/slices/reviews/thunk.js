@@ -13,7 +13,7 @@ export const addReview = createAsyncThunk("addReview", async ({ rentId, review }
         const response = await Axios(options);
         const data = response?.data;
 
-        thunkAPI.dispatch(reviewsActions.setItem({ item: review }));
+        thunkAPI.dispatch(reviewsActions.setItem({ item: data }));
         return true
     } catch (e) {
         return thunkAPI.rejectWithValue({

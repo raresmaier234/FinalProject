@@ -50,7 +50,10 @@ public class RentController {
                     rent.getLocation(),
                     rent.getType(),
                     averageRating,
-                    rent.getPhotoUrls()
+                    rent.getPhotoUrls(),
+                    rent.getNrOfPersons(),
+                    rent.getNrOfRooms(),
+                    rent.getNrOfBathrooms()
             );
         }).collect(Collectors.toList());
     }

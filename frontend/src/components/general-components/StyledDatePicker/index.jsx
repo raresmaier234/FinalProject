@@ -8,7 +8,8 @@ export default function StyledDatePicker({ label, onChange, className, ...props 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={['DatePicker']}>
-                <DatePicker className={className} label={label} onChange={onChange} />
+                <DatePicker className={className} label={label} onChange={onChange}
+                    {...props} />
             </DemoContainer>
         </LocalizationProvider>
     );
