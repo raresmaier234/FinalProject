@@ -32,7 +32,6 @@ const BookingForm = () => {
 
 
     const dispatch = useDispatch();
-    console.log(userInfo)
 
 
     const [form, setForm] = useState({
@@ -79,7 +78,6 @@ const BookingForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form)
         dispatch(addBooking({ booking: form })).then((res) => {
             if (res) {
                 setSnackbarMessage("Booking successfully created!");

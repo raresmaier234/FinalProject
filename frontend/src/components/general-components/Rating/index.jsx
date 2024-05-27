@@ -20,8 +20,15 @@ function getLabelText(value) {
     return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
+function roundToNearestHalf(value) {
+    return Math.round(value * 2) / 2;
+}
+
 export default function HoverRating({ rating, setRating, isEditable }) {
     const [hover, setHover] = React.useState(-1);
+
+    const displayRating = roundToNearestHalf(rating);
+
 
     return (
         <Box
@@ -33,7 +40,7 @@ export default function HoverRating({ rating, setRating, isEditable }) {
         >
             <Rating
                 name="hover-feedback"
-                value={rating}
+                value={displayRating}
                 precision={0.5}
                 getLabelText={getLabelText}
                 onChange={(event, newValue) => {

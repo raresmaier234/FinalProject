@@ -8,4 +8,5 @@ import java.util.Date;
 import java.util.List;
 
 public interface RentRepository extends JpaRepository<Rent, Long> {
+    List<Rent> findByUserId(Long userId);
 }

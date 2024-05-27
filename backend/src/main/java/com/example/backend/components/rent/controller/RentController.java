@@ -2,11 +2,9 @@ package com.example.backend.components.rent.controller;
 
 import com.amazonaws.services.kms.model.NotFoundException;
 import com.example.backend.S3Bucket.FileService;
-import com.example.backend.components.rent.model.Rent;
-import com.example.backend.components.rent.model.RentFilter;
-import com.example.backend.components.rent.model.RentStatus;
-import com.example.backend.components.rent.model.RentType;
+import com.example.backend.components.rent.model.*;
 import com.example.backend.components.rent.service.RentService;
+import com.example.backend.components.reviews.service.ReviewService;
 import com.example.backend.components.user.model.User;
 import com.example.backend.components.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -34,11 +33,27 @@ public class RentController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/getAllRents")
-    public List<Rent> getAllRents() {
-        return rentService.getAll();
-    }
+    @Autowired
+    private ReviewService reviewService;
 
+
+    @GetMapping("/getAllRents")
+    public List<RentDTO> getAllRents() {
+        List<Rent> rents = rentService.getAll();
+        return rents.stream().map(rent -> {
+            Double averageRating = reviewService.getAverageRating(rent.getId());
+            return new RentDTO(
+                    rent.getId(),
+                    rent.getName(),
+                    rent.getDescription(),
+                    rent.getPrice(),
+                    rent.getLocation(),
+                    rent.getType(),
+                    averageRating,
+                    rent.getPhotoUrls()
+            );
+        }).collect(Collectors.toList());
+    }
     @PostMapping("/getAvailableRents")
     public List<Rent> getAllAvailableRents(@RequestBody(required = false) RentFilter filter) {
         return rentService.getAvailableRents(filter);

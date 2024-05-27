@@ -1,6 +1,5 @@
 package com.example.backend.components.booking.model;
 
-import com.example.backend.components.comment.model.Comment;
 import com.example.backend.components.rent.model.Rent;
 import com.example.backend.components.user.model.User;
 import jakarta.persistence.*;

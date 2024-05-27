@@ -11,7 +11,7 @@ export const addBooking = createAsyncThunk("addBooking", async ({ booking }, thu
         headers: {
             'Content-Type': 'application/json'
         },
-        data: booking,  // Make sure to stringify the JSON body
+        data: booking,
     };
     try {
         const response = await Axios(options);
@@ -29,3 +29,23 @@ export const addBooking = createAsyncThunk("addBooking", async ({ booking }, thu
         });
     }
 });
+
+export const getBookings = createAsyncThunk("getBookings", async ({ userId }, thunkAPI) => {
+    const options = {
+        url: `${process.env.REACT_APP_API_URL}/${userId}/bookings`,
+        method: "GET",
+    };
+    try {
+        const response = await Axios(options);
+        const data = response?.data;
+
+        return data;
+    } catch (e) {
+        return thunkAPI.rejectWithValue({
+            error: true,
+            code: e.response?.data?.error?.code,
+            message: "Something went wrong",
+        });
+    }
+});
+

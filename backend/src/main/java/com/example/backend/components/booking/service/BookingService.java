@@ -4,6 +4,7 @@ import com.example.backend.components.booking.model.Booking;
 import com.example.backend.components.booking.model.BookingStatus;
 import com.example.backend.components.booking.repository.BookingRepository;
 import com.example.backend.components.rent.model.Rent;
+import com.example.backend.components.rent.repository.RentRepository;
 import com.example.backend.components.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ import java.util.List;
 public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
+    private RentRepository rentRepository;
 
     public List<LocalDate> findAvailableDates(LocalDate startDate, LocalDate endDate) {
         List<Booking> existingBookings = bookingRepository.findByStartDateBetween(startDate, endDate);
@@ -58,6 +62,15 @@ public class BookingService {
 
     public List<Booking> getPendingBookings(User user) {
         return bookingRepository.findBookingByUser(user);
+    }
+
+    public List<Booking> getBookingsForUserRents(Long userId) {
+        List<Rent> rents = rentRepository.findByUserId(userId);
+        List<Booking> bookings = new ArrayList<>();
+        for (Rent rent : rents) {
+            bookings.addAll(bookingRepository.findByRentId(rent.getId()));
+        }
+        return bookings;
     }
 
 }

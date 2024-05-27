@@ -1,19 +1,25 @@
-import { Height } from "@mui/icons-material"
-
-const ImageSliderstyles = (theme) => ({
+const ImageSliderStyles = (theme) => ({
     item: {
-        maxWidth: "300vh",
-        maxHeight: "200vh",
-        objectFit: "cover"
+        width: "100%",
+        height: "500px",
+        overflow: 'hidden',
+    },
+    image: {
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
     },
     wrapper: {
-        height: "auto"
+        height: "500px",
+        marginLeft: "0px"
     },
     container: {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        width: "100%",
+        height: "500px",
     }
-})
+});
 
-export default ImageSliderstyles
+export default ImageSliderStyles;

@@ -44,11 +44,11 @@ public class BookingController {
         return bookingService.addBooking(booking);
     }
 
-    @GetMapping("/booking/pending")
-    public List<Booking> getPendingBookings(@RequestParam("userId") Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
-
-        return bookingService.getPendingBookings(user);
+    @GetMapping("/{userId}/bookings")
+    public List<Booking> getBookingsForUserRents(
+            @PathVariable Long userId)
+    {
+        return bookingService.getBookingsForUserRents(userId);
     }
 
 }

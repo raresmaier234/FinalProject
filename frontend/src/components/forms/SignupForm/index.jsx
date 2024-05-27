@@ -36,7 +36,6 @@ const SigninForm = ({ isOpen, onClose }) => {
             password: password,
             role: renter ? "RENTER" : "CLIENT"
         }
-        console.log(payload)
         axios.post(process.env.REACT_APP_API_URL + "/register", payload)
             .then((res) => {
                 onClose()

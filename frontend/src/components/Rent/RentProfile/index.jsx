@@ -11,12 +11,18 @@ import ReviewForm from '../ReviewForm';
 import { getRentById } from '../../../store/slices/rent/thunk';
 import { getReviews } from '../../../store/slices/reviews/thunk';
 import HoverRating from '../../general-components/Rating';
+import { useAuth } from '../../../providers/AuthProvider';
+import LoginForm from '../../forms/LoginForm';
 
 export default function RentProfile() {
     const { id } = useParams();
     const rent = useSelector((state) => state.rent.items);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const [openLoginModal, setOpenLoginModal] = useState(false);
+
+    const { user } = useAuth()
 
     const [openReviewModal, setOpenReviewModal] = useState(false);
 
@@ -33,8 +39,17 @@ export default function RentProfile() {
     const { name, description, location, price, photoUrls = [] } = rent;
 
     const handleBookNow = () => {
-        navigate(`/booking/${id}`);
+        if (user)
+            navigate(`/booking/${id}`);
+        setOpenLoginModal(true)
     };
+
+    const handleReview = () => {
+        if (user)
+            setOpenReviewModal(true)
+        else
+            setOpenLoginModal(true)
+    }
 
     return (
         <div className="wrapper">
@@ -65,7 +80,7 @@ export default function RentProfile() {
                             color="primary"
                             aria-label="Book Now"
                             sx={{ mt: 2 }}
-                            onClick={() => setOpenReviewModal(true)}
+                            onClick={handleReview}
                         >
                             Review
                         </Button>
@@ -83,6 +98,7 @@ export default function RentProfile() {
                         </div>
                     ))}
                 </div>
+                <LoginForm isOpen={openLoginModal} onClose={() => setOpenLoginModal(false)}></LoginForm>
             </div>
         </div>
 

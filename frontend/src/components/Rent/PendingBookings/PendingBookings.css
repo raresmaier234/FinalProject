@@ -1,0 +1,51 @@
+.booking-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 100px;
+    justify-content: center;
+}
+
+.booking-card {
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    position: relative;
+}
+
+.booking-card h2 {
+    color: #333;
+    font-size: 20px;
+}
+
+.booking-card p {
+    color: #666;
+    margin: 5px 0;
+}
+
+.button-container {
+    text-align: right;
+    margin-top: 20px;
+}
+
+button {
+    padding: 8px 16px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.approve-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.decline-button {
+    background-color: #f44336;
+    color: white;
+}

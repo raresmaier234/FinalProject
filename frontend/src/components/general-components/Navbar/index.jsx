@@ -208,7 +208,7 @@ export default function Appbar() {
                             component="div"
                             sx={{ display: { xs: 'none', sm: 'block' } }}
                         >
-                            Traveler
+                            Travel Buddy
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: 'flex', margin: '20px', gap: '20px' }}>
                             <Link to="/">
@@ -221,11 +221,19 @@ export default function Appbar() {
                                     Rents
                                 </StyledButton>
                             </Link>
-                            {userInfo !== null && userInfo.role === "RENTER" && <Link to="/createRent">
-                                <StyledButton>
-                                    Create Rent
-                                </StyledButton>
-                            </Link>}
+                            {userInfo !== null && userInfo.role === "RENTER" &&
+                                <>
+                                    <Link to="/createRent">
+                                        <StyledButton>
+                                            Create Rent
+                                        </StyledButton>
+                                    </Link>
+                                    <Link to="/pending-bookings">
+                                        <StyledButton>
+                                            Bookings
+                                        </StyledButton>
+                                    </Link>
+                                </>}
                         </Box>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">

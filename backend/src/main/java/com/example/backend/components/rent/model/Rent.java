@@ -20,10 +20,9 @@ public class Rent {
     private User user;
     private String name;
     private int price;
-    private Rating rating;
     private String description;
 
-    @Transient // Not persisted in the database
+    @Transient
     private List<MultipartFile> photos;
 
     @ElementCollection
@@ -54,12 +53,11 @@ public class Rent {
 
     }
 
-    public Rent(long id, User user, String name, int price, Rating rating, String description, List<MultipartFile> photos, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking, RentType type) {
+    public Rent(long id, User user, String name, int price, String description, List<MultipartFile> photos, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking, RentType type) {
         this.id = id;
         this.user = user;
         this.name = name;
         this.price = price;
-        this.rating = rating;
         this.description = description;
         this.photos = photos;
         this.photoUrls = photoUrls;
@@ -74,11 +72,10 @@ public class Rent {
         this.type = type;
     }
 
-    public Rent(User user, String name, int price, Rating rating, String description, List<MultipartFile> photos, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking, RentType type) {
+    public Rent(User user, String name, int price, String description, List<MultipartFile> photos, List<String> photoUrls, String location, RentStatus rentStatus, LocalDate startDate, LocalDate endDate, int nrOfRooms, int nrOfPersons, int nrOfBathrooms, boolean hasParking, RentType type) {
         this.user = user;
         this.name = name;
         this.price = price;
-        this.rating = rating;
         this.description = description;
         this.photos = photos;
         this.photoUrls = photoUrls;
@@ -135,14 +132,6 @@ public class Rent {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public Rating getRating() {
-        return rating;
-    }
-
-    public void setRating(Rating rating) {
-        this.rating = rating;
     }
 
     public String getDescription() {

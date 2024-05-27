@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { getAvailableRents } from "../../store/slices/rent/thunk";
+import { getAllRents } from "../../store/slices/rent/thunk";
 import useClasses from "../utils/useClasses";
 import CardRent from "./CardRent";
 import rentComponentStyles from "./RentComponentStyles";
-import Map from "../general-components/Map/Map";
-import StyledButton from "../general-components/StyledButton";
+import { useAuth } from "../../providers/AuthProvider";
+import { getUserByEmail } from "../../store/slices/user/thunk";
 
 const RentComponent = () => {
     const classes = useClasses(rentComponentStyles, { name: "rentComponentStyles" });
@@ -16,7 +16,14 @@ const RentComponent = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
 
-    const [openMap, setOpenMap] = useState(false);
+    const userInfo = useSelector((state) => state.user.user);
+    const { user } = useAuth();
+
+    useEffect(() => {
+        if (user) {
+            dispatch(getUserByEmail({ email: user }));
+        }
+    }, [user, dispatch]);
 
     useEffect(() => {
         const filter = {
@@ -27,7 +34,8 @@ const RentComponent = () => {
             adults: searchParams.get("adults"),
             children: searchParams.get("children")
         };
-        dispatch(getAvailableRents({ payload: filter }));
+        dispatch(getAllRents({}));
+        console.log(rents)
     }, [dispatch]);
 
     return (
@@ -42,8 +50,9 @@ const RentComponent = () => {
                         description={rent.description}
                         price={rent.price}
                         location={rent.location}
-                        photos={rent.photoUrls}
+                        photos={rent.photos}
                         type={rent.type}
+                        averageRating={rent.averageRating}
                     />
                 ))}
             </div>

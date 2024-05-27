@@ -1,12 +1,12 @@
-// CreateRentForm.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { Outlet } from 'react-router-dom';
 import { TextField, Box, Checkbox, Typography } from '@mui/material';
+import Button from '@mui/joy/Button';
 import { InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import StyledButton from '../../general-components/StyledButton';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import StyledDatePicker from '../../general-components/StyledDatePicker';
 import GoogleMaps from '../../general-components/GoogleMaps';
 import FormLayout from '../../../containers/FormLayout';
@@ -32,9 +32,32 @@ const CreateRentForm = () => {
     const [hasParking, setHasParking] = useState(false);
     const [type, setType] = useState("");
 
+
     const handleUploadPhotos = (e) => {
         const files = e.target.files;
-        setPhotos([...photos, ...files]);
+        const newPhotos = Array.from(files).map(file =>
+            Object.assign(file, {
+                id: `photo-${file.name}`,
+                content: file,
+                preview: URL.createObjectURL(file)
+            })
+        );
+        setPhotos(prevPhotos => [...prevPhotos, ...newPhotos]);
+    };
+
+    const onDragEnd = (result) => {
+        const { destination, source } = result;
+        if (!destination) {
+            return;
+        }
+        if (destination.index === source.index) {
+            return;
+        }
+
+        const newPhotos = Array.from(photos);
+        const [removed] = newPhotos.splice(source.index, 1);
+        newPhotos.splice(destination.index, 0, removed);
+        setPhotos(newPhotos);
     };
 
     const handleParkingChange = () => {
@@ -69,7 +92,7 @@ const CreateRentForm = () => {
         }
         dispatch(addRent({ rent: formData }));
 
-        navigate('/');
+        // navigate('/');
     };
 
     return (
@@ -196,14 +219,40 @@ const CreateRentForm = () => {
                     </label>
                 </Box>
                 <input type="file" onChange={handleUploadPhotos} multiple className="file-input" />
-                <div className="uploaded-photos">
-                    {photos.map((file, index) => (
-                        <Typography key={index} variant="body2">{file.name}</Typography>
-                    ))}
-                </div>
-                <StyledButton type="submit" className="form-submit">
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="droppable-photos">
+                        {(provided) => (
+                            <div
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                                className="uploaded-photos"
+                            >
+                                {photos.map((file, index) => (
+                                    <Draggable key={file.id} draggableId={file.id} index={index}>
+                                        {(provided) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                            >
+                                                <img src={file.preview} alt={file.content.name} style={{ width: '100px', height: 'auto' }} />
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                ))}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+
+                <Button variant="solid"
+                    size="lg"
+                    color="primary"
+                    type="submit"
+                    sx={{ mt: 2 }} >
                     Submit
-                </StyledButton>
+                </Button>
             </FormLayout>
             <Outlet />
         </div>

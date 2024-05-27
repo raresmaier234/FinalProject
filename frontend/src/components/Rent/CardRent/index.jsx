@@ -15,7 +15,8 @@ import Map from '../../general-components/Map/Map';
 import HoverRating from '../../general-components/Rating';
 import { useJsApiLoader } from '@react-google-maps/api';
 
-export default function CardRent({ id, name, description, price, location, photos, type }) {
+
+export default function CardRent({ id, name, description, price, location, photos, type, averageRating }) {
     const classes = useClasses(cardRentStyles, { name: "cardRentStyles" });
     const [openMap, setOpenMap] = useState(false);
     const [coordinates, setCoordinates] = useState(null);
@@ -50,7 +51,7 @@ export default function CardRent({ id, name, description, price, location, photo
         <>
             <Card sx={{ width: "100%", height: "750px" }}>
                 <div>
-                    <HoverRating></HoverRating>
+                    <HoverRating rating={averageRating} setRating={() => { }} isEditable={false} />
                     <Typography level="title-lg">{name}</Typography>
                     <Typography level="body-sm">{type}</Typography>
                     <Typography level="body-sm">{description}</Typography>
@@ -65,8 +66,16 @@ export default function CardRent({ id, name, description, price, location, photo
                         <BookmarkAdd />
                     </IconButton>
                 </div>
-                <AspectRatio height="500px" maxHeight="500px">
-                    <ImageSlider images={photos}></ImageSlider>
+                <AspectRatio
+                    sx={{
+                        height: '500px',
+                        maxHeight: '500px',
+                        '& .MuiAspectRatio-content': {
+                            backgroundColor: 'transparent',
+                        }
+                    }}
+                    objectFit='cover' >
+                    <ImageSlider images={photos} />
                 </AspectRatio>
                 <CardContent orientation="horizontal">
                     <div>
@@ -97,7 +106,7 @@ export default function CardRent({ id, name, description, price, location, photo
                     </div>
 
                 </CardContent>
-            </Card>
+            </Card >
             {isLoaded && coordinates &&
                 <Map isOpen={openMap} onClose={() => setOpenMap(false)} location={coordinates}></Map>
             }

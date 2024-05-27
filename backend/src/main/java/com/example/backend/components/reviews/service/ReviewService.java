@@ -30,4 +30,8 @@ public class ReviewService {
         return reviewRepository.findByRentId(rentId);
     }
 
+    public Double getAverageRating(Long rentId) {
+        return reviewRepository.findAverageRatingByRentId(rentId);
+    }
+
 }
