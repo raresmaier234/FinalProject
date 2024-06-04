@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode'; // Import a library for decoding JWT tokens
+import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { getUserByEmail } from '../store/slices/user/thunk';
 

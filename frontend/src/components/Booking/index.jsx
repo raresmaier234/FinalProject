@@ -64,7 +64,7 @@ const BookingForm = () => {
         const start = new Date(form.startDate);
         const end = new Date(form.endDate);
         const nights = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
-        const roomCost = form.nrOfRooms * rent.price * nights;
+        const roomCost = (form.nrOfRooms - 1) * rent.price * nights;
         const personCost = form.nrOfPersons * rent.price * nights;
         return roomCost + personCost;
     };

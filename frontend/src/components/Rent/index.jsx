@@ -60,8 +60,6 @@ const RentComponent = () => {
                 ))}
             </div>
         </>
-
-
     );
 };
 

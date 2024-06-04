@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { GoogleMap, useLoadScript, Marker, Circle } from '@react-google-maps/api';
-import Button from '@mui/joy/Button';
-import Switch from '@mui/joy/Switch'; // Importing the Switch component for the toggle
+import Switch from '@mui/joy/Switch';
 import StyledModal from '../StyledModal';
 import IconButton from '@mui/joy/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -21,7 +20,7 @@ const options = {
     draggable: false,
     editable: false,
     visible: true,
-    radius: 500,
+    radius: 1000,
     zIndex: 1
 };
 
@@ -55,8 +54,8 @@ const Map = ({ isOpen, onClose, location = defaultCenter }) => {
         const service = new window.google.maps.places.PlacesService(mapRef.current);
         const request = {
             location: new window.google.maps.LatLng(location.lat, location.lng),
-            radius: '500',
-            type: [type] // This will be dynamically set based on the filter type
+            radius: '1000',
+            type: [type]
         };
 
         service.nearbySearch(request, (results, status) => {
@@ -64,17 +63,16 @@ const Map = ({ isOpen, onClose, location = defaultCenter }) => {
                 const newMarkers = results.map(place => ({
                     lat: place.geometry.location.lat(),
                     lng: place.geometry.location.lng(),
-                    type: type // Store the type of place
+                    type: type
                 }));
                 setMarkers(prevMarkers => [...prevMarkers, ...newMarkers]);
             }
         });
     }, [location]);
 
-    // Update the useEffect to call fetchPlaces based on filter state changes
     useEffect(() => {
         if (isLoaded && !loadError && mapRef.current) {
-            setMarkers([]); // Clear existing markers when filters change
+            setMarkers([]);
             if (showSupermarkets) fetchPlaces('supermarket');
             if (showParking) fetchPlaces('parking');
             if (showRestaurants) fetchPlaces('restaurant');

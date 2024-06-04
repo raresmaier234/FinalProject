@@ -33,13 +33,13 @@ const PendingBookings = () => {
     };
 
     const handleApprove = (bookingId) => {
-        dispatch(updateBookingStatus({ bookingId, status: 'CONFIRMED' })).then(() => {
+        dispatch(updateBookingStatus({ bookingId, bookingStatus: 'CONFIRMED' })).then(() => {
             fetchBookings();
         });
     };
 
     const handleDecline = (bookingId) => {
-        dispatch(updateBookingStatus({ bookingId, status: 'DECLINED' })).then(() => {
+        dispatch(updateBookingStatus({ bookingId, bookingStatus: 'DECLINED' })).then(() => {
             fetchBookings();
         });
     };

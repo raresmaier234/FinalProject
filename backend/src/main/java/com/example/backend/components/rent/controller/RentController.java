@@ -57,10 +57,6 @@ public class RentController {
             );
         }).collect(Collectors.toList());
     }
-    @PostMapping("/getAvailableRents")
-    public List<Rent> getAllAvailableRents(@RequestBody(required = false) RentFilter filter) {
-        return rentService.getAvailableRents(filter);
-    }
 
     @PostMapping("/addRent")
     public ResponseEntity<Rent> addRent(@RequestParam("user_id") Long userId,
