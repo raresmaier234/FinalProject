@@ -11,11 +11,8 @@ import com.example.backend.components.user.model.User;
 import com.example.backend.components.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,12 +25,6 @@ public class BookingController {
     private UserRepository userRepository;
     @Autowired
     private RentRepository rentRepository;
-
-    @GetMapping("/availableDates")
-    List<LocalDate> getAvailableDates(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
-                                    @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
-        return bookingService.findAvailableDates(startDate, endDate);
-    }
 
     @PostMapping("/addBooking")
     public Booking createBooking(@RequestBody BookingRequest request) {

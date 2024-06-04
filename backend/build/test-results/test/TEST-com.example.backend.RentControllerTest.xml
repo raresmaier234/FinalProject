@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.backend.RentControllerTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2024-06-04T08:33:19" hostname="Raress-MacBook-Pro.local" time="0.184">
+<testsuite name="com.example.backend.RentControllerTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2024-06-04T14:28:39" hostname="Raress-MacBook-Pro.local" time="0.363">
   <properties/>
-  <testcase name="testGetAllRents()" classname="com.example.backend.RentControllerTest" time="0.184">
-    <failure message="java.lang.AssertionError: Status expected:&lt;200&gt; but was:&lt;403&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Status expected:&lt;200&gt; but was:&lt;403&gt;
-	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
-	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
-	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+  <testcase name="testUpdateRent()" classname="com.example.backend.RentControllerTest" time="0.363">
+    <failure message="java.lang.AssertionError: No value at JSON path &quot;$[0].name&quot;" type="java.lang.AssertionError">java.lang.AssertionError: No value at JSON path &quot;$[0].name&quot;
+	at org.springframework.test.util.JsonPathExpectationsHelper.evaluateJsonPath(JsonPathExpectationsHelper.java:302)
+	at org.springframework.test.util.JsonPathExpectationsHelper.assertValue(JsonPathExpectationsHelper.java:73)
+	at org.springframework.test.web.servlet.result.JsonPathResultMatchers.lambda$value$0(JsonPathResultMatchers.java:87)
 	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
-	at com.example.backend.RentControllerTest.testGetAllRents(RentControllerTest.java:50)
+	at com.example.backend.RentControllerTest.testUpdateRent(RentControllerTest.java:129)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
@@ -88,11 +88,17 @@
 	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at com.jayway.jsonpath.internal.Utils.notEmpty(Utils.java:401)
+	at com.jayway.jsonpath.JsonPath.read(JsonPath.java:390)
+	at com.jayway.jsonpath.JsonPath.read(JsonPath.java:377)
+	at org.springframework.test.util.JsonPathExpectationsHelper.evaluateJsonPath(JsonPathExpectationsHelper.java:299)
+	... 84 more
 </failure>
   </testcase>
   <system-out><![CDATA[Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
-11:33:14.178 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.backend.RentControllerTest]: RentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-11:33:14.390 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.backend.BackendApplication for test class com.example.backend.RentControllerTest
+17:28:25.482 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.backend.RentControllerTest]: RentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:28:25.755 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.backend.BackendApplication for test class com.example.backend.RentControllerTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -102,30 +108,39 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.1.5)
 
-2024-06-04T11:33:15.756+03:00  INFO 9379 --- [    Test worker] com.example.backend.RentControllerTest   : Starting RentControllerTest using Java 19.0.1 with PID 9379 (started by raresmaier in /Users/raresmaier/Documents/Lucrare Licenta/proiect/backend)
-2024-06-04T11:33:15.759+03:00  INFO 9379 --- [    Test worker] com.example.backend.RentControllerTest   : No active profile set, falling back to 1 default profile: "default"
-2024-06-04T11:33:19.393+03:00  WARN 9379 --- [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: 4de2d88c-5f04-4e12-a704-87ee8dfd30e0
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2024-06-04T11:33:19.595+03:00  INFO 9379 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@61554b6b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@761f234c, org.springframework.security.web.context.SecurityContextHolderFilter@22aefae0, org.springframework.security.web.header.HeaderWriterFilter@632c3f55, org.springframework.security.web.csrf.CsrfFilter@1c90029b, org.springframework.security.web.authentication.logout.LogoutFilter@214fba74, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4e2109fe, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@3de8f85c, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@687b0ddc, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6a6e9289, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7440265c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@48d44b46, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@42b4df5a, org.springframework.security.web.access.ExceptionTranslationFilter@72a3462f, org.springframework.security.web.access.intercept.AuthorizationFilter@26101efc]
-2024-06-04T11:33:19.646+03:00  INFO 9379 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2024-06-04T11:33:19.647+03:00  INFO 9379 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-06-04T11:33:19.649+03:00  INFO 9379 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
-2024-06-04T11:33:19.708+03:00  INFO 9379 --- [    Test worker] com.example.backend.RentControllerTest   : Started RentControllerTest in 5.179 seconds (process running for 7.233)
+2024-06-04T17:28:26.639+03:00  INFO 14445 --- [    Test worker] com.example.backend.RentControllerTest   : Starting RentControllerTest using Java 19.0.1 with PID 14445 (started by raresmaier in /Users/raresmaier/Documents/Lucrare Licenta/proiect/backend)
+2024-06-04T17:28:26.642+03:00  INFO 14445 --- [    Test worker] com.example.backend.RentControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2024-06-04T17:28:28.117+03:00  INFO 14445 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-04T17:28:28.265+03:00  INFO 14445 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 132 ms. Found 4 JPA repository interfaces.
+2024-06-04T17:28:32.045+03:00  INFO 14445 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-04T17:28:32.176+03:00  INFO 14445 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2024-06-04T17:28:32.181+03:00  INFO 14445 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2024-06-04T17:28:32.506+03:00  INFO 14445 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-04T17:28:32.558+03:00  INFO 14445 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-04T17:28:32.980+03:00  INFO 14445 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@279e1422
+2024-06-04T17:28:32.983+03:00  INFO 14445 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-04T17:28:33.083+03:00  WARN 14445 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-04T17:28:34.869+03:00  INFO 14445 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-04T17:28:35.107+03:00  INFO 14445 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-04T17:28:36.288+03:00  WARN 14445 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-04T17:28:37.457+03:00  INFO 14445 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4ff3af97, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5680f009, org.springframework.security.web.context.SecurityContextHolderFilter@4caca86d, org.springframework.security.web.header.HeaderWriterFilter@5b3427c4, org.springframework.security.web.authentication.logout.LogoutFilter@524945e2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@16a3d9a7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24c94e95, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3a4e6da6, org.springframework.security.web.session.SessionManagementFilter@5e6b2641, org.springframework.security.web.access.ExceptionTranslationFilter@6dacde96, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@688e6d4e]
+2024-06-04T17:28:38.278+03:00  INFO 14445 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-06-04T17:28:39.089+03:00  INFO 14445 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-06-04T17:28:39.092+03:00  INFO 14445 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-04T17:28:39.100+03:00  INFO 14445 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 7 ms
+2024-06-04T17:28:39.174+03:00  INFO 14445 --- [    Test worker] com.example.backend.RentControllerTest   : Started RentControllerTest in 13.024 seconds (process running for 15.484)
 
 MockHttpServletRequest:
       HTTP Method = POST
-      Request URI = /api/getAllRents
+      Request URI = /api/editRent/1
        Parameters = {}
-          Headers = [Content-Type:"application/json;charset=UTF-8"]
-             Body = null
-    Session Attrs = {org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN=org.springframework.security.web.csrf.DefaultCsrfToken@2152fde5}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"81"]
+             Body = {"name": "Updated Test Rent", "description": "Updated description", "price": 200}
+    Session Attrs = {}
 
 Handler:
-             Type = null
+             Type = com.example.backend.components.rent.controller.RentController
+           Method = com.example.backend.components.rent.controller.RentController#editRent(Long, Rent)
 
 Async:
     Async started = false
@@ -143,9 +158,9 @@ FlashMap:
        Attributes = null
 
 MockHttpServletResponse:
-           Status = 403
-    Error message = Forbidden
-          Headers = [X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+           Status = 200
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = null
              Body = 
     Forwarded URL = null
