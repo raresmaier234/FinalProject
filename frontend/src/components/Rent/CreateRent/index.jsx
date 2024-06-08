@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { Outlet } from 'react-router-dom';
 import { TextField, Box, Checkbox, Typography } from '@mui/material';
+import { Snackbar, Alert } from '@mui/material';
 import Button from '@mui/joy/Button';
 import { InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,6 +32,8 @@ const CreateRentForm = () => {
     const [nrOfBathrooms, setNrOfBathrooms] = useState(null);
     const [hasParking, setHasParking] = useState(false);
     const [type, setType] = useState("");
+
+    const [openSnackbar, setOpenSnackbar] = useState(false);
 
 
     const handleUploadPhotos = (e) => {
@@ -64,6 +67,17 @@ const CreateRentForm = () => {
         setHasParking(!hasParking);
     };
 
+    const handleOpenSnackbar = () => {
+        setOpenSnackbar(true);
+    };
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;  // Prevents the snackbar from closing when the user clicks outside it
+        }
+        setOpenSnackbar(false);
+    };
+
     const handleChangeType = (e) => {
         setType(e.target.value);
     };
@@ -90,7 +104,9 @@ const CreateRentForm = () => {
         for (let i = 0; i < photos.length; i++) {
             formData.append("photos", photos[i]);
         }
-        dispatch(addRent({ rent: formData }));
+        dispatch(addRent({ rent: formData })).then(() => {
+            handleOpenSnackbar();
+        });
 
         // navigate('/');
     };
@@ -259,6 +275,11 @@ const CreateRentForm = () => {
                     sx={{ mt: 2 }} >
                     Submit
                 </Button>
+                <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
+                    <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                        Rent created successfully!
+                    </Alert>
+                </Snackbar>
             </FormLayout>
             <Outlet />
         </div>

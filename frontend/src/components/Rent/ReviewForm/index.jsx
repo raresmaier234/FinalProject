@@ -9,7 +9,7 @@ import { useAuth } from '../../../providers/AuthProvider';
 import { useSelector } from 'react-redux';
 import StyledModal from '../../general-components/StyledModal';
 
-export default function ReviewForm({ isOpen, onClose, review, rentId }) {
+export default function ReviewForm({ isOpen, onClose, review, rentId, setReviewUpdated }) {
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(2);
     const dispatch = useDispatch();
@@ -35,19 +35,23 @@ export default function ReviewForm({ isOpen, onClose, review, rentId }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const review = {
+        const reviewData = {
+            id: review ? review.id : undefined,
             user: userInfo,
             text: reviewText,
             rating: rating
-        }
-        if (user) {
-            dispatch(addReview({ rentId, review: review }));
-            setReviewText('');
-            setRating(2);
-            onClose()
-        } else {
-            alert("You need to be logged in to post a review.");
-        }
+        };
+        dispatch(addReview({ rentId, review: reviewData }))
+            .then(() => {
+                onClose();
+                setReviewUpdated(true);
+                setReviewText('');
+                setRating(2);
+            })
+            .catch(error => {
+                console.error("Failed to submit review:", error);
+                alert("Failed to submit review, please try again.");
+            });
     };
 
     return (

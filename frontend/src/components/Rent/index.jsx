@@ -16,7 +16,6 @@ const RentComponent = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
 
-    const userInfo = useSelector((state) => state.user.user);
     const { user } = useAuth();
 
     useEffect(() => {

@@ -36,13 +36,24 @@ export default function RentProfile() {
     useEffect(() => {
         dispatch(getRentById({ id }));
         dispatch(getReviews({ rentId: id }))
-    }, [dispatch, id, reviews]);
+    }, [id]);
+
+    const [reviewUpdated, setReviewUpdated] = useState(false);
+
+
+    useEffect(() => {
+        if (reviewUpdated) {
+            dispatch(getReviews({ rentId: id })).then(() => {
+                setReviewUpdated(false); // Reset the flag after the fetch
+            });
+        }
+    }, [reviewUpdated, id, dispatch]);
 
     useEffect(() => {
         if (user) {
             dispatch(getUserByEmail({ email: user }));
         }
-    }, [user, dispatch]);
+    }, [user]);
 
     const { name, description, location, price, photoUrls = [] } = rent;
 
@@ -57,6 +68,7 @@ export default function RentProfile() {
             const existingReview = reviews.find(review => review.user.id === userInfo.id);
             if (existingReview) {
                 setReviewToEdit(existingReview);
+                setReviewUpdated(true);
             } else {
                 setReviewToEdit(null);
             }
@@ -101,7 +113,7 @@ export default function RentProfile() {
                         </Button>
                     </div>
 
-                    <ReviewForm rentId={id} isOpen={openReviewModal} review={reviewToEdit} onClose={() => setOpenReviewModal(false)} />
+                    <ReviewForm rentId={id} isOpen={openReviewModal} setReviewUpdated={setReviewUpdated} review={reviewToEdit} onClose={() => setOpenReviewModal(false)} />
                     {Array.isArray(reviews) && reviews.map((review, index) => (
                         <div key={index} style={{ margin: '10px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
                             <h3>{review.user.firstName} {review.user.lastName}</h3>

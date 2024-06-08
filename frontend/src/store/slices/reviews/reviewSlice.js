@@ -16,6 +16,15 @@ const reviewsSlice = createSlice({
         setItem(state, action) {
             state.items = action.payload.item;
             state.quantity = Object.keys(state.items).length;
+        },
+        addReview(state, action) {
+            state.items.push(action.payload);
+        },
+        updateReview(state, action) {
+            const index = state.items.findIndex(review => review.id === action.payload.id);
+            if (index !== -1) {
+                state.items[index] = action.payload;
+            }
         }
     },
 });
