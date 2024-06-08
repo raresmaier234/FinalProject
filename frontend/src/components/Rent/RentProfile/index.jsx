@@ -13,6 +13,7 @@ import { getReviews } from '../../../store/slices/reviews/thunk';
 import HoverRating from '../../general-components/Rating';
 import { useAuth } from '../../../providers/AuthProvider';
 import LoginForm from '../../forms/LoginForm';
+import { getUserByEmail } from '../../../store/slices/user/thunk';
 
 export default function RentProfile() {
     const { id } = useParams();
@@ -21,6 +22,9 @@ export default function RentProfile() {
     const navigate = useNavigate();
 
     const [openLoginModal, setOpenLoginModal] = useState(false);
+    const [reviewToEdit, setReviewToEdit] = useState(null);
+    const userInfo = useSelector((state) => state.user.user)
+
 
     const { user } = useAuth()
 
@@ -32,9 +36,13 @@ export default function RentProfile() {
     useEffect(() => {
         dispatch(getRentById({ id }));
         dispatch(getReviews({ rentId: id }))
-    }, [dispatch, id]);
+    }, [dispatch, id, reviews]);
 
-
+    useEffect(() => {
+        if (user) {
+            dispatch(getUserByEmail({ email: user }));
+        }
+    }, [user, dispatch]);
 
     const { name, description, location, price, photoUrls = [] } = rent;
 
@@ -45,11 +53,18 @@ export default function RentProfile() {
     };
 
     const handleReview = () => {
-        if (user)
-            setOpenReviewModal(true)
-        else
-            setOpenLoginModal(true)
-    }
+        if (user) {
+            const existingReview = reviews.find(review => review.user.id === userInfo.id);
+            if (existingReview) {
+                setReviewToEdit(existingReview);
+            } else {
+                setReviewToEdit(null);
+            }
+            setOpenReviewModal(true);
+        } else {
+            setOpenLoginModal(true);
+        }
+    };
 
     return (
         <div className="wrapper">
@@ -86,7 +101,7 @@ export default function RentProfile() {
                         </Button>
                     </div>
 
-                    <ReviewForm rentId={id} isOpen={openReviewModal} onClose={() => setOpenReviewModal(false)} />
+                    <ReviewForm rentId={id} isOpen={openReviewModal} review={reviewToEdit} onClose={() => setOpenReviewModal(false)} />
                     {Array.isArray(reviews) && reviews.map((review, index) => (
                         <div key={index} style={{ margin: '10px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
                             <h3>{review.user.firstName} {review.user.lastName}</h3>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReviewService {
@@ -16,16 +17,13 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    @Transactional
-    public Review saveReview(Long rentId, Long userId, String reviewText, double rating) {
-        Review review = new Review();
-        review.setText(reviewText);
-        review.setRating(rating);
-        review.setRent(new Rent(rentId));
-        review.setUser(new User(userId));
+    public Review saveReview(Review review) {
         return reviewRepository.save(review);
     }
 
+    public Optional<Review> findReviewByRentAndUser(Rent rent, User user) {
+        return reviewRepository.findByRentAndUser(rent, user);
+    }
     public List<Review> getAll(Long rentId) {
         return reviewRepository.findByRentId(rentId);
     }

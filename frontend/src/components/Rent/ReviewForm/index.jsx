@@ -9,7 +9,7 @@ import { useAuth } from '../../../providers/AuthProvider';
 import { useSelector } from 'react-redux';
 import StyledModal from '../../general-components/StyledModal';
 
-export default function ReviewForm({ isOpen, onClose, rentId }) {
+export default function ReviewForm({ isOpen, onClose, review, rentId }) {
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(2);
     const dispatch = useDispatch();
@@ -21,6 +21,16 @@ export default function ReviewForm({ isOpen, onClose, rentId }) {
             dispatch(getUserByEmail({ email: user }));
         }
     }, [user, dispatch]);
+
+    useEffect(() => {
+        if (review) {
+            setReviewText(review.text);
+            setRating(review.rating);
+        } else {
+            setReviewText('');
+            setRating(0);
+        }
+    }, [review]);
 
 
     const handleSubmit = (e) => {
@@ -41,8 +51,9 @@ export default function ReviewForm({ isOpen, onClose, rentId }) {
     };
 
     return (
-        <StyledModal isOpen={isOpen} onClose={onClose} title={"Do a review for this rent"} >
-            <form onSubmit={handleSubmit}>
+        <StyledModal isOpen={isOpen} onClose={onClose} style={{ width: "200px", height: "200px" }} title={"Do a review for this rent"} >
+            <form onSubmit={handleSubmit} style={{ width: "200px", height: "200px" }}>
+                <h2>{review ? 'Edit Review' : 'New Review'}</h2>
                 <TextField
                     label="Your Review"
                     value={reviewText}
@@ -51,7 +62,9 @@ export default function ReviewForm({ isOpen, onClose, rentId }) {
                     required
                 />
                 <HoverRating rating={rating} setRating={setRating} isEditable={true} />
-                <Button type="submit" variant="solid" color="primary">Submit Review</Button>
+                <Button type="submit" variant="solid" color="primary">
+                    {review ? 'Update Review' : 'Submit Review'}
+                </Button>
             </form>
         </StyledModal>
 

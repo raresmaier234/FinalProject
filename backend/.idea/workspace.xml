@@ -5,34 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c4fb985-237a-47f2-92cb-1cc91f3def06" name="Changes" comment="changes">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/example/backend/RentControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/example/backend/RentControllerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/example/backend/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/example/backend/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/com.example.backend.RentControllerTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/com.example.backend.RentControllerTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/com.example.backend.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/com.example.backend.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-com.example.backend.RentControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-com.example.backend.RentControllerTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/SecurityConfig.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/controller/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/repository/BookingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/repository/BookingRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/service/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/booking/service/BookingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/backend/RentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/backend/RentControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/reviews/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/reviews/controller/ReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/reviews/repository/ReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/reviews/repository/ReviewRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/components/reviews/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/components/reviews/service/ReviewService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +99,7 @@
       <recent name="com.example.backend" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.RentControllerTest.testUpdateRent">
+  <component name="RunManager" selected="Spring Boot.BackendApp">
     <configuration name="RentControllerTest.testGetAllRents" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -307,7 +284,8 @@
       <workItem from="1716543532692" duration="7489000" />
       <workItem from="1716723395987" duration="20647000" />
       <workItem from="1717068467056" duration="4883000" />
-      <workItem from="1717489872676" duration="5706000" />
+      <workItem from="1717489872676" duration="6793000" />
+      <workItem from="1717849810979" duration="1395000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <created>1698876164558</created>
